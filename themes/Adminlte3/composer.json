@@ -1,0 +1,13 @@
+{
+    "name": "vendor/adminlte3",
+    "description": "Adminlte3 theme.",
+    "type": "caffeinated-theme",
+    "autoload": {
+        "psr-4": {
+            "Themes\\Adminlte3\\": "src/"
+        }
+    },
+    "require": {
+        "caffeinated/composer": "*"
+    }
+}
