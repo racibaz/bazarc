@@ -12,9 +12,11 @@
         "fideloper/proxy": "^4.0",
         "laravel/framework": "5.8.*",
         "laravel/tinker": "^1.0",
-        "spatie/laravel-permission": "^2.37"
+        "spatie/laravel-permission": "^2.37",
+        "laravel/telescope": "^2.0"
     },
     "require-dev": {
+        "barryvdh/laravel-ide-helper": "^2.6",
         "beyondcode/laravel-dump-server": "^1.0",
         "filp/whoops": "^2.0",
         "fzaninotto/faker": "^1.4",
