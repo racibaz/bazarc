@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use Caffeinated\Themes\Facades\Theme;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
