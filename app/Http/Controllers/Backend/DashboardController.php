@@ -17,7 +17,6 @@ class DashboardController extends Controller
     {
         $users =  User::all();
         return view('backend.views.user.index', compact('users'));
-
     }
 
     /**
