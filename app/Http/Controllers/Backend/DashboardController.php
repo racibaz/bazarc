@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Backend;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -14,7 +15,9 @@ class DashboardController extends Controller
      */
     public function index()
     {
-        echo "geldi";
+        $users =  User::all();
+        return view('backend.views.user.index', compact('users'));
+
     }
 
     /**
