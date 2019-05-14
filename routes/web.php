@@ -11,6 +11,9 @@
 |
 */
 
+Route::pattern('id', '[0-9]+');
+Route::pattern('slug', '[a-z0-9-]+');
+
 Route::get('/', function () {
     return view('welcome');
 });
@@ -18,3 +21,12 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+
+//Route::group(['prefix' => 'admin', 'middleware' => 'checkperm'], function() {
+Route::group(['prefix' => 'admin'], function() {
+
+    Route::get('/', 'Backend\DashboardController@index')->name('backend.dashboard');
+//    Route::get('index', 'Backend\DashboardController@index');
+//    Route::get('dashboard', 'Backend\DashboardController@index');
+});
