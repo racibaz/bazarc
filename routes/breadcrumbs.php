@@ -18,36 +18,31 @@ Breadcrumbs::for('dashboard', function ($trail) {
     $trail->push('Dashboard', route('dashboard'));
 });
 
-Breadcrumbs::for('users', function ($trail) {
-    $trail->parent('dashboard');
-    $trail->push('Users', route('users'));
+
+Breadcrumbs::macro('resource', function ($name, $title) {
+    // Home > Blog
+    Breadcrumbs::for("$name.index", function ($trail) use ($name, $title) {
+        $trail->parent('home');
+        $trail->push($title, route("$name.index"));
+    });
+
+    // Home > Blog > New
+    Breadcrumbs::for("$name.create", function ($trail) use ($name) {
+        $trail->parent("$name.index");
+        $trail->push('New', route("$name.create"));
+    });
+
+    // Home > Blog > Post 123
+    Breadcrumbs::for("$name.show", function ($trail, $model) use ($name) {
+        $trail->parent("$name.index");
+        $trail->push($model->title, route("$name.show", $model));
+    });
+
+    // Home > Blog > Post 123 > Edit
+    Breadcrumbs::for("$name.edit", function ($trail, $model) use ($name) {
+        $trail->parent("$name.show", $model);
+        $trail->push('Edit', route("$name.edit", $model));
+    });
 });
 
-//// Home
-//Breadcrumbs::for('home', function ($trail) {
-//    $trail->push('Home', route('home'));
-//});
-//
-//// Home > About
-//Breadcrumbs::for('about', function ($trail) {
-//    $trail->parent('home');
-//    $trail->push('About', route('about'));
-//});
-//
-//// Home > Blog
-//Breadcrumbs::for('blog', function ($trail) {
-//    $trail->parent('home');
-//    $trail->push('Blog', route('blog'));
-//});
-//
-//// Home > Blog > [Category]
-//Breadcrumbs::for('category', function ($trail, $category) {
-//    $trail->parent('blog');
-//    $trail->push($category->title, route('category', $category->id));
-//});
-//
-//// Home > Blog > [Category] > [Post]
-//Breadcrumbs::for('post', function ($trail, $post) {
-//    $trail->parent('category', $post->category);
-//    $trail->push($post->title, route('post', $post->id));
-//});
+Breadcrumbs::resource('user', 'Users');

@@ -15,8 +15,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::group(['prefix' => 'admin'], function() {
 
     Route::get('dashboard', 'Backend\DashboardController@index')->name('dashboard');
-    Route::get('users', 'Backend\DashboardController@index')->name('users');
+
+    Route::resource('user', 'Backend\DashboardController');
     Route::get('users.data', 'Backend\DashboardController@anydata')->name('users.data');
-//    Route::get('index', 'Backend\DashboardController@index');
-//    Route::get('dashboard', 'Backend\DashboardController@index');
 });

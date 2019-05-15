@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Backend;
 
+
+use App\Contracts\Repositories\UserRepository;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -10,6 +12,18 @@ use Yajra\DataTables\Facades\DataTables;
 
 class DashboardController extends Controller
 {
+
+    private $repository;
+
+    /**
+     * DashboardController constructor.
+     * @param UserRepository $repository
+     */
+    public function __construct(UserRepository $repository)
+    {
+        $this->repository = $repository;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -17,7 +31,8 @@ class DashboardController extends Controller
      */
     public function index()
     {
-        $users =  User::all();
+        $users =  $this->repository->all();
+//        $users =  User::all();
         return view('backend.views.user.index', compact('users'));
     }
 
@@ -61,7 +76,7 @@ class DashboardController extends Controller
      */
     public function show($id)
     {
-        //
+        dd("show");
     }
 
     /**
