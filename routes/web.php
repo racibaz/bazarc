@@ -19,3 +19,8 @@ Route::group(['prefix' => 'admin'], function() {
     Route::resource('user', 'Backend\DashboardController');
     Route::get('users.data', 'Backend\DashboardController@anydata')->name('users.data');
 });
+
+
+
+Route::get ( '/redirect/{service}', 'Auth\SocialAuthController@redirect' );
+Route::get ( '/callback/{service}', 'Auth\SocialAuthController@callback' );

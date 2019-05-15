@@ -164,8 +164,10 @@ return [
 
         /*
          * Package Service Providers...
+         * 3. Party Packages
          */
 
+        Laravel\Socialite\SocialiteServiceProvider::class,
         /*
          * Application Service Providers...
          */
@@ -227,6 +229,8 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
 
+        //3. Party Packages
+        'Socialite' => Laravel\Socialite\Facades\Socialite::class,
     ],
 
 ];
