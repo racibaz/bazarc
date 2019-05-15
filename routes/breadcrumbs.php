@@ -15,12 +15,12 @@ Breadcrumbs::for('home', function ($trail) {
 
 Breadcrumbs::for('dashboard', function ($trail) {
     $trail->parent('home');
-    $trail->push('Dashboard', route('backend.dashboard'));
+    $trail->push('Dashboard', route('dashboard'));
 });
 
 Breadcrumbs::for('users', function ($trail) {
     $trail->parent('dashboard');
-    $trail->push('Users', route('backend.users'));
+    $trail->push('Users', route('users'));
 });
 
 //// Home
