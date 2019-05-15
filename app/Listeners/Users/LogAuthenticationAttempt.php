@@ -5,7 +5,7 @@ namespace App\Listeners\Users;
 use Illuminate\Auth\Events\Login;
 use Illuminate\Support\Carbon;
 
-class LogSuccessfulLogin
+class LogAuthenticationAttempt
 {
     /**
      * Create the event listener.
