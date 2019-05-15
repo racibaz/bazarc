@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Backend;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Yajra\DataTables\Facades\DataTables;
+
 
 class DashboardController extends Controller
 {
@@ -17,6 +19,17 @@ class DashboardController extends Controller
     {
         $users =  User::all();
         return view('backend.views.user.index', compact('users'));
+    }
+
+    /**
+     * Process datatables ajax request.
+     *
+     * @return \Illuminate\Http\JsonResponse
+     * @throws \Exception
+     */
+    public function anyData()
+    {
+        return Datatables::of(User::query())->make(true);
     }
 
     /**
