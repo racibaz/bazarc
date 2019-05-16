@@ -7,12 +7,15 @@ use App\Contracts\Repositories\UserRepository;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use Yajra\DataTables\Facades\DataTables;
 
 
 class DashboardController extends Controller
 {
-
+    /**
+     * @var UserRepository
+     */
     private $repository;
 
     /**
@@ -21,6 +24,9 @@ class DashboardController extends Controller
      */
     public function __construct(UserRepository $repository)
     {
+//        $this->authorizeResource('user');
+//        $this->middleware('auth');
+
         $this->repository = $repository;
     }
 
@@ -31,6 +37,14 @@ class DashboardController extends Controller
      */
     public function index()
     {
+        $user = Auth::user();
+
+        if ($user->can('view', $user)) {
+            echo "Current logged in user is allowed to update the Post: {$user->id}";
+        } else {
+            echo 'Not Authorized.';
+        }
+
         $users =  $this->repository->all();
 //        $users =  User::all();
         return view('backend.views.user.index', compact('users'));

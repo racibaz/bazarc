@@ -12,7 +12,8 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 //Route::group(['prefix' => 'admin', 'middleware' => 'checkperm'], function() {
-Route::group(['prefix' => 'admin'], function() {
+Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function() {
+//Route::group(['prefix' => 'admin'], function() {
 
     Route::get('dashboard', 'Backend\DashboardController@index')->name('dashboard');
 
