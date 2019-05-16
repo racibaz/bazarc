@@ -5,14 +5,16 @@ namespace App\Http\Controllers\Backend;
 
 use App\Contracts\Repositories\UserRepository;
 use App\Models\User;
+use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Route;
 use Yajra\DataTables\Facades\DataTables;
 
 
-class DashboardController extends Controller
+class DashboardController extends BackendBaseController
 {
     /**
      * @var UserRepository
@@ -25,10 +27,9 @@ class DashboardController extends Controller
      */
     public function __construct(UserRepository $repository)
     {
-//        $this->authorizeResource('users');
-//        $this->middleware('auth');
+        parent::__construct();
 
-//        $this->middleware(['role:super-admin','permission:publish articles|edit articles']);
+//        $this->middleware('auth');
 
         $this->repository = $repository;
     }
@@ -41,7 +42,7 @@ class DashboardController extends Controller
     public function index()
     {
 //        $user = Auth::user();
-//
+
 //        if ($user->can('edit users', $user)) {
 //            echo "Current logged in user is allowed to update the Post: {$user->id}";
 //        } else {
