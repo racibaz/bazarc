@@ -28,15 +28,16 @@ class UserPolicy
      */
     public function view(User $user, User $use)
     {
-        if ($use->published) {
-            return true;
-        }
-        // visitors cannot view unpublished items
-        if ($user === null) {
-            return false;
-        }
+//        if ($use->published) {
+//            return true;
+//        }
+//
+//        // visitors cannot view unpublished items
+//        if ($user === null) {
+//            return false;
+//        }
         // admin overrides published status
-        if ($user->can('view unpublished uses')) {
+        if ($user->can('view unpublished')) {
             return true;
         }
         // authors can view their own unpublished uses
