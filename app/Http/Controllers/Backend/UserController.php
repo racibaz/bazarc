@@ -33,7 +33,8 @@ class UserController extends BackendBaseController
      */
     public function index()
     {
-        return view('backend.views.user.index');
+        $users = $this->repository->all();
+        return view('backend.views.user.index',compact(['users']));
     }
 
     /**
@@ -80,6 +81,8 @@ class UserController extends BackendBaseController
     }
 
     /**
+     * todo https://laravel.com/docs/5.8/routing#route-model-binding yapılabilinir.
+     *
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
@@ -87,7 +90,8 @@ class UserController extends BackendBaseController
      */
     public function edit($id)
     {
-        //
+        $record = $this->repository->find($id);
+        return view('backend.views.user.create',compact(['record']));
     }
 
     /**

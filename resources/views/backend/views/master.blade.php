@@ -15,7 +15,7 @@
     <!-- iCheck -->
     <link rel="stylesheet" href="{{asset('backend/plugins/iCheck/flat/blue.css')}}">
     <!-- Morris chart -->
-    <link rel="stylesheet" href="{{asset('backend/plugins/morris/morris.css')}}">
+    {{--<link rel="stylesheet" href="{{asset('backend/plugins/morris/morris.css')}}">--}}
     <!-- jvectormap -->
     <link rel="stylesheet" href="{{asset('backend/plugins/jvectormap/jquery-jvectormap-1.2.2.css')}}">
     <!-- Date Picker -->
@@ -28,6 +28,10 @@
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 
     <link rel="stylesheet" href="//cdn.datatables.net/1.10.7/css/jquery.dataTables.min.css">
+    <!-- DataTables -->
+    <link rel="stylesheet" href="{{asset('backend/plugins/datatables/dataTables.bootstrap4.css')}}">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="{{asset('backend/dist/css/adminlte.min.css')}}">
     @stack('css')
 </head>
 <body class="hold-transition sidebar-mini">
@@ -100,6 +104,12 @@
 <!-- daterangepicker -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.2/moment.min.js"></script>
 
+<!-- DataTables -->
+<script src="{{asset('backend/plugins/datatables/jquery.dataTables.js')}}"></script>
+<script src="{{asset('backend/plugins/datatables/dataTables.bootstrap4.js')}}"></script>
+<!-- AdminLTE App -->
+<script src="{{asset('backend/dist/js/adminlte.min.js')}}"></script>
+
 <script src="{{asset('backend/plugins/daterangepicker/daterangepicker.js')}}"></script>
 <!-- datepicker -->
 <script src="{{asset('backend/plugins/datepicker/bootstrap-datepicker.js')}}"></script>
@@ -116,7 +126,7 @@
 <!-- AdminLTE for demo purposes -->
 <script src="{{asset('backend/dist/js/demo.js')}}"></script>
 <!-- DataTables -->
-<script src="//cdn.datatables.net/1.10.7/js/jquery.dataTables.min.js"></script>
+{{--<script src="https://cdn.datatables.net/1.10.7/js/jquery.dataTables.min.js"></script>--}}
 @stack('scripts')
 </body>
 </html>
