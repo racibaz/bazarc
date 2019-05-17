@@ -48,7 +48,7 @@
         <div class="content-header">
             <div class="container-fluid">
                 <div class="row mb-2">
-                    @include('backend.views.partials.breadcrumbs')
+                    @include('backend.views.partials._breadcrumbs')
                 </div><!-- /.row -->
             </div><!-- /.container-fluid -->
         </div>

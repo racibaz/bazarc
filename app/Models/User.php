@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Presenters\UserPresenter;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -17,6 +18,8 @@ class User extends Authenticatable implements Transformable
     use HasRoles;
 
     use Notifiable;
+
+    protected $presenter = UserPresenter::class;
 
     /**
      * The attributes that are mass assignable.

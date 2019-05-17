@@ -21,4 +21,9 @@ class UserPresenter extends FractalPresenter
     {
         return new UserTransformer();
     }
+
+    public function nameOrEmail()
+    {
+        return trim($this->name()) ?: $this->entity->email;
+    }
 }

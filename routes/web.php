@@ -15,7 +15,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'check_permission'], function
 
     Route::get('dashboard', 'Backend\DashboardController@index')->name('dashboard');
 
-    Route::resource('user', 'Backend\DashboardController');
+    Route::resource('user', 'Backend\UserController');
     Route::get('users.data', 'Backend\DashboardController@anydata')->name('users.data');
 });
 
