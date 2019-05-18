@@ -1,7 +1,11 @@
 @extends('backend.views.master')
 
 @section('breadcrumbs')
-    User Breadcrumb Edit
+    @if(isset($record->id))
+        User Breadcrumb Edit
+    @else
+        User Breadcrumb Create
+    @endif
 @stop
 
 @section('content')
@@ -17,7 +21,7 @@
             @if(isset($record->id))
                 {{ html()->modelForm($record, 'PATCH', route('user.update', $record))->class('form-horizontal')->open() }}
             @else
-                {{ html()->modelForm($record, 'POST', 'user.store')->class('form-horizontal')->open() }}
+                {{ html()->modelForm($record, 'POST', route('user.store'))->class('form-horizontal')->open() }}
             @endif
                 <div class="card-body">
                     <div class="form-group">
@@ -49,7 +53,7 @@
 
                 <div class="card-footer">
                     <button type="submit" class="btn btn-info"> @lang('common.form.save') </button>
-                    <button type="submit" class="btn btn-default float-right">@lang('common.form.cancel')</button>
+                    <button type="submit" onclick="window.history.go(-1); return false;" class="btn btn-default float-right">@lang('common.form.cancel')</button>
                 </div>
             {{ html()->closeModelForm() }}
         </div>

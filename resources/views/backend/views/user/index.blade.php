@@ -41,11 +41,11 @@
                                                         <span class="sr-only">Toggle Dropdown</span>
                                                     </button>
                                                     <div class="dropdown-menu" role="menu">
-                                                        <a class="dropdown-item" href="{{route('user.edit',$user->id)}}">{{trans('common.form.edit')}}</a>
-                                                        <a class="dropdown-item" href="{{route('user.show',$user->id)}}">{{trans('common.form.show')}}</a>
-                                                        {{html()->form()->method('Delete')->action(route('user.destroy',$user->id))}}
-                                                            <a class="dropdown-item" href="{{route('user.destroy',$user->id)}}">{{trans('common.form.destroy')}}</a>
-                                                        {{html()->closeModelForm()}}
+                                                        <a class="dropdown-item" href="{{route('user.edit', $user->id)}}">@lang('common.form.edit')</a>
+                                                        <a class="dropdown-item" href="{{route('user.show', $user->id)}}">@lang('common.form.show')</a>
+                                                        {{ html()->form('DELETE')->action(route('user.destroy', $user->id))->open() }}
+                                                                {{html()->button(trans('common.form.delete'),'submit')->class('dropdown-item') }}
+                                                        {{ html()->closeModelForm() }}
                                                     </div>
                                                 </div>
                                             </div>

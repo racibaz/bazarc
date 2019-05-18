@@ -12,5 +12,6 @@ return [
         'destroy' => 'Delete Record',
         'save'  => 'Save',
         'cancel'  => 'Cancel',
+        'delete' => 'Delete',
     ]
 ];

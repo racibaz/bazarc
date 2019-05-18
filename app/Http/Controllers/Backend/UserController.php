@@ -52,7 +52,7 @@ class UserController extends BackendBaseController
      */
     public function index()
     {
-        $users = $this->repository->all();
+        $users = $this->repository->orderBy('created_at','desc')->all();
         return view('backend.views.user.index',compact(['users']));
     }
 
@@ -87,7 +87,28 @@ class UserController extends BackendBaseController
      */
     public function store(Request $request)
     {
-        dd($request);
+        $inputs = $request->all();
+
+        try
+        {
+            $inputs['slug'] = Str::slug($inputs['name'], '-');
+
+            //Policy validated so it is available
+            $inputs['password'] = bcrypt($inputs['password']);
+
+            $this->validator->with( $inputs )->passesOrFail( ValidatorInterface::RULE_UPDATE );
+
+            $this->repository->create($inputs);
+
+            return redirect()->to(route('user.index'));
+
+        }catch (ValidatorException $e){
+
+            return Response::json([
+                'error'   =>true,
+                'message' =>$e->getMessageBag()
+            ]);
+        }
     }
 
     /**
@@ -100,7 +121,7 @@ class UserController extends BackendBaseController
      */
     public function show($record)
     {
-        //
+        return view('backend.views.user.show',compact(['record']));
     }
 
     /**
@@ -129,7 +150,7 @@ class UserController extends BackendBaseController
 
         try
         {
-            $inputs['name'] = Str::slug($inputs['name'], '-');
+            $inputs['slug'] = Str::slug($inputs['name'], '-');
 
             if(!empty($inputs['password'])){
                 $inputs['password'] = bcrypt($inputs['password']);

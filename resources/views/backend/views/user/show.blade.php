@@ -1,7 +1,7 @@
 @extends('backend.views.master')
 
 @section('breadcrumbs')
-    User Breadcrumb Edit
+    User Breadcrumb Show
 @stop
 
 @section('content')
@@ -17,36 +17,26 @@
             <div class="card-body">
                 <div class="form-group">
                     {{ html()->label(trans('user.form.name')) }}
-                    {{ html()->text('name')->class('form-control') }}
+                    {{$record->name}}
                 </div>
                 <div class="form-group">
                     {{ html()->label(trans('user.form.email')) }}
-                    {{ html()->email('email')->class('form-control') }}
-                </div>
-                <div class="form-group">
-                    {{ html()->label(trans('user.form.password')) }}
-                    {{ html()->password('password')->value('')->class('form-control') }}
+                    {{$record->email}}
                 </div>
                 <div class="form-group">
                     {{ html()->label(trans('user.form.cell_phone')) }}
-                    {{ html()->text('cell_phone')->class('form-control') }}
+                    {{$record->cell_phone}}
                 </div>
                 <div class="form-group">
                     {{ html()->label(trans('user.form.web_site')) }}
-                    {{ html()->text('web_site')->class('form-control') }}
+                    {{$record->web_site}}
                 </div>
                 <div class="form-group">
                     {{ html()->label(trans('user.form.bio_note')) }}
-                    {{ html()->textarea('bio_note')->class('form-control') }}
+                    {{$record->bio_note}}
                 </div>
             </div>
             <!-- /.card-body -->
-
-            <div class="card-footer">
-                <button type="submit" class="btn btn-info"> @lang('common.form.save') </button>
-                <button type="submit" class="btn btn-default float-right">@lang('common.form.cancel')</button>
-            </div>
-            {{ html()->closeModelForm() }}
         </div>
         <!-- /.card -->
     </div>
@@ -57,5 +47,4 @@
 @endpush
 
 @push('scripts')
-
 @endpush

@@ -25,10 +25,14 @@ class RoleAndPermissionSeeder extends Seeder
         Permission::create(['name' => 'index-user']);
         Permission::create(['name' => 'create-user']);
         Permission::create(['name' => 'edit-user']);
+        Permission::create(['name' => 'edit-any-user']);
+        Permission::create(['name' => 'show-user']);
+        Permission::create(['name' => 'show-any-user']);
         Permission::create(['name' => 'delete-user']);
+        Permission::create(['name' => 'delete-any-user']);
         Permission::create(['name' => 'anyData-user']);
         Permission::create(['name' => 'update-user']);
-        Permission::create(['name' => 'update-all-user']);
+        Permission::create(['name' => 'update-any-user']);
         Permission::create(['name' => 'publish-user']);
         Permission::create(['name' => 'unpublish-user']);
 
