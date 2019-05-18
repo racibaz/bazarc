@@ -45,4 +45,4 @@ Breadcrumbs::macro('resource', function ($name, $title) {
     });
 });
 
-Breadcrumbs::resource('user', 'Users');
+//Breadcrumbs::resource('user', 'Users');

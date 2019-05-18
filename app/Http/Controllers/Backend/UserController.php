@@ -4,26 +4,45 @@ namespace App\Http\Controllers\Backend;
 
 use App\Contracts\Repositories\UserRepository;
 use App\Models\User;
+use App\Validators\UserValidator;
+use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Response;
+use Illuminate\Support\Str;
+use Prettus\Validator\Contracts\ValidatorInterface;
+use Prettus\Validator\Exceptions\ValidatorException;
 use Yajra\DataTables\Facades\DataTables;
 
 class UserController extends BackendBaseController
 {
+    use ValidatesRequests;
+
     /**
      * @var UserRepository
      */
-    private $repository;
+    protected  $repository;
+
+    /**
+     * @var UserRepository
+     */
+    protected $validator;
 
     /**
      * DashboardController constructor.
+     *
      * @param UserRepository $repository
+     * @param \App\Validators\UserValidator $validator
      */
-    public function __construct(UserRepository $repository)
+    public function __construct(UserRepository $repository, UserValidator $validator)
     {
 //        parent::__construct();
 //        $this->middleware('auth');
+        //$request->getUri()
 
         $this->repository = $repository;
+        $this->validator = $validator;
+
+        $this->authorizeResource(User::class, 'user');
     }
 
     /**
@@ -49,13 +68,15 @@ class UserController extends BackendBaseController
     }
 
     /**
+     * todo instance repo dan alınmalı..
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
      */
     public function create()
     {
-        //
+        $record = new User();
+        return view('backend.views.user._form',compact(['record']));
     }
 
     /**
@@ -66,54 +87,81 @@ class UserController extends BackendBaseController
      */
     public function store(Request $request)
     {
-        //
+        dd($request);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param $record
+     *
      * @return \Illuminate\Http\Response
+     * @internal param int $id
      */
-    public function show($id)
+    public function show($record)
     {
         //
     }
 
     /**
-     * todo https://laravel.com/docs/5.8/routing#route-model-binding yapılabilinir.
-     *
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($record)
     {
-        $record = $this->repository->find($id);
-        return view('backend.views.user.create',compact(['record']));
+        return view('backend.views.user._form',compact(['record']));
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param  \Illuminate\Http\Request $request
+     * @param $record
+     *
+     * @return \Illuminate\Http\JsonResponse
+     * @internal param int $id
+     *
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $record)
     {
-        //
+        $inputs = $request->all();
+
+        try
+        {
+            $inputs['name'] = Str::slug($inputs['name'], '-');
+
+            if(!empty($inputs['password'])){
+                $inputs['password'] = bcrypt($inputs['password']);
+            }else{
+                unset($inputs['password']);
+            }
+
+            $this->validator->with( $inputs )->setId($record->id)->passesOrFail( ValidatorInterface::RULE_UPDATE );
+
+            $this->repository->update($inputs, $record->id);
+
+            return redirect()->to(route('user.index'));
+
+        }catch (ValidatorException $e){
+
+            return Response::json([
+                'error'   =>true,
+                'message' =>$e->getMessageBag()
+            ]);
+        }
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param $record
+     *
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($record)
     {
-        //
+        $this->repository->delete($record->id);
+        return redirect()->to(route('user.index'));
     }
 }

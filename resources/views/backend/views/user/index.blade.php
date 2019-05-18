@@ -43,7 +43,9 @@
                                                     <div class="dropdown-menu" role="menu">
                                                         <a class="dropdown-item" href="{{route('user.edit',$user->id)}}">{{trans('common.form.edit')}}</a>
                                                         <a class="dropdown-item" href="{{route('user.show',$user->id)}}">{{trans('common.form.show')}}</a>
-                                                        <a class="dropdown-item" href="{{route('user.destroy',$user->id)}}">{{trans('common.form.destroy')}}</a>
+                                                        {{html()->form()->method('Delete')->action(route('user.destroy',$user->id))}}
+                                                            <a class="dropdown-item" href="{{route('user.destroy',$user->id)}}">{{trans('common.form.destroy')}}</a>
+                                                        {{html()->closeModelForm()}}
                                                     </div>
                                                 </div>
                                             </div>

@@ -9,6 +9,8 @@ return [
         'created_at' => 'Created Date',
         'edit' => 'Edit Record',
         'show' => 'Show Record',
-        'destroy' => 'Delete Record'
+        'destroy' => 'Delete Record',
+        'save'  => 'Save',
+        'cancel'  => 'Cancel',
     ]
 ];

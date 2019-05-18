@@ -12,21 +12,23 @@ class UserPolicy
     /**
      * Create a new policy instance.
      *
-     * @return void
      */
     public function __construct()
     {
-
+        //
     }
+
+
 
     /**
      * Determine whether the user can view the use.
      *
      * @param  \App\Models\User $user
-     * @param  \App\Models\User $use
-     * @return mixed
+     * @param $record
+     *
+     * @return boolean
      */
-    public function view(User $user, User $use)
+    public function view(User $user, $record)
     {
 //        if ($use->published) {
 //            return true;
@@ -37,11 +39,11 @@ class UserPolicy
 //            return false;
 //        }
         // admin overrides published status
-        if ($user->can('view unpublished')) {
-            return true;
-        }
-        // authors can view their own unpublished uses
-        return $user->id === $use->user_id;
+//        if ($user->can('view unpublished')) {
+//            return true;
+//        }
+//        // authors can view their own unpublished uses
+//        return $user->id === $use->user_id;
     }
     /**
      * Determine whether the user can create uses.
@@ -51,23 +53,29 @@ class UserPolicy
      */
     public function create(User $user)
     {
-        if ($user->can('create uses')) {
+        if ($user->can('create-user')) {
             return true;
         }
     }
+
     /**
+     * todo Kullanıcı kendi verisini değiştirebilir özeliği profile sayfasında yapılabilinir.
      * Determine whether the user can update the use.
      *
      * @param  \App\Models\User $user
-     * @param  \App\Models\User $use
-     * @return mixed
+     * @param $record
+     *
+     * @return boolean
+     * @internal param \App\Models\User $use
      */
-    public function update(User $user, User $use)
+    public function update(User $user, $record)
     {
-        if ($user->can('edit own uses')) {
-            return $user->id === $use->user_id;
+        if ($user->can('update-user')) {
+            return true;
+//            return $user->id === $record->id;
+
         }
-        if ($user->can('edit all uses')) {
+        if ($user->can('update-all-user')) {
             return true;
         }
     }
@@ -76,7 +84,7 @@ class UserPolicy
      *
      * @param  \App\Models\User $user
      * @param  \App\Models\User $use
-     * @return mixed
+     * @return bool
      */
     public function delete(User $user, User $use)
     {

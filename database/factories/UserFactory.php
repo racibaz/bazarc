@@ -26,7 +26,7 @@ $factory->define(User::class, function (Faker $faker) {
         'slug' => Str::slug($name),
         'cell_phone' => $faker->phoneNumber,
         //..
-        'web_site' => $faker->domainName,
+        'web_site' => 'http://www.' . $faker->domainName,
         'gender' => $faker->boolean,
         'bio_note' => $faker->realText(rand(10,20)),
         'IP' => $faker->ipv4,
