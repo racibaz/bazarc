@@ -35,8 +35,9 @@
                     {{ html()->label(trans('user.form.bio_note')) }}
                     {{$record->bio_note}}
                 </div>
-                <a class="btn btn-secondary" href="{{route('user.edit', $record->id)}}">@lang('common.form.edit')</a>
+                <a class="btn btn-secondary" href="{{route('profile.edit', $record->id)}}">@lang('common.form.edit')</a>
             </div>
+
             <!-- /.card-body -->
         </div>
         <!-- /.card -->

@@ -23,7 +23,7 @@ class UserController extends BackendBaseController
     protected  $repository;
 
     /**
-     * @var UserRepository
+     * @var * @var \App\Validators\UserValidator
      */
     protected $validator;
 

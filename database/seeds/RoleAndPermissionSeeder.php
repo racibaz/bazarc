@@ -36,6 +36,18 @@ class RoleAndPermissionSeeder extends Seeder
         Permission::create(['name' => 'publish-user']);
         Permission::create(['name' => 'unpublish-user']);
 
+
+
+        //profile permissions
+        Permission::create(['name' => 'show-any-profile']);
+        Permission::create(['name' => 'show-profile']);
+        Permission::create(['name' => 'edit-profile']);
+        Permission::create(['name' => 'edit-any-profile']);
+        Permission::create(['name' => 'update-any-profile']);
+        Permission::create(['name' => 'update-profile']);
+        Permission::create(['name' => 'delete-profile']);
+        Permission::create(['name' => 'delete-any-profile']);
+
         // create roles and assign created permissions
 
         // this can be done as separate statements
