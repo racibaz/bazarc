@@ -22,6 +22,37 @@ class User extends Authenticatable implements Transformable
     protected $presenter = UserPresenter::class;
 
     /**
+     * User types
+     *
+     * @var integer
+     */
+    public const PASSIVE = 0, ACTIVE = 1, PREPARING_EMAIL_ACTIVATION = 2, GARBAGE = 3;
+
+    /**
+     * User types
+     *
+     * @var array
+     */
+    public static $statuses = [
+        'passive' => [
+            'name' => 'Passive',
+            'is_accept' => false,
+        ],
+        'active' => [
+            'name' => 'Active',
+            'is_accept' => true,
+        ],
+        'preparing_email_activation' => [
+            'name' => 'Preparing Email Activation',
+            'is_accept' => false,
+        ],
+        'garbage' => [
+            'name' => 'Garbage',
+            'is_accept' => false,
+        ]
+    ];
+
+    /**
      * The attributes that are mass assignable.
      *
      * @var array
@@ -48,4 +79,16 @@ class User extends Authenticatable implements Transformable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    /**
+     * Get the active user
+     *
+     * @param $query
+     *
+     * @return mixed
+     */
+    public function scopeActive($query)
+    {
+        return $query->where('status', '==', User::ACTIVE);
+    }
 }

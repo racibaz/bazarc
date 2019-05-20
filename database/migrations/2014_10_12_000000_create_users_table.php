@@ -32,7 +32,7 @@ class CreateUsersTable extends Migration
             $table->string('IP')->nullable();
             $table->timestamp('last_login')->nullable();
             $table->timestamp('previous_visit')->nullable();
-            //$table->unsignedInteger('status')->default(0);
+            $table->unsignedInteger('status')->default(0);
             $table->rememberToken();
             $table->timestamps();
         });

@@ -25,7 +25,8 @@ class UsersTableSeeder extends Seeder
             'cell_phone' => '1234567890',
             'web_site' => 'http://www.bazsoft.biz',
             'gender' => 1,
-            'bio_note' => 'Bio text'
+            'bio_note' => 'Bio text',
+            'status' => 1
         ]);
 
         $user->save();

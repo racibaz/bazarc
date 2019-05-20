@@ -31,6 +31,7 @@ $factory->define(User::class, function (Faker $faker) {
         'bio_note' => $faker->realText(rand(10,20)),
         'IP' => $faker->ipv4,
         'last_login' => now(),
-        'previous_visit' => now()
+        'previous_visit' => now(),
+        'status' => rand(0,3)
     ];
 });
