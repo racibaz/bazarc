@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers\Backend;
 
+use App\Contracts\Repositories\ProfileRepository;
 use App\Models\Profile;
-use App\Models\ProfileRepository;
 use App\Validators\ProfileValidator;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Http\Request;
@@ -44,8 +44,10 @@ class ProfileController extends BackendBaseController
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param $record
+     *
      * @return \Illuminate\Http\Response
+     * @internal param int $id
      */
     public function show($record)
     {
@@ -68,10 +70,12 @@ class ProfileController extends BackendBaseController
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \Illuminate\Http\Request $request
+     * @param $record
      *
      * @return \Illuminate\Http\JsonResponse
+     * @internal param int $id
+     *
      */
     public function update(Request $request, $record)
     {
@@ -91,7 +95,7 @@ class ProfileController extends BackendBaseController
 
             $this->repository->update($inputs, $record->id);
 
-            return redirect()->to(route('profile.index'));
+            return redirect()->to(route('profile.show', $record));
 
         }catch (ValidatorException $e){
 
@@ -100,16 +104,5 @@ class ProfileController extends BackendBaseController
                 'message' =>$e->getMessageBag()
             ]);
         }
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
     }
 }

@@ -16,4 +16,14 @@ class Profile extends Model
     use Notifiable;
 
     protected $table = 'users';
+
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = [
+        'name', 'email', 'password', 'slug', 'cell_phone', 'facebook', 'twitter', 'pinterest',
+        'linkedin', 'youtube', 'web_site', 'gender', 'bio_note', 'IP', 'last_login', 'previous_visit'
+    ];
 }

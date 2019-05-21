@@ -2,11 +2,11 @@
 
 namespace App\Repositories\Eloquent;
 
+use App\Models\Profile;
 use App\Validators\ProfileValidator;
 use Prettus\Repository\Eloquent\BaseRepository;
 use Prettus\Repository\Criteria\RequestCriteria;
 use App\Contracts\Repositories\ProfileRepository;
-use Symfony\Component\HttpKernel\Profiler\Profile;
 
 /**
  * Class ProfileRepositoryRepositoryEloquent.

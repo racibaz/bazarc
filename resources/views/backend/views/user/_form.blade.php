@@ -53,11 +53,11 @@
 
                 <div class="card-footer">
                     <button type="submit" class="btn btn-info"> @lang('common.form.save') </button>
-                    @if($record->id)
-                        {{ html()->form('DELETE')->action(route('user.destroy', $record->id))->open() }}
-                            {{html()->button(trans('common.form.delete'),'submit')->class('btn btn-danger') }}
-                        {{ html()->closeModelForm() }}
-                    @endif
+                    {{--@if($record->id)--}}
+                        {{--{{ html()->form('DELETE')->action(route('user.destroy', $record->id))->open() }}--}}
+                            {{--{{html()->button(trans('common.form.delete'),'submit')->class('btn btn-danger') }}--}}
+                        {{--{{ html()->closeModelForm() }}--}}
+                    {{--@endif--}}
                     <button type="submit" onclick="window.history.go(-1); return false;" class="btn btn-default float-right">@lang('common.form.cancel')</button>
                 </div>
             {{ html()->closeModelForm() }}

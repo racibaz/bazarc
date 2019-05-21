@@ -18,11 +18,8 @@
                 <h3 class="card-title">Input Addon</h3>
             </div>
 
-            @if(isset($record->id))
-                {{ html()->modelForm($record, 'PATCH', route('user.update', $record))->class('form-horizontal')->open() }}
-            @else
-                {{ html()->modelForm($record, 'POST', route('user.store'))->class('form-horizontal')->open() }}
-            @endif
+            {{ html()->modelForm($record, 'PATCH', route('profile.update', $record))->class('form-horizontal')->open() }}
+
                 <div class="card-body">
                     <div class="form-group">
                         {{ html()->label(trans('user.form.name')) }}
@@ -63,6 +60,7 @@
 @endsection
 
 @push('css')
+
 @endpush
 
 @push('scripts')
