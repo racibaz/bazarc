@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Models\Profile;
+use App\Models\Setting;
 use App\Models\User;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
@@ -27,6 +28,7 @@ class RouteServiceProvider extends ServiceProvider
     {
         Route::model('user', User::class);
         Route::model('profile', Profile::class);
+        Route::model('setting', Setting::class);
 
         parent::boot();
     }

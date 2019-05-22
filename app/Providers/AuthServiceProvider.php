@@ -2,8 +2,10 @@
 
 namespace App\Providers;
 
+use App\Models\Setting;
 use App\Models\User;
 use App\Policies\ProfilePolicy;
+use App\Policies\SettingPolicy;
 use App\Policies\UserPolicy;
 use App\Models\Profile;
 use Illuminate\Support\Facades\Gate;
@@ -20,6 +22,7 @@ class AuthServiceProvider extends ServiceProvider
         // 'App\Model' => 'App\Policies\ModelPolicy',
         User::class => UserPolicy::class,
         Profile::class => ProfilePolicy::class,
+        Setting::class => SettingPolicy::class,
     ];
 
     /**
