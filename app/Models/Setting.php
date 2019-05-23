@@ -25,7 +25,7 @@ class Setting extends Model implements Transformable
             'number' => 2
         ],
         'verified' => [
-            'name' => 'VERIFIED',
+            'name' => 'Verified',
             'number' => 3
         ],
         'none' => [

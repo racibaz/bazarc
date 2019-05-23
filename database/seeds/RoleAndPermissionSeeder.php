@@ -48,6 +48,9 @@ class RoleAndPermissionSeeder extends Seeder
         Permission::create(['name' => 'delete-profile']);
         Permission::create(['name' => 'delete-any-profile']);
 
+
+        Permission::create(['name' => 'manage-log']);
+
         // create roles and assign created permissions
 
         // this can be done as separate statements

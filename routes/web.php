@@ -21,6 +21,8 @@ Route::group(['prefix' => 'admin', 'middleware' => 'check_permission'], function
         ->only(['show', 'edit', 'update']);
     Route::resource('setting', 'Backend\SettingController');
     Route::get('users.data', 'Backend\DashboardController@anydata')->name('users.data');
+
+    Route::get('logs', '\Rap2hpoutre\LaravelLogViewer\LogViewerController@index')->name('logs')->middleware(\App\Http\Middleware\LogViewer::class);
 });
 
 

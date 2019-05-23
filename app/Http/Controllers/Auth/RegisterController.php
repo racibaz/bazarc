@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Models\Setting;
 use App\Models\User;
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
@@ -63,10 +66,51 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
+        $userDefaultStatus = Setting::where('attribute_key', 'user_default_status')->first();
+
+        $user = User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
+            'status' => (int) $userDefaultStatus->attribute_value
         ]);
+
+        $userDefaultRole = Setting::where('attribute_key','user_default_role')->first();
+        $user->assignRole([$userDefaultRole->attribute_value]); //writer
+
+        return $user;
+    }
+
+    /**
+     * The user has been registered.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  mixed  $user
+     * @return mixed
+     */
+    protected function registered(Request $request, $user)
+    {
+        $userDefaultRegistrationType = Setting::where('attribute_key', 'registration_type')->first();
+
+        switch ($userDefaultRegistrationType->attribute_value) {    // 1
+
+            case Setting::$registrationTypes['public']['number']:   // 1
+                return redirect('/login');
+                break;
+            case Setting::$registrationTypes['private']['number']:
+                Auth::logout();
+                return redirect()->back()->withErrors(trans('setting.user_registration_type.private'));
+                break;
+            case Setting::$registrationTypes['verified']['number']:
+                Auth::logout();
+                return redirect()->back()->withErrors(trans('setting.user_registration_type.verified'));
+                break;
+            case Setting::$registrationTypes['none']['number']:
+                Auth::logout();
+                return redirect()->back()->withErrors(trans('setting.user_registration_type.none'));
+                break;
+        }
+
+        // todo give a log
     }
 }

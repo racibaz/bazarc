@@ -6,6 +6,7 @@ use App\Presenters\UserPresenter;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Spatie\Activitylog\Traits\LogsActivity;
 use Spatie\Permission\Traits\HasRoles;
 use Illuminate\Database\Eloquent\Model;
 use Prettus\Repository\Contracts\Transformable;
@@ -19,6 +20,8 @@ class User extends Authenticatable implements Transformable
 
     use Notifiable;
 
+    use LogsActivity;
+
     protected $presenter = UserPresenter::class;
 
     /**
@@ -26,7 +29,7 @@ class User extends Authenticatable implements Transformable
      *
      * @var integer
      */
-    public const PASSIVE = 0, ACTIVE = 1, PREPARING_EMAIL_ACTIVATION = 2, GARBAGE = 3;
+    public const ACTIVE = 1, PASSIVE = 2, PREPARING_EMAIL_ACTIVATION = 3, GARBAGE = 4;
 
     /**
      * User types
@@ -34,20 +37,24 @@ class User extends Authenticatable implements Transformable
      * @var array
      */
     public static $statuses = [
-        'passive' => [
-            'name' => 'Passive',
-            'is_accept' => false,
-        ],
         'active' => [
             'name' => 'Active',
+            'number' => 1,
             'is_accept' => true,
+        ],
+        'passive' => [
+            'name' => 'Passive',
+            'number' => 2,
+            'is_accept' => false,
         ],
         'preparing_email_activation' => [
             'name' => 'Preparing Email Activation',
+            'number' => 3,
             'is_accept' => false,
         ],
         'garbage' => [
             'name' => 'Garbage',
+            'number' => 4,
             'is_accept' => false,
         ]
     ];
@@ -62,6 +69,7 @@ class User extends Authenticatable implements Transformable
         'linkedin', 'youtube', 'web_site', 'gender', 'bio_note', 'IP', 'last_login', 'previous_visit'
     ];
 
+    protected static $logAttributes = ['name'];
     /**
      * The attributes that should be hidden for arrays.
      *
@@ -89,6 +97,7 @@ class User extends Authenticatable implements Transformable
      */
     public function scopeActive($query)
     {
-        return $query->where('status', '==', User::ACTIVE);
+        return $query->where('status', '==', $this->statuses['active']['number']);
     }
 }
+

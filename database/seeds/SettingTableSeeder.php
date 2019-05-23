@@ -59,20 +59,6 @@ class SettingTableSeeder extends Seeder
             'attribute_value'             => 'logo.jpg',
         ]);
 
-        Setting::create([
-            'attribute_key'               => 'abstract_text',
-            'attribute_value'             => 'abstract_text ler ',
-        ]);
-
-        Setting::create([
-            'attribute_key'               => 'footer_text',
-            'attribute_value'             => 'site alt yazısı',
-        ]);
-
-        Setting::create([
-            'attribute_key'               => 'contact',
-            'attribute_value'             => '',
-        ]);
 
         Setting::create([
             'attribute_key'               => 'copyright',
@@ -94,16 +80,16 @@ class SettingTableSeeder extends Seeder
         ]);
 
         Setting::create([
-            'attribute_key'               => 'user_contract',
-            'attribute_value'             => 'user_contract',
+            'attribute_key'               => 'user_default_status',
+            'attribute_value'             => \App\Models\User::ACTIVE
         ]);
 
+        //todo Maybe move to upper form role seeder and we give static name for role //writer
         Setting::create([
             'attribute_key'               => 'user_default_role',
-            'attribute_value'             => 1,
+            'attribute_value'             => 'writer'
         ]);
 
-        //$url = \Illuminate\Support\Facades\Route::current()->domain();
         Setting::create([
             'attribute_key'               => 'url',
             'attribute_value'             => 'http://www.bazarc.test',
@@ -129,50 +115,6 @@ class SettingTableSeeder extends Seeder
             'attribute_value'             => 'footer codes',
         ]);
 
-        Setting::create([
-            'attribute_key'               => 'facebook',
-            'attribute_value'             => 'face account',
-        ]);
-
-        Setting::create([
-            'attribute_key'               => 'facebook_embed_code',
-            'attribute_value'             => ''
-        ]);
-
-        Setting::create([
-            'attribute_key'               => 'twitter',
-            'attribute_value'             => 'twitter account',
-        ]);
-
-        Setting::create([
-            'attribute_key'               => 'twitter_embed_code',
-            'attribute_value'             => '<a class="twitter-timeline" href="https://twitter.com/RecaiCansiz">Tweets by RecaiCansiz</a> <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>',
-        ]);
-
-        Setting::create([
-            'attribute_key'               => 'instagram',
-            'attribute_value'             => 'instagram account',
-        ]);
-
-        Setting::create([
-            'attribute_key'               => 'instagram_embed_code',
-            'attribute_value'             => '<!-- SnapWidget --><iframe src="https://snapwidget.com/embed/335198" class="snapwidget-widget" allowTransparency="true" frameborder="0" scrolling="no" style="border:none; overflow:hidden; width:500px; height:125px"></iframe>',
-        ]);
-
-        Setting::create([
-            'attribute_key'               => 'addthis',
-            'attribute_value'             => 'addthis account js',
-        ]);
-
-        Setting::create([
-            'attribute_key'               => 'disqus',
-            'attribute_value'             => '',
-        ]);
-
-        Setting::create([
-            'attribute_key'               => 'sitemap_count',
-            'attribute_value'             => '20',
-        ]);
 
         Setting::create([
             'attribute_key'               => 'allow_photo_formats',
@@ -184,15 +126,6 @@ class SettingTableSeeder extends Seeder
             'attribute_value'             => 'video/avi,video/mpeg,video/quicktime,avi,mov,mp4,3gp,3gp2,wmv,flv',
         ]);
 
-        Setting::create([
-            'attribute_key'               => 'latitude',
-            'attribute_value'             => '41.0082',
-        ]);
-
-        Setting::create([
-            'attribute_key'               => 'longitude',
-            'attribute_value'             => '28.9784',
-        ]);
 
         //profile permissions
         Permission::create(['name' => 'index-setting']);

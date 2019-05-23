@@ -52,6 +52,10 @@
                     {{ html()->label(trans('setting.form.user_default_role')) }}
                     {{ html()->select('user_default_role', $roles, $userDefaultRole)->class('form-control') }}
                 </div>
+                <div class="form-group">
+                    {{ html()->label(trans('setting.form.user_default_status')) }}
+                    {{ html()->select('user_default_status', $statuses, $userDefaultStatus)->class('form-control') }}
+                </div>
             </div>
             <!-- /.card-body -->
 

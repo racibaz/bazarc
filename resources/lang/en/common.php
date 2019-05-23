@@ -2,6 +2,7 @@
 
 return [
 
+    'logs' => 'Logs',
     'form' => [
         'action' => 'Action',
         'active' => 'Active',

@@ -4,10 +4,12 @@ namespace App\Http\Controllers\Backend;
 
 use App\Contracts\Repositories\SettingRepository;
 use App\Models\Setting;
+use App\Models\User;
 use App\Validators\SettingValidator;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Spatie\Activitylog\Models\Activity;
 use Spatie\Permission\Models\Role;
 
 class SettingController extends BackendBaseController
@@ -55,15 +57,27 @@ class SettingController extends BackendBaseController
         $timezone = $this->repository->findByField('attribute_key', 'timezone')->pluck('attribute_value')->first();
         $url = $this->repository->findByField('attribute_key', 'url')->pluck('attribute_value')->first();
         $roles = Role::all()->pluck('name', 'id');
+
         
         $userDefaultRole = Setting::where('attribute_key', 'user_default_role')->first();
         $userDefaultRole = $userDefaultRole->attribute_value;
 
+        $userDefaultStatus = Setting::where('attribute_key', 'user_default_status')->first();
+        $userDefaultStatus = $userDefaultStatus->attribute_value;
 
-        $registrationTypes = [];
-        foreach (Setting::$registrationTypes as $regType){
-            array_push($registrationTypes, $regType['name']);
+        //todo we should write function for it
+        $statuses = [];
+        foreach (User::$statuses as $index => $status){
+            $statuses[$status['number']] = $status['name'];
         }
+        $statuses = collect($statuses);
+
+        //todo we should write function for it
+        $registrationTypes = [];
+        foreach (Setting::$registrationTypes as $index => $regType){
+            $registrationTypes[$regType['number']] = $regType['name'];
+        }
+        $registrationTypes = collect($registrationTypes);
 
 
         return view('backend.views.setting.index',compact([
@@ -79,6 +93,8 @@ class SettingController extends BackendBaseController
             'url',
             'roles',
             'userDefaultRole',
+            'statuses',
+            'userDefaultStatus'
         ]));
     }
 
@@ -133,9 +149,17 @@ class SettingController extends BackendBaseController
         }
 
         if (!empty($inputs['user_default_role']) || $inputs['user_default_role'] == null){
+
             $record = $this->repository->findByField('attribute_key', 'user_default_role')->first();
             $this->repository->update(['attribute_value' => $inputs['user_default_role']], $record->id);
         }
+
+        if (!empty($inputs['user_default_status']) || $inputs['user_default_status'] == null){
+
+            $record = $this->repository->findByField('attribute_key', 'user_default_status')->first();
+            $this->repository->update(['attribute_value' => $inputs['user_default_status']], $record->id);
+        }
+
 
         return redirect()->to(route('setting.index'));
     }
