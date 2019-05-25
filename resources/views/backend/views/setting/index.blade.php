@@ -45,6 +45,10 @@
                     {{ html()->text('url')->value($url)->class('form-control') }}
                 </div>
                 <div class="form-group">
+                    {{ html()->label(trans('setting.form.timezone')) }}
+                    {{ html()->select('timezone', $timezoneList, $defaultTimezone)->class('form-control') }}
+                </div>
+                <div class="form-group">
                     {{ html()->label(trans('setting.form.registration_type')) }}
                     {{ html()->select('registration_type', $registrationTypes, $registrationType)->class('form-control') }}
                 </div>

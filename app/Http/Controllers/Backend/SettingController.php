@@ -6,10 +6,9 @@ use App\Contracts\Repositories\SettingRepository;
 use App\Models\Setting;
 use App\Models\User;
 use App\Validators\SettingValidator;
+use DateTimeZone;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
-use Spatie\Activitylog\Models\Activity;
 use Spatie\Permission\Models\Role;
 
 class SettingController extends BackendBaseController
@@ -42,7 +41,7 @@ class SettingController extends BackendBaseController
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\View\View
      */
     public function index()
     {
@@ -54,10 +53,13 @@ class SettingController extends BackendBaseController
         $description = $this->repository->findByField('attribute_key', 'description')->pluck('attribute_value')->first();
         $keywords = $this->repository->findByField('attribute_key', 'keywords')->pluck('attribute_value')->first();
         $registrationType = $this->repository->findByField('attribute_key', 'registration_type')->pluck('attribute_value')->first();
-        $timezone = $this->repository->findByField('attribute_key', 'timezone')->pluck('attribute_value')->first();
+        $defaultTimezone = $this->repository->findByField('attribute_key', 'timezone')->pluck('attribute_value')->first();
         $url = $this->repository->findByField('attribute_key', 'url')->pluck('attribute_value')->first();
         $roles = Role::all()->pluck('name', 'id');
 
+        $timezoneList = [];
+        //SelectBox içerisinde value değerinin seçilebilmesi için key yerine value değerini atıyoruz.
+        foreach (DateTimeZone::listIdentifiers() as $key => $value) $timezoneList[$value] = $value;
         
         $userDefaultRole = Setting::where('attribute_key', 'user_default_role')->first();
         $userDefaultRole = $userDefaultRole->attribute_value;
@@ -79,7 +81,6 @@ class SettingController extends BackendBaseController
         }
         $registrationTypes = collect($registrationTypes);
 
-
         return view('backend.views.setting.index',compact([
             'records',
             'languageCode',
@@ -89,7 +90,8 @@ class SettingController extends BackendBaseController
             'keywords',
             'registrationTypes',
             'registrationType',
-            'timezone',
+            'defaultTimezone',
+            'timezoneList',
             'url',
             'roles',
             'userDefaultRole',
@@ -141,6 +143,11 @@ class SettingController extends BackendBaseController
         if (!empty($inputs['url']) || $inputs['url'] == null){
             $record = $this->repository->findByField('attribute_key', 'url')->first();
             $this->repository->update(['attribute_value' => $inputs['url']], $record->id);
+        }
+
+        if (!empty($inputs['timezone']) || $inputs['timezone'] == null){
+            $record = $this->repository->findByField('attribute_key', 'timezone')->first();
+            $this->repository->update(['attribute_value' => $inputs['timezone']], $record->id);
         }
 
         if (!empty($inputs['registration_type']) || $inputs['registration_type'] == null){
