@@ -65,7 +65,7 @@ class User extends Authenticatable implements Transformable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'slug', 'cell_phone', 'facebook', 'twitter', 'pinterest',
+        'name', 'email', 'password', 'two_factor_type', 'authy_id', 'slug', 'cell_phone', 'facebook', 'twitter', 'pinterest',
         'linkedin', 'youtube', 'web_site', 'gender', 'bio_note', 'IP', 'last_login', 'previous_visit'
     ];
 
@@ -98,6 +98,68 @@ class User extends Authenticatable implements Transformable
     public function scopeActive($query)
     {
         return $query->where('status', '==', $this->statuses['active']['number']);
+    }
+
+    public function phoneNumber()
+    {
+        return $this->hasOne(PhoneNumber::class);
+    }
+
+    public function hasTwoFactorAuthenticationEnabled()
+    {
+        return $this->two_factor_type !== 'off';
+    }
+
+    public function hasSmsTwoFactorAuthenticationEnabled()
+    {
+        return $this->two_factor_type === 'sms';
+    }
+
+    public function hasTwoFactorType($type)
+    {
+        return $this->two_factor_type === $type;
+    }
+
+    public function hasDiallingCode($diallingCodeId)
+    {
+        if ($this->hasPhoneNumber() === false) {
+            return false;
+        }
+
+        return $this->phoneNumber->diallingCode->id === $diallingCodeId;
+    }
+
+    public function getPhoneNumber()
+    {
+        if ($this->hasPhoneNumber() === false) {
+            return false;
+        }
+
+        return $this->phoneNumber->phone_number;
+    }
+
+    public function hasPhoneNumber()
+    {
+        return $this->phoneNumber !== null;
+    }
+
+    public function registeredForTwoFactorAuthentication()
+    {
+        return $this->authy_id !== null;
+    }
+
+    public function updatePhoneNumber($phoneNumber, $phoneNumberDiallingCode)
+    {
+        $this->phoneNumber()->delete();
+
+        if (!$phoneNumber) {
+            return;
+        }
+
+        return $this->phoneNumber()->create([
+            'phone_number' => $phoneNumber,
+            'dialling_code_id' => $phoneNumberDiallingCode,
+        ]);
     }
 }
 

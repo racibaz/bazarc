@@ -22,7 +22,7 @@ class UsersTableSeeder extends Seeder
             'password' => bcrypt(12345),
             'remember_token' => Str::random(10),
             'slug' => Str::slug('admin'),
-            'cell_phone' => '1234567890',
+            'cell_phone' => '5415859867',
             'web_site' => 'http://www.bazsoft.biz',
             'gender' => 1,
             'bio_note' => 'Bio text',

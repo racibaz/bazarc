@@ -23,7 +23,8 @@
         "spatie/laravel-html": "^2.22",
         "spatie/laravel-permission": "^2.37",
         "squizlabs/php_codesniffer": "3.4.2",
-        "yajra/laravel-datatables-oracle": "~9.0"
+        "yajra/laravel-datatables-oracle": "~9.0",
+        "authy/php": "3.0"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.2",

@@ -168,6 +168,7 @@ return [
          */
 
         Laravel\Socialite\SocialiteServiceProvider::class,
+        App\Providers\AuthyServiceProvider::class,
         /*
          * Application Service Providers...
          */
@@ -231,6 +232,8 @@ return [
 
         //3. Party Packages
         'Socialite' => Laravel\Socialite\Facades\Socialite::class,
+
+        'Authy' => App\Facades\Authy::class,
     ],
 
 ];
