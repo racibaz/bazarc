@@ -24,9 +24,26 @@ class UserTransformer extends TransformerAbstract
         return [
             'id'         => (int) $model->id,
             'name'       => $model->name,
+            'slug'       => $model->slug,
             'email'      => $model->email,
-            'created_at' => $model->created_at,
-            'updated_at' => $model->updated_at
+            'created_at' => (string) $model->created_at,
+            'updated_at' => (string) $model->updated_at
         ];
+    }
+
+    /**
+     * @param $index
+     * @return mixed|null
+     */
+    public static function originalAttribute($index)
+    {
+        $attributes = [
+            'id' => 'id',
+            'name' => 'name',
+            'slug' => 'slug',
+            'status' => 'status'
+        ];
+
+        return isset($attributes[$index]) ? $attributes[$index] : null;
     }
 }

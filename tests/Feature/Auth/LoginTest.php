@@ -14,7 +14,7 @@ class LoginTest extends TestCase
      *
      * @return void
      */
-    public function testItShouldSeeLoginPage()
+    public function it_should_see_login_page()
     {
         $this->get(route('login'))
             ->assertStatus(200);

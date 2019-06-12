@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Presenters\UserPresenter;
+use App\Transformers\UserTransformer;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -21,6 +22,8 @@ class User extends Authenticatable implements Transformable
     use Notifiable;
 
     use LogsActivity;
+
+    public $transformer = UserTransformer::class;
 
     protected $presenter = UserPresenter::class;
 
