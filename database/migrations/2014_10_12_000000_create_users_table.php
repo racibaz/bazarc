@@ -19,7 +19,7 @@ class CreateUsersTable extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            $table->enum('two_factor_type', ['off', 'sms', 'app']);
+            $table->enum('two_factor_type', ['off', 'sms', 'app'])->default('off');
             $table->string('authy_id')->unique()->nullable();
             $table->string('slug')->nullable();
             $table->string('cell_phone')->nullable();

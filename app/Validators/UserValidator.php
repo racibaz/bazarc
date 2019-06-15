@@ -17,6 +17,7 @@ class UserValidator extends LaravelValidator
         ValidatorInterface::RULE_CREATE => [
             'name'                          => 'required|min:3|string',
             'email'                         => 'required|unique:users|email',
+            'password'                      => 'required',
             'email_verified_at'             => 'nullable|date',
 //            'slug'                          => 'required|unique:users|string',
             'cell_phone'                    => 'nullable|string',
@@ -27,6 +28,7 @@ class UserValidator extends LaravelValidator
             'last_login'                    => 'nullable|date',
             'previous_visit'                => 'nullable|date'
         ],
+        //todo password eklenmeli.
         ValidatorInterface::RULE_UPDATE => [
             'name'                          => 'required|min:3|string',
             'email'                         => 'required|unique:users|email',
