@@ -38,8 +38,7 @@ class RoleAndPermissionSeeder extends Seeder
 
         Permission::create(['name' => 'index-impersonate']);
         Permission::create(['name' => 'impersonate-impersonate']);
-
-
+        Permission::create(['name' => 'stop-impersonate']);
 
         //profile permissions
         Permission::create(['name' => 'show-any-profile']);

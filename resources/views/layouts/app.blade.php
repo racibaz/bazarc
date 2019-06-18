@@ -53,10 +53,10 @@
                         @else
                             @if(session()->has('impersonate_by'))
                                 <li class="nav item">
-                                    <form method="post" action="{{route('impersonate')}}">
+                                    <form method="post" action="{{route('impersonate.stop')}}">
                                         @csrf
-                                        @method('delete')
-                                        <button class="btn btn-link">Stop Impersonating</button>
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-link">Stop Impersonating</button>
                                     </form>
                                 </li>
                             @endif

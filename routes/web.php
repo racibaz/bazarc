@@ -24,9 +24,10 @@ Route::group(['prefix' => 'admin', 'middleware' => 'check_permission'], function
     Route::resource('setting', 'Backend\SettingController');
     Route::get('users.data', 'Backend\DashboardController@anydata')->name('users.data');
 
+    //impersonate
     Route::get('impersonate', 'Backend\ImpersonateController@index')->name('impersonate');
     Route::post('impersonate', 'Backend\ImpersonateController@impersonate')->name('impersonate');
-    Route::delete('impersonate', 'Backend\ImpersonateController@stop');
+    Route::delete('impersonate/stop', 'Backend\ImpersonateController@stop')->name('impersonate.stop');
 
     //--Logs
     Route::get('logs', '\Rap2hpoutre\LaravelLogViewer\LogViewerController@index')->name('logs')->middleware(\App\Http\Middleware\LogViewer::class);
@@ -46,3 +47,6 @@ Route::group(['middleware' => 'auth'], function () {
 //Social Media Logins
 Route::get ( '/redirect/{service}', 'Auth\SocialAuthController@redirect' );
 Route::get ( '/callback/{service}', 'Auth\SocialAuthController@callback' );
+
+//impersonate for basic roles without permission
+Route::delete('impersonate/stop', 'Backend\ImpersonateController@stop')->name('impersonate.stop');

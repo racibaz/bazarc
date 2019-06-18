@@ -71,7 +71,7 @@ class ImpersonateUserTest extends TestCase
 
         $this->assertEquals(auth()->id(), $user->id);
 
-        $this->delete(route('impersonate'));
+        $this->delete(route('impersonate.stop'));
 
         $this->assertEquals(auth()->id(), $admin->id);
     }
