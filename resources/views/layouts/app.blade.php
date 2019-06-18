@@ -51,18 +51,32 @@
                                 </li>
                             @endif
                         @else
+                            @if(session()->has('impersonate_by'))
+                                <li class="nav item">
+                                    <form method="post" action="{{route('impersonate')}}">
+                                        @csrf
+                                        @method('delete')
+                                        <button class="btn btn-link">Stop Impersonating</button>
+                                    </form>
+                                </li>
+                            @endif
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->name }} <span class="caret"></span>
                                 </a>
-
+                                <div class="dropdown-menu">
+                                    <a href="{{ url('/settings/twofactor') }}"><i class="fa fa-btn fa-lock"></i>Two factor settings</a>
+                                    <a href="{{ url('/admin/impersonate') }}"><i class="fa fa-btn fa-lock"></i>Impersonate as a User</a>
+                                </div>
+                            </li>
+                            <li class="nav-item">
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                    <li><a href="{{ url('/settings/twofactor') }}"><i class="fa fa-btn fa-lock"></i>Two factor settings</a></li>
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
-                                       onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
+                                    <li><a class="dropdown-item" href="{{ route('logout') }}"
+                                           onclick="event.preventDefault();
+                                                         document.getElementById('logout-form').submit();">
                                         {{ __('Logout') }}
-                                    </a>
+                                        </a>
+                                    </li>
 
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                         @csrf

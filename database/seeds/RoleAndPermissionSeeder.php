@@ -36,6 +36,9 @@ class RoleAndPermissionSeeder extends Seeder
         Permission::create(['name' => 'publish-user']);
         Permission::create(['name' => 'unpublish-user']);
 
+        Permission::create(['name' => 'index-impersonate']);
+        Permission::create(['name' => 'impersonate-impersonate']);
+
 
 
         //profile permissions

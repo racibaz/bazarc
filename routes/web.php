@@ -24,6 +24,10 @@ Route::group(['prefix' => 'admin', 'middleware' => 'check_permission'], function
     Route::resource('setting', 'Backend\SettingController');
     Route::get('users.data', 'Backend\DashboardController@anydata')->name('users.data');
 
+    Route::get('impersonate', 'Backend\ImpersonateController@index')->name('impersonate');
+    Route::post('impersonate', 'Backend\ImpersonateController@impersonate')->name('impersonate');
+    Route::delete('impersonate', 'Backend\ImpersonateController@stop');
+
     //--Logs
     Route::get('logs', '\Rap2hpoutre\LaravelLogViewer\LogViewerController@index')->name('logs')->middleware(\App\Http\Middleware\LogViewer::class);
 });
