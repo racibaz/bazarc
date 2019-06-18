@@ -75,7 +75,7 @@ class RegisterController extends Controller
             'status' => (int) $userDefaultStatus->attribute_value
         ]);
 
-        $userDefaultRole = Setting::where('attribute_key','user_default_role')->first();
+        $userDefaultRole = Setting::where('attribute_key', 'user_default_role')->first();
         $user->assignRole([$userDefaultRole->attribute_value]); //writer
 
         return $user;
@@ -93,7 +93,6 @@ class RegisterController extends Controller
         $userDefaultRegistrationType = Setting::where('attribute_key', 'registration_type')->first();
 
         switch ($userDefaultRegistrationType->attribute_value) {    // 1
-
             case Setting::$registrationTypes['public']['number']:   // 1
                 return redirect('/login');
                 break;

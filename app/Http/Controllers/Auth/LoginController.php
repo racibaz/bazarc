@@ -76,8 +76,6 @@ class LoginController extends Controller
         $user->getName();
         $user->getEmail();
         $user->getAvatar();
-
-
     }
 
     /**
@@ -89,7 +87,6 @@ class LoginController extends Controller
      */
     protected function authenticated(Request $request, User $user)
     {
-
         if ($user->hasTwoFactorAuthenticationEnabled()) {
             return $this->logoutAndRedirectToTokenEntry($request, $user);
         }

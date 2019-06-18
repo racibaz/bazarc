@@ -20,7 +20,7 @@ class UserController extends BackendBaseController
     /**
      * @var UserRepository
      */
-    protected  $repository;
+    protected $repository;
 
     /**
      * @var * @var \App\Validators\UserValidator
@@ -52,8 +52,8 @@ class UserController extends BackendBaseController
      */
     public function index()
     {
-        $users = $this->repository->orderBy('created_at','desc')->all();
-        return view('backend.views.user.index',compact(['users']));
+        $users = $this->repository->orderBy('created_at', 'desc')->all();
+        return view('backend.views.user.index', compact(['users']));
     }
 
     /**
@@ -76,7 +76,7 @@ class UserController extends BackendBaseController
     public function create()
     {
         $record = new User();
-        return view('backend.views.user._form',compact(['record']));
+        return view('backend.views.user._form', compact(['record']));
     }
 
     /**
@@ -89,21 +89,18 @@ class UserController extends BackendBaseController
     {
         $inputs = $request->all();
 
-        try
-        {
+        try {
             $inputs['slug'] = Str::slug($inputs['name'], '-');
 
             //Policy validated so it is available
             $inputs['password'] = bcrypt($inputs['password']);
 
-            $this->validator->with( $inputs )->passesOrFail( ValidatorInterface::RULE_UPDATE );
+            $this->validator->with($inputs)->passesOrFail(ValidatorInterface::RULE_UPDATE);
 
             $this->repository->create($inputs);
 
             return redirect()->to(route('user.index'));
-
-        }catch (ValidatorException $e){
-
+        } catch (ValidatorException $e) {
             return Response::json([
                 'error'   =>true,
                 'message' =>$e->getMessageBag()
@@ -121,7 +118,7 @@ class UserController extends BackendBaseController
      */
     public function show($record)
     {
-        return view('backend.views.user.show',compact(['record']));
+        return view('backend.views.user.show', compact(['record']));
     }
 
     /**
@@ -131,7 +128,7 @@ class UserController extends BackendBaseController
      */
     public function edit($record)
     {
-        return view('backend.views.user._form',compact(['record']));
+        return view('backend.views.user._form', compact(['record']));
     }
 
     /**
@@ -148,24 +145,22 @@ class UserController extends BackendBaseController
     {
         $inputs = $request->all();
 
-        try
-        {
+        try {
             $inputs['slug'] = Str::slug($inputs['name'], '-');
 
-            if(!empty($inputs['password'])){
+            if (!empty($inputs['password'])) {
                 $inputs['password'] = bcrypt($inputs['password']);
-            }else{
+            } else {
                 unset($inputs['password']);
             }
 
-            $this->validator->with( $inputs )->setId($record->id)->passesOrFail( ValidatorInterface::RULE_UPDATE );
+            $this->validator->with($inputs)->setId($record->id)->passesOrFail(ValidatorInterface::RULE_UPDATE);
 
             $this->repository->update($inputs, $record->id);
 
             return redirect()->to(route('user.index'));
 
-        }catch (ValidatorException $e){
-
+        } catch (ValidatorException $e) {
             return Response::json([
                 'error'   =>true,
                 'message' =>$e->getMessageBag()
