@@ -18,6 +18,11 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+
+    @if(config('recaptcha.is_active'))
+        {!! htmlScriptTagJsApiV3([]) !!}
+    @endif
+
 </head>
 <body>
     <div id="app">

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "ca4f98feb432d63903fb249bfe19c859",
+    "content-hash": "ae90d3bac998f647dd0741200d45d5e3",
     "packages": [
         {
             "name": "anahkiasen/underscore-php",
@@ -101,6 +101,60 @@
                 "two-factor"
             ],
             "time": "2018-01-02T15:03:35+00:00"
+        },
+        {
+            "name": "biscolab/laravel-recaptcha",
+            "version": "v3.4.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/biscolab/laravel-recaptcha.git",
+                "reference": "cf6ab3680c55c7ef915c764f5953660df3fe7732"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/biscolab/laravel-recaptcha/zipball/cf6ab3680c55c7ef915c764f5953660df3fe7732",
+                "reference": "cf6ab3680c55c7ef915c764f5953660df3fe7732",
+                "shasum": ""
+            },
+            "require": {
+                "laravel/framework": "^5.5",
+                "php": "^7.1"
+            },
+            "require-dev": {
+                "orchestra/testbench": "~3.0",
+                "phpunit/phpunit": "6.*|7.*"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Biscolab\\ReCaptcha\\ReCaptchaServiceProvider"
+                    ],
+                    "aliases": {
+                        "ReCaptcha": "Biscolab\\ReCaptcha\\Facades\\ReCaptcha"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Biscolab\\ReCaptcha\\": "src/"
+                },
+                "files": [
+                    "src/helpers.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Roberto Belotti",
+                    "email": "boby.belotti@gmail.com"
+                }
+            ],
+            "description": "Simple ReCaptcha package for Laravel 5",
+            "time": "2019-02-27T21:00:28+00:00"
         },
         {
             "name": "davejamesmiller/laravel-breadcrumbs",

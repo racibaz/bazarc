@@ -42,9 +42,6 @@ class BazArcInstall extends Command
         Artisan::call('migrate', ['--force' => true]);
         Artisan::call('db:seed', ['--force' => true]);
 
-        app()['cache']->forget('spatie.permission.cache');
-        app()['cache']->forget();
-
         return true;
     }
 }
