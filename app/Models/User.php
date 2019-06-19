@@ -7,6 +7,7 @@ use App\Transformers\UserTransformer;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Laravel\Passport\HasApiTokens;
 use Spatie\Activitylog\Traits\LogsActivity;
 use Spatie\Permission\Traits\HasRoles;
 use Illuminate\Database\Eloquent\Model;
@@ -18,6 +19,8 @@ class User extends Authenticatable implements Transformable
     use TransformableTrait;
 
     use HasRoles;
+
+    use HasApiTokens;
 
     use Notifiable;
 

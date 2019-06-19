@@ -65,6 +65,7 @@
                             </div>
 
                             <a href="redirect/google">Login in with Google</a>
+                            <a href="redirect/facebook">Login in with Facebook</a>
                             <a href="redirect/twitter">Login in with Twitter</a>
                             <a href="redirect/github">Login in with GitHub</a>
                         </div>
