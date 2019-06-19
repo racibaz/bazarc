@@ -106,9 +106,20 @@ class User extends Authenticatable implements Transformable
         return $query->where('status', '==', $this->statuses['active']['number']);
     }
 
+
     public function phoneNumber()
     {
         return $this->hasOne(PhoneNumber::class);
+    }
+
+    public function social()
+    {
+        return $this->hasMany(UserSocial::class);
+    }
+
+    public function hasSocialLinked($service)
+    {
+        return (bool)$this->social->where('service', $service)->count();
     }
 
     public function hasTwoFactorAuthenticationEnabled()

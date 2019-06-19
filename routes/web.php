@@ -45,8 +45,8 @@ Route::group(['middleware' => 'auth'], function () {
 });
 
 //Social Media Logins
-Route::get ('/redirect/{service}', 'Auth\SocialAuthController@redirect');
-Route::get ('/callback/{service}', 'Auth\SocialAuthController@callback');
+Route::get('/redirect/{service}', 'Auth\SocialAuthController@redirect');
+Route::get('/callback/{service}', 'Auth\SocialAuthController@callback');
 
 //impersonate for basic roles without permission
 Route::delete('impersonate/stop', 'Backend\ImpersonateController@stop')->name('impersonate.stop');
