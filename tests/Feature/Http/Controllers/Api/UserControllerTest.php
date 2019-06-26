@@ -4,6 +4,7 @@ namespace Tests\Feature\Http\Controllers\Api;
 
 use App\Models\User;
 use Faker\Factory;
+use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Str;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -82,5 +83,44 @@ class UserControllerTest extends TestCase
             'slug' => Str::slug($name),
             'email' => $email
         ]);
+    }
+
+    /**
+     * @test
+     */
+    public function can_return_a_collection_of_paginated_users()
+    {
+
+        $user1 = factory(User::class)->create();
+        $user2 = factory(User::class)->create();
+        $user3 = factory(User::class)->create();
+
+
+        $response = $this->actingAs($user1, 'api')->json('GET', '/api/v1/users');
+
+
+
+        $response->assertStatus(200)
+            ->assertJsonStructure([
+                'data' => [
+                    '*' => ['id', 'name', 'slug', 'email', 'created_at', 'updated_at',
+                        'links' =>
+                            ['*' =>
+                                [
+                                    'rel', 'href'
+                                ]
+                            ]
+                    ]
+                ],
+                'meta' => [
+                    'pagination' => [
+                        'total', 'count',
+                        'per_page',
+                        'current_page',
+                        'total_pages',
+                        'links' => ['next']
+                    ]
+                ]
+            ]);
     }
 }
