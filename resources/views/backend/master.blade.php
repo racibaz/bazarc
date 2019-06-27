@@ -15,7 +15,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
     @stack('css')
 </head>
 <body class="hold-transition sidebar-mini">
-<div class="wrapper">
+    <div id="app" class="wrapper">
 
     {{--@include('backend.views.layout.header')--}}
 
@@ -26,7 +26,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
     @section('breadcrumbs')
         <h2>Dashboard Breadcrumb</h2>
     @stop
-<!-- Content Wrapper. Contains page content -->
+    <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
         <div class="content-header">
@@ -42,24 +42,24 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <section class="content">
             <div class="container-fluid">
                 <!-- Small boxes (Stat box) -->
-
-                @yield('content')
+                <router-view></router-view>
+{{--                @yield('content')--}}
 
             </div><!-- /.container-fluid -->
         </section>
         <!-- /.content -->
     </div>
-    <!-- /.content-wrapper -->
+        <!-- /.content-wrapper -->
 
-    @include('backend.layout.footer')
+        @include('backend.layout.footer')
 
-<!-- Control Sidebar -->
-    <aside class="control-sidebar control-sidebar-dark">
-        <!-- Control sidebar content goes here -->
-    </aside>
-    <!-- /.control-sidebar -->
-</div>
-<!-- ./wrapper -->
+        <!-- Control Sidebar -->
+        <aside class="control-sidebar control-sidebar-dark">
+            <!-- Control sidebar content goes here -->
+        </aside>
+        <!-- /.control-sidebar -->
+    </div>
+    <!-- ./wrapper -->
 
 <script src="/js/app.js"></script>
 @stack('script')

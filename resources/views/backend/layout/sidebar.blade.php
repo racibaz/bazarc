@@ -29,12 +29,20 @@
                     <li class="nav-item">
                         <a href="{!! route('dashboard') !!}" class="nav-link">
                             <i class="fa fa-home" aria-hidden="true"></i>
-
                             <p>
                                 {{trans('dashboard.dashboard')}}
                                 <span class="right badge badge-danger">New</span>
                             </p>
                         </a>
+                    </li>
+                    <li class="nav-item">
+                        <router-link to="/dashboard" class="nav-link">
+                            <i class="fa fa-home" aria-hidden="true"></i>
+                            <p>
+                                {{trans('dashboard.dashboard')}}
+                                <span class="right badge badge-danger">New</span>
+                            </p>
+                        </router-link>
                     </li>
                 @endcan
                 @can('index-user')
