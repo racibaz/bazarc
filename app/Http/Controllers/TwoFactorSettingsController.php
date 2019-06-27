@@ -11,7 +11,7 @@ class TwoFactorSettingsController extends Controller
 {
     public function index()
     {
-        return view('backend.views.setting.twofactor')->with([
+        return view('backend.setting.twofactor')->with([
             'diallingCodes' => DiallingCode::all(),
         ]);
     }

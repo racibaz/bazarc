@@ -24,7 +24,7 @@ class ImpersonateController extends BackendBaseController
      */
     public function index()
     {
-        return  view('backend.views.impersonate.index');
+        return  view('backend.impersonate.index');
     }
 
     /**

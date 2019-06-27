@@ -51,7 +51,7 @@ class ProfileController extends BackendBaseController
      */
     public function show($record)
     {
-        return view('backend.views.profile.show',compact(['record']));
+        return view('backend.profile.show',compact(['record']));
     }
 
     /**
@@ -64,7 +64,7 @@ class ProfileController extends BackendBaseController
      */
     public function edit($record)
     {
-        return view('backend.views.profile._form',compact(['record']));
+        return view('backend.profile._form',compact(['record']));
     }
 
     /**

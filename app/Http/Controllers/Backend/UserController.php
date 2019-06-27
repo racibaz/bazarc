@@ -53,7 +53,7 @@ class UserController extends BackendBaseController
     public function index()
     {
         $users = $this->repository->orderBy('created_at', 'desc')->all();
-        return view('backend.views.user.index', compact(['users']));
+        return view('backend.user.index', compact(['users']));
     }
 
     /**
@@ -76,7 +76,7 @@ class UserController extends BackendBaseController
     public function create()
     {
         $record = new User();
-        return view('backend.views.user._form', compact(['record']));
+        return view('backend.user._form', compact(['record']));
     }
 
     /**
@@ -118,7 +118,7 @@ class UserController extends BackendBaseController
      */
     public function show($record)
     {
-        return view('backend.views.user.show', compact(['record']));
+        return view('backend.user.show', compact(['record']));
     }
 
     /**
@@ -128,7 +128,7 @@ class UserController extends BackendBaseController
      */
     public function edit($record)
     {
-        return view('backend.views.user._form', compact(['record']));
+        return view('backend.user._form', compact(['record']));
     }
 
     /**

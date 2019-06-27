@@ -43,7 +43,7 @@ class DashboardController extends BackendBaseController
     {
         $users =  $this->repository->all();
         $userCount = count($users);
-        return view('backend.views.dashboard.index', compact('users', 'userCount'));
+        return view('backend.dashboard.index', compact('users', 'userCount'));
     }
 
     /**

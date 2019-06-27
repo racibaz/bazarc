@@ -13,12 +13,26 @@ Breadcrumbs::for('home', function ($trail) {
     $trail->push('Home', route('home'));
 });
 
+#region Dashboard
 Breadcrumbs::for('dashboard', function ($trail) {
     $trail->parent('home');
     $trail->push('Dashboard', route('dashboard'));
 });
+#endregion
 
+#region Profile Breadcrumb
+Breadcrumbs::for('profile.show', function ($trail) {
+    $trail->parent('dashboard');
+    $trail->push('Profile Show', route('profile.show', auth()->user()->getAuthIdentifier()));
+});
 
+Breadcrumbs::for('profile.edit', function ($trail) {
+    $trail->parent('dashboard');
+    $trail->push('Profile Edit', route('profile.edit', auth()->user()->getAuthIdentifier()));
+});
+#endregion
+
+#region   models of resource routes macro breadcrumbs
 Breadcrumbs::macro('resource', function ($name, $title) {
     // Home > Blog
     Breadcrumbs::for("$name.index", function ($trail) use ($name, $title) {
@@ -35,7 +49,7 @@ Breadcrumbs::macro('resource', function ($name, $title) {
     // Home > Blog > Post 123
     Breadcrumbs::for("$name.show", function ($trail, $model) use ($name) {
         $trail->parent("$name.index");
-        $trail->push($model->title, route("$name.show", $model));
+        $trail->push('Show Page', route("$name.show", $model));
     });
 
     // Home > Blog > Post 123 > Edit
@@ -45,4 +59,6 @@ Breadcrumbs::macro('resource', function ($name, $title) {
     });
 });
 
-//Breadcrumbs::resource('user', 'Users');
+Breadcrumbs::resource('user', 'Users');
+Breadcrumbs::resource('setting', 'Settings');
+#endregion

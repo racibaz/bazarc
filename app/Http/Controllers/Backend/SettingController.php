@@ -81,7 +81,7 @@ class SettingController extends BackendBaseController
         }
         $registrationTypes = collect($registrationTypes);
 
-        return view('backend.views.setting.index',compact([
+        return view('backend.setting.index',compact([
             'records',
             'languageCode',
             'title',
