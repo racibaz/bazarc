@@ -1,8 +1,10 @@
+<style>
+
+</style>
 <template>
     <div class="container">
         <div class="row justify-content-center">
-            <not-found></not-found>
-            Dashboard
+Deneme
         </div>
     </div>
 </template>

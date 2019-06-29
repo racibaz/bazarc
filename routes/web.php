@@ -53,3 +53,5 @@ Route::delete('impersonate/stop', 'Backend\ImpersonateController@stop')->name('i
 
 //create passport token
 Route::post('/passport/token/create', 'Auth\PassportAuthController@store')->name('passport.token.create');
+
+Route::get('{path}','HomeController@index')->where( 'path', '([A-z\d-/_.]+)?' );

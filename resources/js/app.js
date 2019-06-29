@@ -14,14 +14,16 @@ Vue.use(VueRouter)
 
 
 let routes = [
-    { path: '/dashboard', component: require('./components/Dashboard.vue') },
-    { path: '/developer', component: require('./components/Developer.vue') },
+    { path: '/dashboard', component: require('./components/Dashboard.vue').default },
+    { path: '/profile', component: require('./components/ExampleComponent.vue').default },
 ]
 
 const router = new VueRouter({
     mode: 'history',
     routes // short for `routes: routes`
 })
+
+
 
 /**
  * The following block of code may be used to automatically register your

@@ -28,7 +28,7 @@
                 @can('index-dashboard')
                     <li class="nav-item">
                         <a href="{!! route('dashboard') !!}" class="nav-link">
-                            <i class="fa fa-home" aria-hidden="true"></i>
+                            <i class="fa fa-home blue" aria-hidden="true"></i>
                             <p>
                                 {{trans('dashboard.dashboard')}}
                                 <span class="right badge badge-danger">New</span>
@@ -40,6 +40,15 @@
                             <i class="fa fa-home" aria-hidden="true"></i>
                             <p>
                                 {{trans('dashboard.dashboard')}}
+                                <span class="right badge badge-danger">New</span>
+                            </p>
+                        </router-link>
+                    </li>
+                    <li class="nav-item">
+                        <router-link to="/profile" class="nav-link">
+                            <i class="fa fa-home" aria-hidden="true"></i>
+                            <p>
+                                Profile
                                 <span class="right badge badge-danger">New</span>
                             </p>
                         </router-link>
