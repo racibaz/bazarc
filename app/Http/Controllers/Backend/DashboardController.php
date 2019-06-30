@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Backend;
 
 use App\Contracts\Repositories\UserRepository;
 use App\Models\User;
+use Caffeinated\Themes\Facades\Theme;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;

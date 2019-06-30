@@ -1,0 +1,13 @@
+{
+    "name": "vendor/default-theme",
+    "description": "DefaultTheme theme.",
+    "type": "caffeinated-theme",
+    "autoload": {
+        "psr-4": {
+            "Themes\\DefaultTheme\\": "src/"
+        }
+    },
+    "require": {
+        "caffeinated/composer": "*"
+    }
+}
