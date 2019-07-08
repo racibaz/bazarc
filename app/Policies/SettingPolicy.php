@@ -18,6 +18,20 @@ class SettingPolicy
         //
     }
 
+
+    /**
+     * Determine whether the user can view the use.
+     *
+     * @param  \App\Models\User $user
+     * @param $record
+     *
+     * @return boolean
+     */
+    public function index()
+    {
+        return true;
+    }
+
     /**
      * Determine whether the user can view the use.
      *

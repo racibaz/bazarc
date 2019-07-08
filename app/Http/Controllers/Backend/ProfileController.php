@@ -20,7 +20,7 @@ class ProfileController extends BackendBaseController
     /**
      * @var ProfileRepository
      */
-    protected  $repository;
+    protected $repository;
 
     /**
      * @var \App\Validators\ProfileValidator
@@ -51,7 +51,7 @@ class ProfileController extends BackendBaseController
      */
     public function show($record)
     {
-        return view('backend.profile.show',compact(['record']));
+        return view('backend.profile.show', compact(['record']));
     }
 
     /**
@@ -64,7 +64,7 @@ class ProfileController extends BackendBaseController
      */
     public function edit($record)
     {
-        return view('backend.profile._form',compact(['record']));
+        return view('backend.profile._form', compact(['record']));
     }
 
     /**
@@ -81,23 +81,22 @@ class ProfileController extends BackendBaseController
     {
         $inputs = $request->all();
 
-        try
-        {
+        try {
             $inputs['slug'] = Str::slug($inputs['name'], '-');
 
-            if(!empty($inputs['password'])){
+            if (!empty($inputs['password'])) {
                 $inputs['password'] = bcrypt($inputs['password']);
-            }else{
+            } else {
                 unset($inputs['password']);
             }
 
-            $this->validator->with( $inputs )->setId($record->id)->passesOrFail( ValidatorInterface::RULE_UPDATE );
+            $this->validator->with($inputs)->setId($record->id)->passesOrFail( ValidatorInterface::RULE_UPDATE);
 
             $this->repository->update($inputs, $record->id);
 
             return redirect()->to(route('profile.show', $record));
 
-        }catch (ValidatorException $e){
+        }catch (ValidatorException $e) {
 
             return Response::json([
                 'error'   =>true,

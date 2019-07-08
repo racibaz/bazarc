@@ -1,11 +1,7 @@
 @extends('backend.master')
 
 @section('breadcrumbs')
-    @if(isset($record->id))
-        User Breadcrumb Edit
-    @else
-        User Breadcrumb Create
-    @endif
+    Setting Breadcrumb Edit
 @stop
 
 @section('content')

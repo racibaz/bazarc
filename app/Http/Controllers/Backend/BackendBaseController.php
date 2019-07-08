@@ -4,12 +4,21 @@ namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Auth\Access\AuthorizationException;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+use Illuminate\Foundation\Bus\DispatchesJobs;
+use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 class BackendBaseController extends Controller
 {
+
+    use DispatchesJobs, ValidatesRequests;
+
+    use AuthorizesRequests {
+        resourceAbilityMap as protected resourceAbilityMapTrait;
+    }
 
     /**
      * Controller constructor.
@@ -26,6 +35,20 @@ class BackendBaseController extends Controller
             return $next($request);
         });
     }
+
+    /**
+     * Get the map of resource methods to ability names.
+     *
+     * @example https://github.com/laravel/ideas/issues/772
+     * @return array
+     */
+    protected function resourceAbilityMap()
+    {
+        // Map the "index" ability to the "index" function in our policies
+        return array_merge($this->resourceAbilityMapTrait(), ['index' => 'index']);
+    }
+
+
 
     /**
      * Check the user permissions in current route
