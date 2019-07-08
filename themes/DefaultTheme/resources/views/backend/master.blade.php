@@ -11,7 +11,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
     <title>{{config('app.name')}}</title>
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <link rel="stylesheet" href="/css/app.css">
+    <link rel="stylesheet" href="{{ asset('themes/default-theme/css/theme.css') }}">
     @stack('css')
 </head>
 <body class="hold-transition sidebar-mini">
@@ -61,7 +61,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
     </div>
     <!-- ./wrapper -->
 
-<script src="/js/app.js"></script>
+<script src="{{ asset('themes/default-theme/js/theme.js') }}"></script>
 @stack('script')
 
 </body>

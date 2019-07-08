@@ -11,12 +11,7 @@ const mix = require('laravel-mix');
  |
  */
 
-// mix
-//     .setPublicPath('./public')
-//     .js('resources/js/theme.js', 'js')
-//     .sass('resources/sass/theme.scss', 'css')
-//     .version()
-
-
-mix.js('resources/js/theme.js', 'public/js')
-    .sass('resources/sass/theme.scss', 'public/css');
+mix.setPublicPath('./public')
+    .js('resources/js/theme.js', 'js')
+    .sass('resources/sass/theme.scss', 'css')
+    .version()
