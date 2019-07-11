@@ -6,7 +6,6 @@ use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Str;
 use Tests\TestCase;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class RegisterTest extends TestCase
 {
@@ -18,7 +17,7 @@ class RegisterTest extends TestCase
      *
      * @return void
      */
-    public function test_user_register_while_get_the_role()
+    public function test_user_register_while_get_the_role ()
     {
         Session::start();
 

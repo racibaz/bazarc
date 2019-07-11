@@ -2,19 +2,19 @@
 
 namespace Tests\Feature\Http\Controllers\Auth;
 
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Laravel\Socialite\Facades\Socialite;
 use Mockery;
 use Tests\TestCase;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class SocialAuthControllerTest extends TestCase
 {
     use RefreshDatabase;
 
     /**
- * @test
- */
-    public function can_authenticate_using_twitter()
+     * @test
+     */
+    public function can_authenticate_using_twitter ()
     {
         $abstractUser = Mockery::mock('Laravel\Socialite\Two\User');
 
@@ -40,7 +40,7 @@ class SocialAuthControllerTest extends TestCase
     /**
      * @test
      */
-    public function can_authenticate_using_google()
+    public function can_authenticate_using_google ()
     {
         $abstractUser = Mockery::mock('Laravel\Socialite\Two\User');
 
@@ -65,7 +65,7 @@ class SocialAuthControllerTest extends TestCase
     /**
      * @test
      */
-    public function can_authenticate_using_facebook()
+    public function can_authenticate_using_facebook ()
     {
         $abstractUser = Mockery::mock('Laravel\Socialite\Two\User');
 
@@ -90,7 +90,7 @@ class SocialAuthControllerTest extends TestCase
     /**
      * @test
      */
-    public function can_authenticate_using_github()
+    public function can_authenticate_using_github ()
     {
         $abstractUser = Mockery::mock('Laravel\Socialite\Two\User');
 
