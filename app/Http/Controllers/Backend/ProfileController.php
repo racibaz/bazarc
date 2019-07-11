@@ -6,6 +6,7 @@ use App\Contracts\Repositories\ProfileRepository;
 use App\Models\Profile;
 use App\Validators\ProfileValidator;
 use Illuminate\Foundation\Validation\ValidatesRequests;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Str;
@@ -23,7 +24,7 @@ class ProfileController extends BackendBaseController
     protected $repository;
 
     /**
-     * @var \App\Validators\ProfileValidator
+     * @var ProfileValidator
      */
     protected $validator;
 
@@ -31,7 +32,7 @@ class ProfileController extends BackendBaseController
      * ProfileController constructor.
      *
      * @param ProfileRepository $repository
-     * @param \App\Validators\ProfileValidator $validator
+     * @param ProfileValidator $validator
      */
     public function __construct(ProfileRepository $repository, ProfileValidator $validator)
     {
@@ -70,10 +71,10 @@ class ProfileController extends BackendBaseController
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request $request
+     * @param Request $request
      * @param $record
      *
-     * @return \Illuminate\Http\JsonResponse
+     * @return JsonResponse
      * @internal param int $id
      *
      */
@@ -90,18 +91,19 @@ class ProfileController extends BackendBaseController
                 unset($inputs['password']);
             }
 
-            $this->validator->with($inputs)->setId($record->id)->passesOrFail( ValidatorInterface::RULE_UPDATE);
+            $this->validator->with($inputs)->setId($record->id)->passesOrFail(ValidatorInterface::RULE_UPDATE);
 
             $this->repository->update($inputs, $record->id);
 
             return redirect()->to(route('profile.show', $record));
 
-        }catch (ValidatorException $e) {
+        } catch (ValidatorException $e) {
 
             return Response::json([
-                'error'   =>true,
-                'message' =>$e->getMessageBag()
-            ]);
+                'error' => true,
+                'message' => $e->getMessageBag()
+            ]
+            );
         }
     }
 }

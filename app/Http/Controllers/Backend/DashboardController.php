@@ -5,13 +5,10 @@ namespace App\Http\Controllers\Backend;
 
 use App\Contracts\Repositories\UserRepository;
 use App\Models\User;
-use Caffeinated\Themes\Facades\Theme;
-use Illuminate\Auth\Access\AuthorizationException;
+use Exception;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\Route;
+use Illuminate\Http\Response;
 use Yajra\DataTables\Facades\DataTables;
 
 
@@ -38,11 +35,11 @@ class DashboardController extends BackendBaseController
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function index()
     {
-        $users =  $this->repository->all();
+        $users = $this->repository->all();
         $userCount = count($users);
         return view('backend.dashboard.index', compact('users', 'userCount'));
     }
@@ -50,8 +47,8 @@ class DashboardController extends BackendBaseController
     /**
      * Process datatables ajax request.
      *
-     * @return \Illuminate\Http\JsonResponse
-     * @throws \Exception
+     * @return JsonResponse
+     * @throws Exception
      */
     public function anyData()
     {
@@ -61,7 +58,7 @@ class DashboardController extends BackendBaseController
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function create()
     {
@@ -71,8 +68,8 @@ class DashboardController extends BackendBaseController
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @return Response
      */
     public function store(Request $request)
     {
@@ -82,8 +79,8 @@ class DashboardController extends BackendBaseController
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param int $id
+     * @return Response
      */
     public function show($id)
     {
@@ -93,8 +90,8 @@ class DashboardController extends BackendBaseController
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param int $id
+     * @return Response
      */
     public function edit($id)
     {
@@ -104,9 +101,9 @@ class DashboardController extends BackendBaseController
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @param int $id
+     * @return Response
      */
     public function update(Request $request, $id)
     {
@@ -116,8 +113,8 @@ class DashboardController extends BackendBaseController
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param int $id
+     * @return Response
      */
     public function destroy($id)
     {

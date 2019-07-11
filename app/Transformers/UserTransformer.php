@@ -2,8 +2,8 @@
 
 namespace App\Transformers;
 
-use League\Fractal\TransformerAbstract;
 use App\Models\User;
+use League\Fractal\TransformerAbstract;
 
 /**
  * Class UserTransformer.
@@ -12,32 +12,6 @@ use App\Models\User;
  */
 class UserTransformer extends TransformerAbstract
 {
-    /**
-     * Transform the User entity.
-     *
-     * @param \App\Models\User $model
-     *
-     * @return array
-     */
-    public function transform(User $model)
-    {
-        return [
-            'id'         => (int) $model->id,
-            'name'       => $model->name,
-            'slug'       => $model->slug,
-            'email'      => $model->email,
-            'created_at' => (string) $model->created_at,
-            'updated_at' => (string) $model->updated_at,
-
-            'links' => [
-                [
-                    'rel' => 'self',
-                    'href' => route('users.show', $model->id),
-                ],
-            ]
-        ];
-    }
-
     /**
      * @param $index
      * @return mixed|null
@@ -71,5 +45,31 @@ class UserTransformer extends TransformerAbstract
             'deleted_at' => 'deletedDate',
         ];
         return isset($attributes[$index]) ? $attributes[$index] : null;
+    }
+
+    /**
+     * Transform the User entity.
+     *
+     * @param User $model
+     *
+     * @return array
+     */
+    public function transform(User $model)
+    {
+        return [
+            'id' => (int)$model->id,
+            'name' => $model->name,
+            'slug' => $model->slug,
+            'email' => $model->email,
+            'created_at' => (string)$model->created_at,
+            'updated_at' => (string)$model->updated_at,
+
+            'links' => [
+                [
+                    'rel' => 'self',
+                    'href' => route('users.show', $model->id),
+                ],
+            ]
+        ];
     }
 }

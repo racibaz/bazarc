@@ -15,7 +15,8 @@ class ActivityLogController extends BackendBaseController
      */
     protected $repository;
 
-    public function __construct(ActivityLogRepository $repository){
+    public function __construct(ActivityLogRepository $repository)
+    {
         $this->repository = $repository;
 
         $this->authorizeResource(ActivityLog::class, 'activity_log');

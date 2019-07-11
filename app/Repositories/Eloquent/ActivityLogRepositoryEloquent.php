@@ -2,11 +2,11 @@
 
 namespace App\Repositories\Eloquent;
 
-use App\Presenters\ActivityLogPresenter;
-use Prettus\Repository\Eloquent\BaseRepository;
-use Prettus\Repository\Criteria\RequestCriteria;
 use App\Contracts\Repositories\ActivityLogRepository;
 use App\Models\ActivityLog;
+use App\Presenters\ActivityLogPresenter;
+use Prettus\Repository\Criteria\RequestCriteria;
+use Prettus\Repository\Eloquent\BaseRepository;
 
 /**
  * Class UserActivityRepositoryEloquent.
@@ -45,5 +45,5 @@ class ActivityLogRepositoryEloquent extends BaseRepository implements ActivityLo
     {
         $this->pushCriteria(app(RequestCriteria::class));
     }
-    
+
 }

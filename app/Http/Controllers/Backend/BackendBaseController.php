@@ -7,7 +7,6 @@ use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -33,27 +32,14 @@ class BackendBaseController extends Controller
             $this->checkPermissionOnCurrentRoute();
 
             return $next($request);
-        });
+        }
+        );
     }
-
-    /**
-     * Get the map of resource methods to ability names.
-     *
-     * @example https://github.com/laravel/ideas/issues/772
-     * @return array
-     */
-    protected function resourceAbilityMap()
-    {
-        // Map the "index" ability to the "index" function in our policies
-        return array_merge($this->resourceAbilityMapTrait(), ['index' => 'index']);
-    }
-
-
 
     /**
      * Check the user permissions in current route
      * @return bool
-     * @throws \Illuminate\Auth\Access\AuthorizationException
+     * @throws AuthorizationException
      */
     public function checkPermissionOnCurrentRoute()
     {
@@ -78,5 +64,17 @@ class BackendBaseController extends Controller
         }
 
         return true;
+    }
+
+    /**
+     * Get the map of resource methods to ability names.
+     *
+     * @example https://github.com/laravel/ideas/issues/772
+     * @return array
+     */
+    protected function resourceAbilityMap()
+    {
+        // Map the "index" ability to the "index" function in our policies
+        return array_merge($this->resourceAbilityMapTrait(), ['index' => 'index']);
     }
 }

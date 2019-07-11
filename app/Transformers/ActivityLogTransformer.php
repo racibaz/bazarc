@@ -8,36 +8,6 @@ use League\Fractal\TransformerAbstract;
 class ActivityLogTransformer extends TransformerAbstract
 {
     /**
-     * Transform the User entity.
-     *
-     * @param ActivityLogPolicy $model
-     *
-     * @return array
-     */
-    public function transform(ActivityLogPolicy $model)
-    {
-        return [
-            'id' => (int)$model->id,
-            'log_name' => $model->log_name,
-            'description' => $model->description,
-            'subject_id' => $model->subject_id,
-            'subject_type' => $model->subject_type,
-            'causer_id' => $model->causer_id,
-            'causer_type' => $model->causer_type,
-            'properties' => (string) $model->properties,
-            'created_at' => (string)$model->created_at,
-            'updated_at' => (string)$model->updated_at,
-
-            'links' => [
-                [
-                    'rel' => 'self',
-                    'href' => route('users.show', $model->id),
-                ],
-            ]
-        ];
-    }
-
-    /**
      * @param $index
      * @return mixed|null
      */
@@ -77,6 +47,36 @@ class ActivityLogTransformer extends TransformerAbstract
             'status' => 'status'
         ];
         return isset($attributes[$index]) ? $attributes[$index] : null;
+    }
+
+    /**
+     * Transform the User entity.
+     *
+     * @param ActivityLogPolicy $model
+     *
+     * @return array
+     */
+    public function transform(ActivityLogPolicy $model)
+    {
+        return [
+            'id' => (int)$model->id,
+            'log_name' => $model->log_name,
+            'description' => $model->description,
+            'subject_id' => $model->subject_id,
+            'subject_type' => $model->subject_type,
+            'causer_id' => $model->causer_id,
+            'causer_type' => $model->causer_type,
+            'properties' => (string)$model->properties,
+            'created_at' => (string)$model->created_at,
+            'updated_at' => (string)$model->updated_at,
+
+            'links' => [
+                [
+                    'rel' => 'self',
+                    'href' => route('users.show', $model->id),
+                ],
+            ]
+        ];
     }
 
 

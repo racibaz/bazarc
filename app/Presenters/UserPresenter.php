@@ -3,6 +3,7 @@
 namespace App\Presenters;
 
 use App\Transformers\UserTransformer;
+use League\Fractal\TransformerAbstract;
 use Prettus\Repository\Presenter\FractalPresenter;
 
 /**
@@ -15,7 +16,7 @@ class UserPresenter extends FractalPresenter
     /**
      * Transformer
      *
-     * @return \League\Fractal\TransformerAbstract
+     * @return TransformerAbstract
      */
     public function getTransformer()
     {

@@ -22,7 +22,7 @@ class ProfilePolicy
     /**
      * Determine whether the user can view the use.
      *
-     * @param  \App\Models\User $user
+     * @param User $user
      * @param $record
      *
      * @return boolean
@@ -31,7 +31,7 @@ class ProfilePolicy
     {
         if ($user->can('show-any-profile')) {
             return true;
-        }elseif ($user->can('show-profile')) {
+        } elseif ($user->can('show-profile')) {
             return $user->id === $record->id;
         }
     }
@@ -40,7 +40,7 @@ class ProfilePolicy
     /**
      * Determine whether the user can update the use.
      *
-     * @param  \App\Models\User $user
+     * @param User $user
      * @param $record
      *
      * @return boolean
@@ -50,7 +50,7 @@ class ProfilePolicy
     {
         if ($user->can('update-any-profile')) {
             return true;
-        }elseif ($user->can('update-profile')) {
+        } elseif ($user->can('update-profile')) {
             return $user->id === $record->id;
         }
     }
@@ -58,7 +58,7 @@ class ProfilePolicy
     /**
      * Determine whether the user can delete the use.
      *
-     * @param  \App\Models\User $user
+     * @param User $user
      * @param $record
      *
      * @return bool
@@ -67,7 +67,7 @@ class ProfilePolicy
     {
         if ($user->can('delete-any-profile')) {
             return true;
-        }elseif ($user->can('delete-profile')) {
+        } elseif ($user->can('delete-profile')) {
             return $user->id === $record->id;
         }
     }

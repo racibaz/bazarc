@@ -3,8 +3,12 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Models\User;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Redirector;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\View\View;
 
 class ImpersonateController extends BackendBaseController
 {
@@ -20,23 +24,24 @@ class ImpersonateController extends BackendBaseController
     }
 
     /**
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @return Factory|View
      */
     public function index()
     {
-        return  view('backend.impersonate.index');
+        return view('backend.impersonate.index');
     }
 
     /**
-     * @param \Illuminate\Http\Request $request
+     * @param Request $request
      *
-     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     * @return RedirectResponse|Redirector
      */
     public function impersonate(Request $request)
     {
         $request->validate([
             'email' => 'required|email|exists:users,email'
-        ]);
+        ]
+        );
 
         $user = User::where('email', $request->email)->first();
 
@@ -48,7 +53,7 @@ class ImpersonateController extends BackendBaseController
     }
 
     /**
-     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     * @return RedirectResponse|Redirector
      */
     public function stop()
     {

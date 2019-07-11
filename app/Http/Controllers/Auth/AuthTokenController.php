@@ -3,18 +3,22 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Facades\Authy;
-use App\Models\User;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\User;
 use App\Services\Authy\Exceptions\InvalidTokenException;
 use App\Services\Authy\Exceptions\SmsRequestFailedException;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\ValidationException;
+use Illuminate\View\View;
 
 class AuthTokenController extends Controller
 {
     /**
      * @param Request $request
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Http\RedirectResponse|\Illuminate\View\View
+     * @return Factory|RedirectResponse|View
      */
     public function getToken(Request $request)
     {
@@ -27,21 +31,23 @@ class AuthTokenController extends Controller
 
     /**
      * @param Request $request
-     * @return \Illuminate\Http\RedirectResponse
-     * @throws \Illuminate\Validation\ValidationException
+     * @return RedirectResponse
+     * @throws ValidationException
      */
     public function postToken(Request $request)
     {
         $this->validate($request, [
             'token' => 'required'
-        ]);
+        ]
+        );
 
         try {
             $verification = Authy::verifyToken($request->token);
         } catch (InvalidTokenException $e) {
             return redirect()->back()->withErrors([
                 'token' => 'Invalid token',
-            ]);
+            ]
+            );
         }
 
         if (Auth::loginUsingId(
@@ -57,7 +63,7 @@ class AuthTokenController extends Controller
 
     /**
      * @param Request $request
-     * @return \Illuminate\Http\RedirectResponse
+     * @return RedirectResponse
      */
     public function getResend(Request $request)
     {

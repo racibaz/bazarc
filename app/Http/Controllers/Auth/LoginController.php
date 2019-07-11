@@ -8,6 +8,7 @@ use App\Models\User;
 use App\Services\Authy\Exceptions\SmsRequestFailedException;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 use Laravel\Socialite\Facades\Socialite;
 
@@ -53,7 +54,7 @@ class LoginController extends Controller
     /**
      * Redirect the user to the GitHub authentication page.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function redirectToProvider()
     {
@@ -63,7 +64,7 @@ class LoginController extends Controller
     /**
      * Obtain the user information from GitHub.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function handleProviderCallback()
     {
@@ -81,7 +82,7 @@ class LoginController extends Controller
     /**
      * The user has been authenticated.
      *
-     * @param  \Illuminate\Http\Request $request
+     * @param Request $request
      * @param User $user
      * @return mixed
      */
@@ -105,7 +106,8 @@ class LoginController extends Controller
             'authy_id' => $user->authy_id,
             'using_sms' => false,
             'remember' => $request->has('remember'),
-        ]);
+        ]
+        );
 
         if ($user->hasSmsTwoFactorAuthenticationEnabled()) {
             try {

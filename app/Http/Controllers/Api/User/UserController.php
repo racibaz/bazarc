@@ -6,6 +6,7 @@ use App\Contracts\Repositories\UserRepository as Repository;
 use App\Http\Controllers\Api\ApiController;
 use App\Models\User;
 use App\Validators\UserValidator;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Str;
@@ -20,15 +21,15 @@ class UserController extends ApiController
     private $repository;
 
     /**
-     * @var \App\Validators\UserValidator
+     * @var UserValidator
      */
     private $validator;
 
     /**
      * UserController constructor.
      *
-     * @param \App\Contracts\Repositories\UserRepository $repository
-     * @param \App\Validators\UserValidator $validator
+     * @param Repository $repository
+     * @param UserValidator $validator
      *
      * @internal param \App\Http\Controllers\Api\User\Repo $repo
      */
@@ -54,7 +55,7 @@ class UserController extends ApiController
 
     /**
      * @param User $record
-     * @return \Illuminate\Http\JsonResponse
+     * @return JsonResponse
      */
     public function show(User $record)
     {
@@ -64,8 +65,8 @@ class UserController extends ApiController
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @return Response
      */
     public function store(Request $request)
     {
@@ -83,12 +84,13 @@ class UserController extends ApiController
 
             return response()->json($record, 201);
 
-        }catch(ValidatorException $e) {
+        } catch (ValidatorException $e) {
 
             return Response::json([
                 'error' => true,
                 'message' => $e->getMessageBag()
-            ]);
+            ]
+            );
         }
     }
 }

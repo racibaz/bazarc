@@ -4,15 +4,13 @@ namespace App\Models;
 
 use App\Presenters\UserPresenter;
 use App\Transformers\UserTransformer;
-use Illuminate\Notifications\Notifiable;
-use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
 use Laravel\Passport\HasApiTokens;
-use Spatie\Activitylog\Traits\LogsActivity;
-use Spatie\Permission\Traits\HasRoles;
-use Illuminate\Database\Eloquent\Model;
 use Prettus\Repository\Contracts\Transformable;
 use Prettus\Repository\Traits\TransformableTrait;
+use Spatie\Activitylog\Traits\LogsActivity;
+use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable implements Transformable
 {
@@ -26,17 +24,12 @@ class User extends Authenticatable implements Transformable
 
     use LogsActivity;
 
-    public $transformer = UserTransformer::class;
-
-    protected $presenter = UserPresenter::class;
-
     /**
      * User types
      *
      * @var integer
      */
     public const ACTIVE = 1, PASSIVE = 2, PREPARING_EMAIL_ACTIVATION = 3, GARBAGE = 4;
-
     /**
      * User types
      *
@@ -64,25 +57,43 @@ class User extends Authenticatable implements Transformable
             'is_accept' => false,
         ]
     ];
-
+    protected static $logAttributes = ['name'];
+    public $transformer = UserTransformer::class;
+    protected $presenter = UserPresenter::class;
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'two_factor_type', 'authy_id', 'slug', 'cell_phone', 'facebook', 'twitter', 'pinterest',
-        'linkedin', 'youtube', 'web_site', 'gender', 'bio_note', 'IP', 'last_login', 'previous_visit'
+        'name',
+        'email',
+        'password',
+        'two_factor_type',
+        'authy_id',
+        'slug',
+        'cell_phone',
+        'facebook',
+        'twitter',
+        'pinterest',
+        'linkedin',
+        'youtube',
+        'web_site',
+        'gender',
+        'bio_note',
+        'IP',
+        'last_login',
+        'previous_visit'
     ];
-
-    protected static $logAttributes = ['name'];
     /**
      * The attributes that should be hidden for arrays.
      *
      * @var array
      */
     protected $hidden = [
-        'password', 'remember_token', 'status'
+        'password',
+        'remember_token',
+        'status'
     ];
 
     /**
@@ -104,12 +115,6 @@ class User extends Authenticatable implements Transformable
     public function scopeActive($query)
     {
         return $query->where('status', '==', $this->statuses['active']['number']);
-    }
-
-
-    public function phoneNumber()
-    {
-        return $this->hasOne(PhoneNumber::class);
     }
 
     public function social()
@@ -146,6 +151,11 @@ class User extends Authenticatable implements Transformable
         return $this->phoneNumber->diallingCode->id === $diallingCodeId;
     }
 
+    public function hasPhoneNumber()
+    {
+        return $this->phoneNumber !== null;
+    }
+
     public function getPhoneNumber()
     {
         if ($this->hasPhoneNumber() === false) {
@@ -153,11 +163,6 @@ class User extends Authenticatable implements Transformable
         }
 
         return $this->phoneNumber->phone_number;
-    }
-
-    public function hasPhoneNumber()
-    {
-        return $this->phoneNumber !== null;
     }
 
     public function registeredForTwoFactorAuthentication()
@@ -176,7 +181,13 @@ class User extends Authenticatable implements Transformable
         return $this->phoneNumber()->create([
             'phone_number' => $phoneNumber,
             'dialling_code_id' => $phoneNumberDiallingCode,
-        ]);
+        ]
+        );
+    }
+
+    public function phoneNumber()
+    {
+        return $this->hasOne(PhoneNumber::class);
     }
 }
 

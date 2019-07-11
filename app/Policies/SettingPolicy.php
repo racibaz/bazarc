@@ -22,7 +22,7 @@ class SettingPolicy
     /**
      * Determine whether the user can view the use.
      *
-     * @param  \App\Models\User $user
+     * @param User $user
      * @param $record
      *
      * @return boolean
@@ -35,7 +35,7 @@ class SettingPolicy
     /**
      * Determine whether the user can view the use.
      *
-     * @param  \App\Models\User $user
+     * @param User $user
      * @param $record
      *
      * @return boolean
@@ -44,7 +44,7 @@ class SettingPolicy
     {
         if ($user->can('show-any-setting')) {
             return true;
-        }elseif ($user->can('show-setting')) {
+        } elseif ($user->can('show-setting')) {
             return $user->id === $record->id;
         }
     }
@@ -52,7 +52,7 @@ class SettingPolicy
     /**
      * Determine whether the user can create uses.
      *
-     * @param  \App\Models\User $user
+     * @param User $user
      * @return mixed
      */
     public function create(User $user)
@@ -65,7 +65,7 @@ class SettingPolicy
     /**
      * Determine whether the user can update the use.
      *
-     * @param  \App\Models\User $user
+     * @param User $user
      * @param $record
      *
      * @return boolean
@@ -75,7 +75,7 @@ class SettingPolicy
     {
         if ($user->can('update-any-setting')) {
             return true;
-        }elseif ($user->can('update-setting')) {
+        } elseif ($user->can('update-setting')) {
             return $user->id === $record->id;
         }
     }
@@ -83,7 +83,7 @@ class SettingPolicy
     /**
      * Determine whether the user can delete the use.
      *
-     * @param  \App\Models\User $user
+     * @param User $user
      * @param $record
      *
      * @return bool
@@ -92,7 +92,7 @@ class SettingPolicy
     {
         if ($user->can('delete-any-setting')) {
             return true;
-        }elseif ($user->can('delete-setting')) {
+        } elseif ($user->can('delete-setting')) {
             return $user->id === $record->id;
         }
     }

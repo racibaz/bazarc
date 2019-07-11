@@ -2,11 +2,11 @@
 
 namespace App\Repositories\Eloquent;
 
-use Prettus\Repository\Eloquent\BaseRepository;
-use Prettus\Repository\Criteria\RequestCriteria;
 use App\Contracts\Repositories\SettingRepository;
 use App\Models\Setting;
 use App\Validators\SettingValidator;
+use Prettus\Repository\Criteria\RequestCriteria;
+use Prettus\Repository\Eloquent\BaseRepository;
 
 /**
  * Class SettingRepositoryEloquent.
@@ -39,7 +39,7 @@ class SettingRepositoryEloquent extends BaseRepository implements SettingReposit
     {
         return SettingValidator::class;
     }
-    
+
 
     /**
      * Boot up the repository, pushing criteria
@@ -48,5 +48,5 @@ class SettingRepositoryEloquent extends BaseRepository implements SettingReposit
     {
         $this->pushCriteria(app(RequestCriteria::class));
     }
-    
+
 }

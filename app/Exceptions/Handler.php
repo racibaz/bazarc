@@ -5,16 +5,16 @@ namespace App\Exceptions;
 use App\Traits\ApiResponser;
 use Asm89\Stack\CorsService;
 use Exception;
-use Illuminate\Database\QueryException;
+use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Auth\AuthenticationException;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Database\QueryException;
+use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Illuminate\Session\TokenMismatchException;
 use Illuminate\Validation\ValidationException;
-use Illuminate\Auth\Access\AuthorizationException;
-use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Symfony\Component\HttpKernel\Exception\HttpException;
-use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\HttpKernel\Exception\MethodNotAllowedHttpException;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class Handler extends ExceptionHandler
 {
@@ -42,14 +42,14 @@ class Handler extends ExceptionHandler
     /**
      * Report or log an exception.
      *
-     * @param  \Exception $exception
+     * @param \Exception $exception
      *
      * @return void
      * @throws \Exception
      */
     public function report(Exception $exception)
     {
-        if(app()->environment() == 'testing') {
+        if (app()->environment() == 'testing') {
             throw $exception;
         }
 
@@ -59,8 +59,8 @@ class Handler extends ExceptionHandler
     /**
      * Render an exception into an HTTP response.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Exception  $exception
+     * @param \Illuminate\Http\Request $request
+     * @param \Exception $exception
      * @return \Illuminate\Http\Response
      */
     public function render($request, Exception $exception)
@@ -101,8 +101,9 @@ class Handler extends ExceptionHandler
 
         if ($exception instanceof AuthorizationException) {
 
-            if ($request->ajax())
+            if ($request->ajax()) {
                 return $this->errorResponse($exception->getMessage(), 403);
+            }
 
             return response()->view('errors.custom_error_page', ['message' => $exception->getMessage()], 403);
         }
@@ -118,8 +119,7 @@ class Handler extends ExceptionHandler
             return response()->view('errors.405', ['message' => $message], 405);
         }
 
-        if ($exception instanceof NotFoundHttpException)
-        {
+        if ($exception instanceof NotFoundHttpException) {
             $message = 'The specified URL cannot be found';
 
             if ($request->ajax()) {
@@ -137,7 +137,9 @@ class Handler extends ExceptionHandler
             $errorCode = $exception->errorInfo[1];
 
             if ($errorCode == 1451) {
-                return $this->errorResponse('Cannot remove this resource permanently. It is related with any other resource', 409);
+                return $this->errorResponse('Cannot remove this resource permanently. It is related with any other resource',
+                    409
+                );
             }
         }
 
@@ -159,8 +161,8 @@ class Handler extends ExceptionHandler
     /**
      * Convert an authentication exception into an unauthenticated response.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Illuminate\Auth\AuthenticationException  $exception
+     * @param \Illuminate\Http\Request $request
+     * @param \Illuminate\Auth\AuthenticationException $exception
      * @return \Illuminate\Http\Response
      */
     protected function unauthenticated($request, AuthenticationException $exception)
@@ -175,8 +177,8 @@ class Handler extends ExceptionHandler
     /**
      * Create a response object from the given validation exception.
      *
-     * @param  \Illuminate\Validation\ValidationException  $e
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Validation\ValidationException $e
+     * @param \Illuminate\Http\Request $request
      * @return \Symfony\Component\HttpFoundation\Response
      */
     protected function convertValidationExceptionToResponse(ValidationException $e, $request)
@@ -201,8 +203,8 @@ class Handler extends ExceptionHandler
     /**
      * Convert a validation exception into a JSON response.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Illuminate\Validation\ValidationException  $exception
+     * @param \Illuminate\Http\Request $request
+     * @param \Illuminate\Validation\ValidationException $exception
      * @return \Illuminate\Http\JsonResponse
      */
     protected function invalidJson($request, ValidationException $exception)

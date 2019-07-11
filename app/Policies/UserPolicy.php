@@ -21,7 +21,7 @@ class UserPolicy
     /**
      * Determine whether the user can view the use.
      *
-     * @param  \App\Models\User $user
+     * @param User $user
      * @param $record
      *
      * @return boolean
@@ -34,7 +34,7 @@ class UserPolicy
     /**
      * Determine whether the user can view the use.
      *
-     * @param  \App\Models\User $user
+     * @param User $user
      * @param $record
      *
      * @return boolean
@@ -43,7 +43,7 @@ class UserPolicy
     {
         if ($user->can('show-any-user')) {
             return true;
-        }elseif ($user->can('show-user')) {
+        } elseif ($user->can('show-user')) {
             return $user->id === $record->id;
         }
     }
@@ -51,7 +51,7 @@ class UserPolicy
     /**
      * Determine whether the user can create uses.
      *
-     * @param  \App\Models\User $user
+     * @param User $user
      * @return mixed
      */
     public function create(User $user)
@@ -64,7 +64,7 @@ class UserPolicy
     /**
      * Determine whether the user can update the use.
      *
-     * @param  \App\Models\User $user
+     * @param User $user
      * @param $record
      *
      * @return boolean
@@ -74,7 +74,7 @@ class UserPolicy
     {
         if ($user->can('update-any-user')) {
             return true;
-        }elseif ($user->can('update-user')) {
+        } elseif ($user->can('update-user')) {
             return $user->id === $record->id;
         }
     }
@@ -82,7 +82,7 @@ class UserPolicy
     /**
      * Determine whether the user can delete the use.
      *
-     * @param  \App\Models\User $user
+     * @param User $user
      * @param $record
      *
      * @return bool
@@ -91,7 +91,7 @@ class UserPolicy
     {
         if ($user->can('delete-any-user')) {
             return true;
-        }elseif ($user->can('delete-user')) {
+        } elseif ($user->can('delete-user')) {
             return $user->id === $record->id;
         }
     }

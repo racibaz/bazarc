@@ -7,8 +7,10 @@ use App\Models\Setting;
 use App\Models\User;
 use App\Validators\SettingValidator;
 use DateTimeZone;
+use Illuminate\Contracts\View\View;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Spatie\Permission\Models\Role;
 
 class SettingController extends BackendBaseController
@@ -18,18 +20,18 @@ class SettingController extends BackendBaseController
     /**
      * @var SettingRepository
      */
-    protected  $repository;
+    protected $repository;
 
     /**
-     * @var \App\Validators\SettingValidator
+     * @var SettingValidator
      */
     protected $validator;
 
     /**
      * ProfileController constructor.
      *
-     * @param \App\Contracts\Repositories\SettingRepository $repository
-     * @param \App\Validators\SettingValidator $validator
+     * @param SettingRepository $repository
+     * @param SettingValidator $validator
      */
     public function __construct(SettingRepository $repository, SettingValidator $validator)
     {
@@ -38,29 +40,36 @@ class SettingController extends BackendBaseController
 
         $this->authorizeResource(Setting::class, 'setting');
     }
+
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Contracts\View\View
+     * @return View
      */
     public function index()
     {
-        $records = $this->repository->orderBy('created_at','desc')->all();
+        $records = $this->repository->orderBy('created_at', 'desc')->all();
 
-        $languageCode =  $this->repository->findByField('attribute_key', 'language_code')->pluck('attribute_value')->first();
+        $languageCode = $this->repository->findByField('attribute_key', 'language_code')->pluck('attribute_value'
+        )->first();
         $title = $this->repository->findByField('attribute_key', 'title')->pluck('attribute_value')->first();
         $slogan = $this->repository->findByField('attribute_key', 'slogan')->pluck('attribute_value')->first();
-        $description = $this->repository->findByField('attribute_key', 'description')->pluck('attribute_value')->first();
+        $description = $this->repository->findByField('attribute_key', 'description')->pluck('attribute_value')->first(
+        );
         $keywords = $this->repository->findByField('attribute_key', 'keywords')->pluck('attribute_value')->first();
-        $registrationType = $this->repository->findByField('attribute_key', 'registration_type')->pluck('attribute_value')->first();
-        $defaultTimezone = $this->repository->findByField('attribute_key', 'timezone')->pluck('attribute_value')->first();
+        $registrationType = $this->repository->findByField('attribute_key', 'registration_type'
+        )->pluck('attribute_value')->first();
+        $defaultTimezone = $this->repository->findByField('attribute_key', 'timezone')->pluck('attribute_value')->first(
+        );
         $url = $this->repository->findByField('attribute_key', 'url')->pluck('attribute_value')->first();
         $roles = Role::all()->pluck('name', 'id');
 
         $timezoneList = [];
         //SelectBox içerisinde value değerinin seçilebilmesi için key yerine value değerini atıyoruz.
-        foreach (DateTimeZone::listIdentifiers() as $key => $value) $timezoneList[$value] = $value;
-        
+        foreach (DateTimeZone::listIdentifiers() as $key => $value) {
+            $timezoneList[$value] = $value;
+        }
+
         $userDefaultRole = Setting::where('attribute_key', 'user_default_role')->first();
         $userDefaultRole = $userDefaultRole->attribute_value;
 
@@ -69,19 +78,19 @@ class SettingController extends BackendBaseController
 
         //todo we should write function for it
         $statuses = [];
-        foreach (User::$statuses as $index => $status){
+        foreach (User::$statuses as $index => $status) {
             $statuses[$status['number']] = $status['name'];
         }
         $statuses = collect($statuses);
 
         //todo we should write function for it
         $registrationTypes = [];
-        foreach (Setting::$registrationTypes as $index => $regType){
+        foreach (Setting::$registrationTypes as $index => $regType) {
             $registrationTypes[$regType['number']] = $regType['name'];
         }
         $registrationTypes = collect($registrationTypes);
 
-        return view('backend.setting.index',compact([
+        return view('backend.setting.index', compact([
             'records',
             'languageCode',
             'title',
@@ -97,13 +106,15 @@ class SettingController extends BackendBaseController
             'userDefaultRole',
             'statuses',
             'userDefaultStatus'
-        ]));
+        ]
+        )
+        );
     }
 
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function create()
     {
@@ -113,55 +124,55 @@ class SettingController extends BackendBaseController
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @return Response
      */
     public function store(Request $request)
     {
         $inputs = $request->all();
 
-        if (!empty($inputs['title']) || $inputs['title'] == null){
+        if (!empty($inputs['title']) || $inputs['title'] == null) {
             $record = $this->repository->findByField('attribute_key', 'title')->first();
-            $this->repository->update( ['attribute_value' => $inputs['title']], $record->id);
+            $this->repository->update(['attribute_value' => $inputs['title']], $record->id);
         }
 
-        if (!empty($inputs['slogan']) || $inputs['slogan'] == null){
+        if (!empty($inputs['slogan']) || $inputs['slogan'] == null) {
             $record = $this->repository->findByField('attribute_key', 'slogan')->first();
             $this->repository->update(['attribute_value' => $inputs['slogan']], $record->id);
         }
 
-        if (!empty($inputs['description']) || $inputs['description'] == null){
+        if (!empty($inputs['description']) || $inputs['description'] == null) {
             $record = $this->repository->findByField('attribute_key', 'description')->first();
             $this->repository->update(['attribute_value' => $inputs['description']], $record->id);
         }
 
-        if (!empty($inputs['keywords']) || $inputs['keywords'] == null){
+        if (!empty($inputs['keywords']) || $inputs['keywords'] == null) {
             $record = $this->repository->findByField('attribute_key', 'keywords')->first();
             $this->repository->update(['attribute_value' => $inputs['keywords']], $record->id);
         }
 
-        if (!empty($inputs['url']) || $inputs['url'] == null){
+        if (!empty($inputs['url']) || $inputs['url'] == null) {
             $record = $this->repository->findByField('attribute_key', 'url')->first();
             $this->repository->update(['attribute_value' => $inputs['url']], $record->id);
         }
 
-        if (!empty($inputs['timezone']) || $inputs['timezone'] == null){
+        if (!empty($inputs['timezone']) || $inputs['timezone'] == null) {
             $record = $this->repository->findByField('attribute_key', 'timezone')->first();
             $this->repository->update(['attribute_value' => $inputs['timezone']], $record->id);
         }
 
-        if (!empty($inputs['registration_type']) || $inputs['registration_type'] == null){
+        if (!empty($inputs['registration_type']) || $inputs['registration_type'] == null) {
             $record = $this->repository->findByField('attribute_key', 'registration_type')->first();
             $this->repository->update(['attribute_value' => $inputs['registration_type']], $record->id);
         }
 
-        if (!empty($inputs['user_default_role']) || $inputs['user_default_role'] == null){
+        if (!empty($inputs['user_default_role']) || $inputs['user_default_role'] == null) {
 
             $record = $this->repository->findByField('attribute_key', 'user_default_role')->first();
             $this->repository->update(['attribute_value' => $inputs['user_default_role']], $record->id);
         }
 
-        if (!empty($inputs['user_default_status']) || $inputs['user_default_status'] == null){
+        if (!empty($inputs['user_default_status']) || $inputs['user_default_status'] == null) {
 
             $record = $this->repository->findByField('attribute_key', 'user_default_status')->first();
             $this->repository->update(['attribute_value' => $inputs['user_default_status']], $record->id);
@@ -174,8 +185,8 @@ class SettingController extends BackendBaseController
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param int $id
+     * @return Response
      */
     public function show($id)
     {
@@ -187,7 +198,7 @@ class SettingController extends BackendBaseController
      *
      * @param $record
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function edit($record)
     {
@@ -197,9 +208,9 @@ class SettingController extends BackendBaseController
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @param int $id
+     * @return Response
      */
     public function update(Request $request, $id)
     {
@@ -209,8 +220,8 @@ class SettingController extends BackendBaseController
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param int $id
+     * @return Response
      */
     public function destroy($id)
     {

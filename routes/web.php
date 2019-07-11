@@ -5,13 +5,14 @@ Route::pattern('slug', '[a-z0-9-]+');
 
 Route::get('/', function () {
     return view('welcome');
-});
+}
+);
 
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::group(['prefix' => 'admin', 'middleware' => 'check_permission'], function() {
+Route::group(['prefix' => 'admin', 'middleware' => 'check_permission'], function () {
 
     //--Dashboard
     Route::get('dashboard', 'Backend\DashboardController@index')->name('dashboard');
@@ -32,12 +33,16 @@ Route::group(['prefix' => 'admin', 'middleware' => 'check_permission'], function
 
     //UserActivity
     Route::resource('activity_log', 'Backend\ActivityLogController')->only([
-        'index', 'show'
-    ]);
+        'index',
+        'show'
+    ]
+    );
 
     //--Logs
-    Route::get('logs', '\Rap2hpoutre\LaravelLogViewer\LogViewerController@index')->name('logs')->middleware(\App\Http\Middleware\LogViewer::class);
-});
+    Route::get('logs', '\Rap2hpoutre\LaravelLogViewer\LogViewerController@index')->name('logs'
+    )->middleware(\App\Http\Middleware\LogViewer::class);
+}
+);
 
 
 //--Authy Two Factor Auth
@@ -48,7 +53,8 @@ Route::get('/auth/token/resend', 'Auth\AuthTokenController@getResend');
 Route::group(['middleware' => 'auth'], function () {
     Route::get('/settings/twofactor', 'TwoFactorSettingsController@index');
     Route::put('/settings/twofactor', 'TwoFactorSettingsController@update');
-});
+}
+);
 
 //Social Media Logins
 Route::get('/redirect/{service}', 'Auth\SocialAuthController@redirect');
@@ -60,4 +66,4 @@ Route::delete('impersonate/stop', 'Backend\ImpersonateController@stop')->name('i
 //create passport token
 Route::post('/passport/token/create', 'Auth\PassportAuthController@store')->name('passport.token.create');
 
-Route::get('{path}','HomeController@index')->where( 'path', '([A-z\d-/_.]+)?' );
+Route::get('{path}', 'HomeController@index')->where('path', '([A-z\d-/_.]+)?');

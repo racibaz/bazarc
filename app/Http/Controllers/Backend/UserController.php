@@ -5,7 +5,9 @@ namespace App\Http\Controllers\Backend;
 use App\Contracts\Repositories\UserRepository;
 use App\Models\User;
 use App\Validators\UserValidator;
+use Exception;
 use Illuminate\Foundation\Validation\ValidatesRequests;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Str;
@@ -31,7 +33,7 @@ class UserController extends BackendBaseController
      * DashboardController constructor.
      *
      * @param UserRepository $repository
-     * @param \App\Validators\UserValidator $validator
+     * @param UserValidator $validator
      */
     public function __construct(UserRepository $repository, UserValidator $validator)
     {
@@ -59,8 +61,8 @@ class UserController extends BackendBaseController
     /**
      * Process datatables ajax request.
      *
-     * @return \Illuminate\Http\JsonResponse
-     * @throws \Exception
+     * @return JsonResponse
+     * @throws Exception
      */
     public function anyData()
     {
@@ -82,7 +84,7 @@ class UserController extends BackendBaseController
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -102,9 +104,10 @@ class UserController extends BackendBaseController
             return redirect()->to(route('user.index'));
         } catch (ValidatorException $e) {
             return Response::json([
-                'error'   =>true,
-                'message' =>$e->getMessageBag()
-            ]);
+                'error' => true,
+                'message' => $e->getMessageBag()
+            ]
+            );
         }
     }
 
@@ -134,10 +137,10 @@ class UserController extends BackendBaseController
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request $request
+     * @param Request $request
      * @param $record
      *
-     * @return \Illuminate\Http\JsonResponse
+     * @return JsonResponse
      * @internal param int $id
      *
      */
@@ -162,9 +165,10 @@ class UserController extends BackendBaseController
 
         } catch (ValidatorException $e) {
             return Response::json([
-                'error'   =>true,
-                'message' =>$e->getMessageBag()
-            ]);
+                'error' => true,
+                'message' => $e->getMessageBag()
+            ]
+            );
         }
     }
 
