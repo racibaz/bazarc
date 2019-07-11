@@ -1,19 +1,17 @@
 <?php
 
-namespace App\Http\Controllers\Api\User;
+namespace App\Http\Controllers\Api;
 
-use App\Contracts\Repositories\UserRepository as Repository;
-use App\Http\Controllers\Api\ApiController;
-use App\Models\User;
-use App\Validators\UserValidator;
+use App\Contracts\Repositories\RoleRepository as Repository;
+use App\Models\Role;
+use App\Validators\RoleValidator;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-use Illuminate\Support\Str;
 use Prettus\Validator\Contracts\ValidatorInterface;
 use Prettus\Validator\Exceptions\ValidatorException;
 
-class UserController extends ApiController
+class RoleController extends ApiController
 {
     /**
      * @var $repository
@@ -21,19 +19,19 @@ class UserController extends ApiController
     private $repository;
 
     /**
-     * @var UserValidator
+     * @var RoleValidator
      */
     private $validator;
 
     /**
-     * UserController constructor.
+     * RoleController constructor.
      *
      * @param Repository $repository
-     * @param UserValidator $validator
+     * @param \App\Validators\RoleValidator $validator
      *
      * @internal param \App\Http\Controllers\Api\User\Repo $repo
      */
-    public function __construct (Repository $repository, UserValidator $validator)
+    public function __construct(Repository $repository, RoleValidator $validator)
     {
         parent::__construct();
 
@@ -43,22 +41,22 @@ class UserController extends ApiController
     }
 
     /**
-     * user list
+     * role list
      * @return mixed
      */
-    public function index ()
+    public function index()
     {
-        $users = $this->repository->all();
+        $records = $this->repository->all();
 
-        return $this->showAll($users);
+        return $this->showAll($records);
     }
 
     /**
-     * @param User $record
+     * @param \App\Models\Role $record
      *
      * @return JsonResponse
      */
-    public function show (User $record)
+    public function show(Role $record)
     {
         return $this->showOne($record);
     }
@@ -70,16 +68,11 @@ class UserController extends ApiController
      *
      * @return Response
      */
-    public function store (Request $request)
+    public function store(Request $request)
     {
         $inputs = $request->all();
 
         try {
-            $inputs['slug'] = Str::slug($inputs['name'], '-');
-
-            //Policy validated so it is available
-            $inputs['password'] = bcrypt($inputs['password']);
-
             $this->validator->with($inputs)->passesOrFail(ValidatorInterface::RULE_UPDATE);
 
             $record = $this->repository->create($inputs);

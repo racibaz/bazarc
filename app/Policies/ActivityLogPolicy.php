@@ -20,6 +20,7 @@ class ActivityLogPolicy
     }
 
     /**
+     * todo dd('policy');
      * Determine whether the user can view the use.
      *
      * @return boolean

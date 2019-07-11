@@ -1,0 +1,24 @@
+<?php
+
+namespace App\Models;
+
+use App\Presenters\RolePresenter;
+use App\Transformers\RoleTransformer;
+use Prettus\Repository\Contracts\Transformable;
+use Prettus\Repository\Traits\TransformableTrait;
+
+/**
+ * Class Role.
+ *
+ * @package namespace App\Models;
+ */
+class Role extends \Spatie\Permission\Models\Role implements Transformable
+{
+    use TransformableTrait;
+
+
+    protected $fillable = [];
+    protected $presenter = RolePresenter::class;
+    public $transformer = RoleTransformer::class;
+
+}

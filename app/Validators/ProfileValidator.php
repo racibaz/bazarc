@@ -2,6 +2,7 @@
 
 namespace App\Validators;
 
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use \Prettus\Validator\Contracts\ValidatorInterface;
 use \Prettus\Validator\LaravelValidator;
 
@@ -12,6 +13,8 @@ use \Prettus\Validator\LaravelValidator;
  */
 class ProfileValidator extends LaravelValidator
 {
+    use RefreshDatabase;
+
     /**
      * Validation Rules
      *
