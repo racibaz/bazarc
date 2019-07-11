@@ -47,6 +47,17 @@
                         </a>
                     </li>
                 @endcan
+                @can('index-activity-log')
+                    <li class="nav-item">
+                        <a href="{!! route('activity_log.index') !!}" class="nav-link">
+                            <i class="nav-icon fa fa-users"></i>
+                            <p>
+                                {{trans('activity_log.activity_logs')}}
+                                <span class="right badge badge-danger">New</span>
+                            </p>
+                        </a>
+                    </li>
+                @endcan
                 @can('index-setting')
                     <li class="nav-item">
                         <a href="{!! route('setting.index') !!}" class="nav-link">

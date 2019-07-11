@@ -61,4 +61,5 @@ Breadcrumbs::macro('resource', function ($name, $title) {
 
 Breadcrumbs::resource('user', 'Users');
 Breadcrumbs::resource('setting', 'Settings');
+Breadcrumbs::resource('activity_log', 'Activity Log');
 #endregion

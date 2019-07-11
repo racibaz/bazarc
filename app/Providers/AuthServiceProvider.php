@@ -2,8 +2,10 @@
 
 namespace App\Providers;
 
+use App\Models\ActivityLog;
 use App\Models\Setting;
 use App\Models\User;
+use App\Policies\ActivityLogPolicy;
 use App\Policies\ProfilePolicy;
 use App\Policies\SettingPolicy;
 use App\Policies\UserPolicy;
@@ -25,6 +27,7 @@ class AuthServiceProvider extends ServiceProvider
         User::class => UserPolicy::class,
         Profile::class => ProfilePolicy::class,
         Setting::class => SettingPolicy::class,
+        ActivityLog::class => ActivityLogPolicy::class,
     ];
 
     /**

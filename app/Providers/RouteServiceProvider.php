@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Models\ActivityLog;
 use App\Models\Profile;
 use App\Models\Setting;
 use App\Models\User;
@@ -29,6 +30,7 @@ class RouteServiceProvider extends ServiceProvider
         Route::model('user', User::class);
         Route::model('profile', Profile::class);
         Route::model('setting', Setting::class);
+        Route::model('activity_log', ActivityLog::class);
 
         parent::boot();
     }
