@@ -9,7 +9,7 @@ use Prettus\Repository\Criteria\RequestCriteria;
 use Prettus\Repository\Eloquent\BaseRepository;
 
 /**
- * Class UserActivityRepositoryEloquent.
+ * Class ActivityLogRepositoryEloquent.
  *
  * @package namespace App\Repositories\Eloquent;
  */

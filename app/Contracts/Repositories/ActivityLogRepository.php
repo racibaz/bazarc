@@ -5,7 +5,7 @@ namespace App\Contracts\Repositories;
 use Prettus\Repository\Contracts\RepositoryInterface;
 
 /**
- * Interface UserActivityRepository.
+ * Interface ActivityLogRepository.
  *
  * @package namespace App\Contracts\Repositories;
  */

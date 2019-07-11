@@ -2,12 +2,14 @@
 
 namespace App\Models;
 
+use App\Presenters\ActivityLogPresenter;
+use App\Transformers\ActivityLogTransformer;
 use Illuminate\Database\Eloquent\Model;
 use Prettus\Repository\Contracts\Transformable;
 use Prettus\Repository\Traits\TransformableTrait;
 
 /**
- * Class UserActivity.
+ * Class ActivityLog.
  *
  * @package namespace App\Models;
  */
@@ -15,7 +17,9 @@ class ActivityLog extends Model implements Transformable
 {
     use TransformableTrait;
 
+    public $transformer = ActivityLogTransformer::class;
     protected $table = 'activity_log';
+    protected $presenter = ActivityLogPresenter::class;
     /**
      * The attributes that are mass assignable.
      *

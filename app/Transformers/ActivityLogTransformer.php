@@ -2,7 +2,7 @@
 
 namespace App\Transformers;
 
-use App\Policies\ActivityLogPolicy;
+use App\Models\ActivityLog;
 use League\Fractal\TransformerAbstract;
 
 class ActivityLogTransformer extends TransformerAbstract
@@ -56,7 +56,7 @@ class ActivityLogTransformer extends TransformerAbstract
      *
      * @return array
      */
-    public function transform(ActivityLogPolicy $model)
+    public function transform(ActivityLog $model)
     {
         return [
             'id' => (int)$model->id,
