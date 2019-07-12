@@ -2,16 +2,15 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Contracts\Repositories\RoleRepository as Repository;
-use App\Models\Role;
-use App\Validators\RoleValidator;
+use App\Contracts\Repositories\PermissionRepository as Repository;
+use App\Validators\PermissionValidator;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Response;
 use Prettus\Validator\Contracts\ValidatorInterface;
 use Prettus\Validator\Exceptions\ValidatorException;
 
-class RoleController extends ApiController
+class PermissionController extends ApiController
 {
     /**
      * @var $repository
@@ -19,19 +18,18 @@ class RoleController extends ApiController
     private $repository;
 
     /**
-     * @var RoleValidator
+     * @var PermissionValidator
      */
     private $validator;
 
     /**
-     * RoleController constructor.
+     * PermissionController constructor.
      *
      * @param Repository $repository
-     * @param RoleValidator $validator
+     * @param PermissionValidator $validator
      *
-     * @internal param \App\Http\Controllers\Api\User\Repo $repo
      */
-    public function __construct(Repository $repository, RoleValidator $validator)
+    public function __construct(Repository $repository, PermissionValidator $validator)
     {
         parent::__construct();
 
@@ -41,7 +39,7 @@ class RoleController extends ApiController
     }
 
     /**
-     * role list
+     * permission list
      * @return mixed
      */
     public function index()
@@ -49,16 +47,6 @@ class RoleController extends ApiController
         $records = $this->repository->all();
 
         return $this->showAll($records);
-    }
-
-    /**
-     * @param Role $record
-     *
-     * @return JsonResponse
-     */
-    public function show(Role $record)
-    {
-        return $this->showOne($record);
     }
 
     /**

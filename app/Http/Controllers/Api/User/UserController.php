@@ -33,7 +33,7 @@ class UserController extends ApiController
      *
      * @internal param \App\Http\Controllers\Api\User\Repo $repo
      */
-    public function __construct (Repository $repository, UserValidator $validator)
+    public function __construct(Repository $repository, UserValidator $validator)
     {
         parent::__construct();
 
@@ -46,7 +46,7 @@ class UserController extends ApiController
      * user list
      * @return mixed
      */
-    public function index ()
+    public function index()
     {
         $users = $this->repository->all();
 
@@ -58,7 +58,7 @@ class UserController extends ApiController
      *
      * @return JsonResponse
      */
-    public function show (User $record)
+    public function show(User $record)
     {
         return $this->showOne($record);
     }
@@ -70,7 +70,7 @@ class UserController extends ApiController
      *
      * @return Response
      */
-    public function store (Request $request)
+    public function store(Request $request)
     {
         $inputs = $request->all();
 
@@ -80,19 +80,15 @@ class UserController extends ApiController
             //Policy validated so it is available
             $inputs['password'] = bcrypt($inputs['password']);
 
-            $this->validator->with($inputs)->passesOrFail(ValidatorInterface::RULE_UPDATE);
+            $this->validator->with($inputs)->passesOrFail(ValidatorInterface::RULE_CREATE);
 
             $record = $this->repository->create($inputs);
 
             return response()->json($record, 201);
 
-        }catch(ValidatorException $e){
+        } catch (ValidatorException $e) {
 
-            return Response::json([
-                    'error' => true,
-                    'message' => $e->getMessageBag()
-                ]
-            );
+            return $this->errorResponse($e->getMessageBag(), 409);
         }
     }
 }

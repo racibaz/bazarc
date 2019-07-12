@@ -17,7 +17,7 @@ class ActivityLogControllerTest extends TestCase
      *
      * @test
      */
-    public function non_authenticated_users_cannot_access_the_following_endpoints_for_the_activity_log_api ()
+    public function non_authenticated_users_cannot_access_the_following_endpoints_for_the_activity_log_api()
     {
         $index = $this->json('GET', '/api/v1/activity_logs');
         $index->assertStatus(401);
@@ -30,7 +30,7 @@ class ActivityLogControllerTest extends TestCase
      * @test
      * @return void
      */
-    public function can_get_activity_logs_without_authenticated ()
+    public function can_get_activity_logs_without_authenticated()
     {
         $response = $this->json('GET', 'api/v1/activity_logs');
 
@@ -48,7 +48,7 @@ class ActivityLogControllerTest extends TestCase
     /**
      * @test
      */
-    public function can_return_a_collection_of_paginated_activity_logs ()
+    public function can_return_a_collection_of_paginated_activity_logs()
     {
 
         $user = factory(User::class)->create();
@@ -65,29 +65,33 @@ class ActivityLogControllerTest extends TestCase
             ->assertJsonStructure([
                 'data' => [
                     '*' => [
-                            'log_name',
-                            'description',
-                            'subject_id',
-                            'subject_type',
-                            'causer_id',
-                            'causer_type',
-                            'properties',
-                            'links' =>
-                                ['*' => [
-                                    'rel', 'href'
-                                     ]
+                        'log_name',
+                        'description',
+                        'subject_id',
+                        'subject_type',
+                        'causer_id',
+                        'causer_type',
+                        'properties',
+                        'links' =>
+                            [
+                                '*' => [
+                                    'rel',
+                                    'href'
                                 ]
+                            ]
                     ]
                 ],
                 'meta' => [
                     'pagination' => [
-                        'total', 'count',
+                        'total',
+                        'count',
                         'per_page',
                         'current_page',
                         'total_pages',
                         'links' => ['next']
                     ]
                 ]
-            ]);
+            ]
+            );
     }
 }

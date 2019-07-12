@@ -5,7 +5,7 @@ namespace App\Policies;
 use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
-class ActivityLogPolicy
+class PermissionPolicy
 {
     use HandlesAuthorization;
 
@@ -26,7 +26,7 @@ class ActivityLogPolicy
      */
     public function index()
     {
-        if (auth()->user()->can('index-activity-log')) {
+        if (auth()->user()->can('index-permission')) {
             return true;
         }
     }
@@ -41,7 +41,7 @@ class ActivityLogPolicy
      */
     public function view(User $user, $record)
     {
-        if ($user->can('show-activity-log')) {
+        if ($user->can('show-permission')) {
             return true;
         }
     }

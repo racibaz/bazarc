@@ -2,13 +2,13 @@
 
 namespace Tests\Feature\Http\Controllers\Api;
 
+use App\Models\Permission;
 use App\Models\User;
 use Faker\Factory;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Spatie\Permission\Models\Role;
 use Tests\TestCase;
 
-class RoleControllerTest extends TestCase
+class PermissionControllerTest extends TestCase
 {
     use RefreshDatabase;
 
@@ -17,12 +17,12 @@ class RoleControllerTest extends TestCase
      *
      * @test
      */
-    public function can_return_a_collection_of_paginated_roles()
+    public function can_return_a_collection_of_paginated_permissions()
     {
         $user = factory(User::class)->create();
-        $role1 = factory(Role::class)->create();
+        $permission1 = factory(Permission::class)->create();
 
-        $response = $this->actingAs($user, 'api')->json('GET', '/api/v1/roles');
+        $response = $this->actingAs($user, 'api')->json('GET', '/api/v1/permissions');
 
         $response->assertStatus(200)
             ->assertJsonStructure([
@@ -58,14 +58,14 @@ class RoleControllerTest extends TestCase
      * @test
      * @return void
      */
-    public function can_create_a_role()
+    public function can_create_a_permission()
     {
         $faker = Factory::create();
 
         $user = factory(User::class)->create();
 
         $response = $this->actingAs($user, 'api')
-            ->json('POST', 'api/v1/roles', [
+            ->json('POST', 'api/v1/permissions', [
                 'name' => $name = $faker->name,
                 'guard_name' => $guardName = $faker->boolean == true ? 'web' : 'api',
             ]
@@ -83,7 +83,7 @@ class RoleControllerTest extends TestCase
         ]
         )->assertStatus(201);
 
-        $this->assertDatabaseHas('roles', [
+        $this->assertDatabaseHas('permissions', [
             'name' => $name,
             'guard_name' => $guardName
         ]
@@ -94,7 +94,7 @@ class RoleControllerTest extends TestCase
      * @test
      * @return void
      */
-    public function can_delete_a_role()
+    public function can_delete_a_permission()
     {
         $faker = Factory::create();
 
@@ -106,14 +106,14 @@ class RoleControllerTest extends TestCase
         $user = factory(User::class)->create();
 
         $response = $this->actingAs($user, 'api')
-            ->json('POST', 'api/v1/roles', [
-                'name' => 'role2',
+            ->json('POST', 'api/v1/permissions', [
+                'name' => 'permissions2',
                 'guard_name' => 'web'
             ]
             );
 
         $response = $this->actingAs($user, 'api')
-            ->json('DELETE', "api/v1/roles/", [
+            ->json('DELETE', "api/v1/permissions/", [
                 'id' => 2
             ]
             );

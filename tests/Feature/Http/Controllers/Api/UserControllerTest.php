@@ -15,7 +15,7 @@ class UserControllerTest extends TestCase
     /**
      * @test
      */
-    public function non_authenticated_users_cannot_access_the_following_endpoints_for_the_user_api ()
+    public function non_authenticated_users_cannot_access_the_following_endpoints_for_the_user_api()
     {
         $index = $this->json('GET', '/api/v1/users');
         $index->assertStatus(401);
@@ -37,7 +37,7 @@ class UserControllerTest extends TestCase
      * @test
      * @return void
      */
-    public function can_get_users_without_authenticated ()
+    public function can_get_users_without_authenticated()
     {
         $response = $this->json('GET', 'api/v1/users');
 
@@ -56,7 +56,7 @@ class UserControllerTest extends TestCase
      * @test
      * @return void
      */
-    public function can_create_a_user ()
+    public function can_create_a_user()
     {
         $faker = Factory::create();
 
@@ -67,27 +67,35 @@ class UserControllerTest extends TestCase
                 'name' => $name = $faker->company,
                 'email' => $email = $faker->email,
                 'password' => $password = 'secret12345*'
-            ]);
+            ]
+            );
 
         $response->assertJsonStructure([
-            'id', 'name', 'slug', 'email', 'created_at'
-        ])->assertJson([
+            'id',
+            'name',
+            'slug',
+            'email',
+            'created_at'
+        ]
+        )->assertJson([
             'name' => $name,
             'slug' => Str::slug($name),
             'email' => $email
-        ])->assertStatus(201);
+        ]
+        )->assertStatus(201);
 
         $this->assertDatabaseHas('users', [
             'name' => $name,
             'slug' => Str::slug($name),
             'email' => $email
-        ]);
+        ]
+        );
     }
 
     /**
      * @test
      */
-    public function can_return_a_collection_of_paginated_users ()
+    public function can_return_a_collection_of_paginated_users()
     {
 
         $user1 = factory(User::class)->create();
@@ -101,24 +109,34 @@ class UserControllerTest extends TestCase
         $response->assertStatus(200)
             ->assertJsonStructure([
                 'data' => [
-                    '*' => ['id', 'name', 'slug', 'email', 'created_at', 'updated_at',
-                            'links' =>
-                                ['*' =>
-                                     [
-                                         'rel', 'href'
-                                     ]
-                                ]
+                    '*' => [
+                        'id',
+                        'name',
+                        'slug',
+                        'email',
+                        'created_at',
+                        'updated_at',
+                        'links' =>
+                            [
+                                '*' =>
+                                    [
+                                        'rel',
+                                        'href'
+                                    ]
+                            ]
                     ]
                 ],
                 'meta' => [
                     'pagination' => [
-                        'total', 'count',
+                        'total',
+                        'count',
                         'per_page',
                         'current_page',
                         'total_pages',
                         'links' => ['next']
                     ]
                 ]
-            ]);
+            ]
+            );
     }
 }

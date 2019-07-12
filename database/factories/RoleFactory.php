@@ -8,7 +8,7 @@ use Spatie\Permission\Models\Role;
 
 $factory->define(Role::class, function (Faker $faker) {
     return [
-        'name' => 'writer',
+        'name' => "role{$faker->randomNumber()}",
         'guard_name' => $faker->boolean == true ? 'web' : 'api',
     ];
 });

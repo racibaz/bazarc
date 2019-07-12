@@ -17,8 +17,8 @@ class Role extends \Spatie\Permission\Models\Role implements Transformable
     use TransformableTrait;
 
 
+    public $transformer = RoleTransformer::class;
     protected $fillable = [];
     protected $presenter = RolePresenter::class;
-    public $transformer = RoleTransformer::class;
 
 }

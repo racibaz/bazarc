@@ -179,9 +179,9 @@ class User extends Authenticatable implements Transformable
         }
 
         return $this->phoneNumber()->create([
-            'phone_number' => $phoneNumber,
-            'dialling_code_id' => $phoneNumberDiallingCode,
-        ]
+                'phone_number' => $phoneNumber,
+                'dialling_code_id' => $phoneNumberDiallingCode,
+            ]
         );
     }
 

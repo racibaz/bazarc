@@ -7,11 +7,11 @@ use Prettus\Repository\Contracts\Transformable;
 use Prettus\Repository\Traits\TransformableTrait;
 
 /**
- * Class ImpersonateRepository.
+ * Class Impersonate.
  *
  * @package namespace App\Models;
  */
-class ImpersonateRepository extends Model implements Transformable
+class Impersonate extends Model implements Transformable
 {
     use TransformableTrait;
 

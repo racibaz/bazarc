@@ -10,5 +10,6 @@ Route::prefix('v1')->group(function () {
     Route::apiResource('users', 'Api\User\UserController');
     Route::apiResource('activity_logs', 'Api\ActivityLogController')->only(['index', 'show']);
     Route::apiResource('roles', 'Api\RoleController');
+    Route::apiResource('permissions', 'Api\PermissionController');
 }
 );
