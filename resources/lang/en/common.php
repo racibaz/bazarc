@@ -14,5 +14,8 @@ return [
         'save'  => 'Save',
         'cancel'  => 'Cancel',
         'delete' => 'Delete',
+
+        //Common form fields
+        'name' => 'Name',
     ]
 ];

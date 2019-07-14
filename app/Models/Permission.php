@@ -17,11 +17,6 @@ class Permission extends \Spatie\Permission\Models\Permission implements Transfo
     use TransformableTrait;
 
     public $transformer = PermissionTransformer::class;
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
     protected $fillable = [];
     protected $presenter = PermissionPresenter::class;
 

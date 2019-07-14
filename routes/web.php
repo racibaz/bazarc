@@ -34,9 +34,15 @@ Route::group(['prefix' => 'admin', 'middleware' => 'check_permission'], function
     //UserActivity
     Route::resource('activity_log', 'Backend\ActivityLogController')->only([
         'index',
-        'show'
-    ]
+        'show']
     );
+
+    //Role
+    Route::resource('role', 'Backend\RoleController');
+
+    //Permission
+    Route::resource('permission', 'Backend\PermissionController');
+
 
     //--Logs
     Route::get('logs', '\Rap2hpoutre\LaravelLogViewer\LogViewerController@index')->name('logs'

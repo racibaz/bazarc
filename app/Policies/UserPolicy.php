@@ -28,7 +28,9 @@ class UserPolicy
      */
     public function index()
     {
-        return true;
+        if (auth()->user()->can('index-user')) {
+            return true;
+        }
     }
 
     /**

@@ -58,6 +58,26 @@
                         </a>
                     </li>
                 @endcan
+                @can('index-role')
+                    <li class="nav-item">
+                        <a href="{!! route('role.index') !!}" class="nav-link">
+                            <i class="nav-icon fa fa-users"></i>
+                            <p>
+                                {{trans('role.roles')}}
+                            </p>
+                        </a>
+                    </li>
+                @endcan
+                @can('index-permission')
+                    <li class="nav-item">
+                        <a href="{!! route('permission.index') !!}" class="nav-link">
+                            <i class="nav-icon fa fa-users"></i>
+                            <p>
+                                {{trans('permission.permissions')}}
+                            </p>
+                        </a>
+                    </li>
+                @endcan
                 @can('index-setting')
                     <li class="nav-item">
                         <a href="{!! route('setting.index') !!}" class="nav-link">

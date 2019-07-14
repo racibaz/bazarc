@@ -2,46 +2,45 @@
 
 namespace App\Http\Controllers\Backend;
 
-use App\Contracts\Repositories\RoleRepository as Repository;
-use App\Http\Controllers\Controller;
-use App\Models\Role;
-use App\Validators\RoleValidator;
+use App\Contracts\Repositories\PermissionRepository as Repository;
+use App\Models\Permission;
+use App\Validators\PermissionValidator;
 use Exception;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Response;
-use Illuminate\Support\Str;
 use Prettus\Validator\Contracts\ValidatorInterface;
 use Prettus\Validator\Exceptions\ValidatorException;
 use Yajra\DataTables\Facades\DataTables;
 
-class RoleController extends BackendBaseController
+class PermissionController extends BackendBaseController
 {
     use ValidatesRequests;
 
     /**
-     * @var RoleRepository
+     * @var PermissionRepository
      */
     protected $repository;
 
     /**
-     * @var * @var \App\Validators\RoleValidator
+     * @var * @var \App\Validators\PermissionValidator
      */
     protected $validator;
 
     /**
      * DashboardController constructor.
      *
-     * @param \App\Contracts\Repositories\RoleRepository $repository
-     * @param RoleValidator $validator
+     * @param \App\Contracts\Repositories\PermissionRepository $repository
+     * @param PermissionValidator $validator
      */
-    public function __construct(Repository $repository, RoleValidator $validator)
+    public function __construct(Repository $repository, PermissionValidator $validator)
     {
         $this->repository = $repository;
         $this->validator = $validator;
 
-        $this->authorizeResource(Role::class, 'role');
+        $this->authorizeResource(Permission::class, 'permission');
     }
 
     /**
@@ -51,8 +50,8 @@ class RoleController extends BackendBaseController
      */
     public function index()
     {
-        $roles = $this->repository->orderBy('created_at', 'desc')->all();
-        return view('backend.role.index', compact(['roles']));
+        $permissions = $this->repository->orderBy('created_at', 'desc')->all();
+        return view('backend.permission.index', compact(['permissions']));
     }
 
     /**
@@ -63,7 +62,7 @@ class RoleController extends BackendBaseController
      */
     public function anyData()
     {
-        return Datatables::of(Role::query())->make(true);
+        return Datatables::of(Permission::query())->make(true);
     }
 
     /**
@@ -74,8 +73,8 @@ class RoleController extends BackendBaseController
      */
     public function create()
     {
-        $record = new Role();
-        return view('backend.role._form', compact(['record']));
+        $record = new Permission();
+        return view('backend.permission._form', compact(['record']));
     }
 
     /**
@@ -93,7 +92,7 @@ class RoleController extends BackendBaseController
 
             $this->repository->create($inputs);
 
-            return redirect()->to(route('role.index'));
+            return redirect()->to(route('permission.index'));
         } catch (ValidatorException $e) {
             return Response::json([
                     'error' => true,
@@ -113,7 +112,7 @@ class RoleController extends BackendBaseController
      */
     public function show($record)
     {
-        return view('backend.role.show', compact(['record']));
+        return view('backend.permission.show', compact(['record']));
     }
 
     /**
@@ -123,7 +122,7 @@ class RoleController extends BackendBaseController
      */
     public function edit($record)
     {
-        return view('backend.role._form', compact(['record']));
+        return view('backend.permission._form', compact(['record']));
     }
 
     /**
@@ -141,12 +140,11 @@ class RoleController extends BackendBaseController
         $inputs = $request->all();
 
         try {
-
             $this->validator->with($inputs)->setId($record->id)->passesOrFail(ValidatorInterface::RULE_UPDATE);
 
             $this->repository->update($inputs, $record->id);
 
-            return redirect()->to(route('role.index'));
+            return redirect()->to(route('permission.index'));
 
         } catch (ValidatorException $e) {
             return Response::json([
@@ -167,6 +165,6 @@ class RoleController extends BackendBaseController
     public function destroy($record)
     {
         $this->repository->delete($record->id);
-        return redirect()->to(route('role.index'));
+        return redirect()->to(route('permission.index'));
     }
 }

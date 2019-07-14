@@ -40,7 +40,7 @@ class RoleAndPermissionSeeder extends Seeder
         Permission::create(['name' => 'impersonate-impersonate']);
         Permission::create(['name' => 'stop-impersonate']);
 
-        //profile permissions
+        //profile
         Permission::create(['name' => 'show-any-profile']);
         Permission::create(['name' => 'show-profile']);
         Permission::create(['name' => 'edit-profile']);
@@ -53,6 +53,23 @@ class RoleAndPermissionSeeder extends Seeder
 
         Permission::create(['name' => 'index-activity-log']);
         Permission::create(['name' => 'show-activity-log']);
+
+
+        //role
+        Permission::create(['name' => 'index-role']);
+        Permission::create(['name' => 'create-role']);
+        Permission::create(['name' => 'edit-role']);
+        Permission::create(['name' => 'show-role']);
+        Permission::create(['name' => 'delete-role']);
+        Permission::create(['name' => 'update-role']);
+
+        //permission
+        Permission::create(['name' => 'index-permission']);
+        Permission::create(['name' => 'create-permission']);
+        Permission::create(['name' => 'edit-permission']);
+        Permission::create(['name' => 'show-permission']);
+        Permission::create(['name' => 'delete-permission']);
+        Permission::create(['name' => 'update-permission']);
 
 
         Permission::create(['name' => 'manage-log']);
