@@ -44,16 +44,6 @@ class DashboardController extends BackendBaseController
         return view('backend.dashboard.index', compact('users', 'userCount'));
     }
 
-    /**
-     * Process datatables ajax request.
-     *
-     * @return JsonResponse
-     * @throws Exception
-     */
-    public function anyData()
-    {
-        return Datatables::of(User::query())->make(true);
-    }
 
     /**
      * Show the form for creating a new resource.

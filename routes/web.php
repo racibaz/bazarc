@@ -19,11 +19,11 @@ Route::group(['prefix' => 'admin', 'middleware' => 'check_permission'], function
     Route::get('/', 'Backend\DashboardController@index');
 
     //users
+    Route::get('users/anyData', 'Backend\UserController@anyData')->name('users.anyData');
     Route::resource('user', 'Backend\UserController');
     Route::resource('profile', 'Backend\ProfileController')
         ->only(['show', 'edit', 'update']);
     Route::resource('setting', 'Backend\SettingController');
-    Route::get('users.data', 'Backend\DashboardController@anydata')->name('users.data');
 
     //impersonate
     Route::get('impersonate', 'Backend\ImpersonateController@index')->name('impersonate');

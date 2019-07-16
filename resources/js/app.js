@@ -12,6 +12,8 @@ window.Vue = require('vue');
 import VueRouter from 'vue-router'
 Vue.use(VueRouter)
 
+// var $       = require( 'jquery' );
+// var dt      = require( 'datatables.net' )();
 
 let routes = [
     { path: '/dashboard', component: require('./components/Dashboard.vue').default },

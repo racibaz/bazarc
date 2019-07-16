@@ -12,6 +12,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <title>{{config('app.name')}}</title>
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="stylesheet" href="/css/app.css">
+{{--    <link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">--}}
+    <link rel="stylesheet" href="//cdn.datatables.net/1.10.7/css/jquery.dataTables.min.css">
+
     @stack('css')
 </head>
 <body class="hold-transition sidebar-mini">
@@ -60,6 +63,12 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <!-- ./wrapper -->
 
 <script src="/js/app.js"></script>
+    <!-- jQuery -->
+    <script src="//code.jquery.com/jquery.js"></script>
+    <!-- DataTables -->
+    <script src="//cdn.datatables.net/1.10.7/js/jquery.dataTables.min.js"></script>
+    <!-- Bootstrap JavaScript -->
+{{--    <script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>--}}
 @stack('script')
 
 </body>

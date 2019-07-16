@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Contracts\Repositories\UserRepository;
+use App\Http\Controllers\Controller;
 use App\Models\User;
 use App\Validators\UserValidator;
 use Exception;
@@ -15,7 +16,7 @@ use Prettus\Validator\Contracts\ValidatorInterface;
 use Prettus\Validator\Exceptions\ValidatorException;
 use Yajra\DataTables\Facades\DataTables;
 
-class UserController extends BackendBaseController
+class UserController extends Controller
 {
     use ValidatesRequests;
 
@@ -44,7 +45,7 @@ class UserController extends BackendBaseController
         $this->repository = $repository;
         $this->validator = $validator;
 
-        $this->authorizeResource(User::class, 'user');
+//        $this->authorizeResource(User::class, 'user');
     }
 
     /**
@@ -55,7 +56,8 @@ class UserController extends BackendBaseController
     public function index()
     {
         $users = $this->repository->orderBy('created_at', 'desc')->all();
-        return view('backend.user.index', compact(['users']));
+//        return view('backend.user.index', compact(['users']));
+        return view('backend.user.index');
     }
 
     /**
@@ -104,9 +106,9 @@ class UserController extends BackendBaseController
             return redirect()->to(route('user.index'));
         } catch (ValidatorException $e) {
             return Response::json([
-                'error' => true,
-                'message' => $e->getMessageBag()
-            ]
+                    'error' => true,
+                    'message' => $e->getMessageBag()
+                ]
             );
         }
     }
@@ -165,9 +167,9 @@ class UserController extends BackendBaseController
 
         } catch (ValidatorException $e) {
             return Response::json([
-                'error' => true,
-                'message' => $e->getMessageBag()
-            ]
+                    'error' => true,
+                    'message' => $e->getMessageBag()
+                ]
             );
         }
     }
