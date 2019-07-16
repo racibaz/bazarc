@@ -18,8 +18,11 @@
                         <table class="table table-bordered" id="table">
                             <thead>
                             <tr>
-                                <th>Name</th>
-                                <th>Email</th>
+                                <th>{{trans('user.form.name')}}</th>
+                                <th>{{trans('user.form.email')}}</th>
+                                <th>{{trans('user.form.cell_phone')}}</th>
+                                <th>{{trans('common.form.updated_at')}}</th>
+                                <th width="100px">{{trans('common.form.action')}}</th>
                             </tr>
                             </thead>
                         </table>
@@ -85,19 +88,20 @@
 @push('css')
 @endpush
 
-@push('scripts')
+@push('script')
     <script>
         $(function() {
             $('#table').DataTable({
                 processing: true,
                 serverSide: true,
+                responsive: true,
                 ajax: '{!! route('users.anyData') !!}',
-                headers: {
-                    'X-CSRF-TOKEN': '{{ csrf_token() }}'
-                },
                 columns: [
                     { data: 'name', name: 'name' },
-                    { data: 'email', name: 'email' }
+                    { data: 'email', name: 'email' },
+                    { data: 'cell_phone', name: 'cell_phone' },
+                    { data: 'updated_at', name: 'updated_at' },
+                    {data: 'action', name: 'action', orderable: false, searchable: false},
                 ]
             });
         });
