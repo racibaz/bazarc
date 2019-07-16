@@ -20,16 +20,15 @@ class SettingPolicy
 
 
     /**
-     * Determine whether the user can view the use.
-     *
-     * @param User $user
-     * @param $record
+     * Determine whether the user can index the use.
      *
      * @return boolean
      */
-    public function index()
+    public function index(): bool
     {
-        return true;
+        if (auth()->user()->can('index-setting')) {
+            return true;
+        }
     }
 
     /**
@@ -40,7 +39,7 @@ class SettingPolicy
      *
      * @return boolean
      */
-    public function view(User $user, $record)
+    public function view(User $user, $record): bool
     {
         if ($user->can('show-any-setting')) {
             return true;
@@ -55,7 +54,7 @@ class SettingPolicy
      * @param User $user
      * @return mixed
      */
-    public function create(User $user)
+    public function create(User $user): bool
     {
         if ($user->can('create-setting')) {
             return true;
@@ -71,7 +70,7 @@ class SettingPolicy
      * @return boolean
      * @internal param \App\Models\User $use
      */
-    public function update(User $user, $record)
+    public function update(User $user, $record): bool
     {
         if ($user->can('update-any-setting')) {
             return true;
@@ -88,7 +87,7 @@ class SettingPolicy
      *
      * @return bool
      */
-    public function delete(User $user, $record)
+    public function delete(User $user, $record): bool
     {
         if ($user->can('delete-any-setting')) {
             return true;

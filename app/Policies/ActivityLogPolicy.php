@@ -20,11 +20,11 @@ class ActivityLogPolicy
     }
 
     /**
-     * Determine whether the user can view the use.
+     * Determine whether the user can index the use.
      *
      * @return boolean
      */
-    public function index()
+    public function index(): bool
     {
         if (auth()->user()->can('index-activity-log')) {
             return true;
@@ -39,7 +39,7 @@ class ActivityLogPolicy
      *
      * @return boolean
      */
-    public function view(User $user, $record)
+    public function view(User $user, $record): bool
     {
         if ($user->can('show-activity-log')) {
             return true;

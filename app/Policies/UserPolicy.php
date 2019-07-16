@@ -4,6 +4,7 @@ namespace App\Policies;
 
 use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
+use phpDocumentor\Reflection\Types\Boolean;
 
 class UserPolicy
 {
@@ -19,14 +20,11 @@ class UserPolicy
     }
 
     /**
-     * Determine whether the user can view the use.
+     * Determine whether the user can index the use.
      *
-     * @param User $user
-     * @param $record
-     *
-     * @return boolean
+     * @return bool
      */
-    public function index()
+    public function index(): bool
     {
         if (auth()->user()->can('index-user')) {
             return true;
@@ -41,7 +39,7 @@ class UserPolicy
      *
      * @return boolean
      */
-    public function view(User $user, $record)
+    public function view(User $user, $record): bool
     {
         if ($user->can('show-any-user')) {
             return true;
@@ -56,7 +54,7 @@ class UserPolicy
      * @param User $user
      * @return mixed
      */
-    public function create(User $user)
+    public function create(User $user): bool
     {
         if ($user->can('create-user')) {
             return true;
@@ -72,7 +70,7 @@ class UserPolicy
      * @return boolean
      * @internal param \App\Models\User $use
      */
-    public function update(User $user, $record)
+    public function update(User $user, $record): bool
     {
         if ($user->can('update-any-user')) {
             return true;
@@ -89,7 +87,7 @@ class UserPolicy
      *
      * @return bool
      */
-    public function delete(User $user, $record)
+    public function delete(User $user, $record): bool
     {
         if ($user->can('delete-any-user')) {
             return true;

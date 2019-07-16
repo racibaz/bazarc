@@ -27,7 +27,7 @@ class ProfilePolicy
      *
      * @return boolean
      */
-    public function view(User $user, $record)
+    public function view(User $user, $record): bool
     {
         if ($user->can('show-any-profile')) {
             return true;
@@ -46,7 +46,7 @@ class ProfilePolicy
      * @return boolean
      * @internal param \App\Models\User $use
      */
-    public function update(User $user, $record)
+    public function update(User $user, $record): bool
     {
         if ($user->can('update-any-profile')) {
             return true;
@@ -63,7 +63,7 @@ class ProfilePolicy
      *
      * @return bool
      */
-    public function delete(User $user, $record)
+    public function delete(User $user, $record): bool
     {
         if ($user->can('delete-any-profile')) {
             return true;

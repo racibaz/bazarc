@@ -21,11 +21,11 @@ class RolePolicy
     }
 
     /**
-     * Determine whether the role can view the use.
+     * Determine whether the role can index the use.
      *
      * @return boolean
      */
-    public function index()
+    public function index(): bool
     {
         if (auth()->user()->can('index-role')) {
             return true;
@@ -40,7 +40,7 @@ class RolePolicy
      *
      * @return boolean
      */
-    public function view(User $user, $record)
+    public function view(User $user, $record): bool
     {
         if ($user->can('show-role')) {
             return true;
@@ -54,7 +54,7 @@ class RolePolicy
      *
      * @return mixed
      */
-    public function create(User $user)
+    public function create(User $user): bool
     {
         if ($user->can('create-role')) {
             return true;
@@ -70,7 +70,7 @@ class RolePolicy
      * @return boolean
      * @internal param \App\Models\Role $use
      */
-    public function update(User $user, $record)
+    public function update(User $user, $record): bool
     {
         if ($user->can('update-role')) {
             return true;
@@ -85,7 +85,7 @@ class RolePolicy
      *
      * @return bool
      */
-    public function delete(User $user, $record)
+    public function delete(User $user, $record): bool
     {
         if ($user->can('delete-role')) {
             return true;

@@ -17,15 +17,15 @@ class PermissionPolicy
      */
     public function __construct()
     {
-
+        //
     }
 
     /**
-     * Determine whether the permission can view the use.
+     * Determine whether the permission can index the use.
      *
      * @return boolean
      */
-    public function index()
+    public function index(): bool
     {
         if (auth()->user()->can('index-permission')) {
             return true;
@@ -40,7 +40,7 @@ class PermissionPolicy
      *
      * @return boolean
      */
-    public function view(User $user, $record)
+    public function view(User $user, $record): bool
     {
         if ($user->can('show-permission')) {
             return true;
@@ -54,7 +54,7 @@ class PermissionPolicy
      *
      * @return mixed
      */
-    public function create(User $user)
+    public function create(User $user): bool
     {
         if ($user->can('create-permission')) {
             return true;
@@ -70,7 +70,7 @@ class PermissionPolicy
      * @return boolean
      * @internal param \App\Models\Permission $use
      */
-    public function update(User $user, $record)
+    public function update(User $user, $record): bool
     {
         if ($user->can('update-permission')) {
             return true;
@@ -85,7 +85,7 @@ class PermissionPolicy
      *
      * @return bool
      */
-    public function delete(User $user, $record)
+    public function delete(User $user, $record): bool
     {
         if ($user->can('delete-permission')) {
             return true;
