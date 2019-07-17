@@ -3,10 +3,8 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Contracts\Repositories\UserRepository;
-use App\Http\Controllers\Controller;
 use App\Models\User;
 use App\Validators\UserValidator;
-use Exception;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -14,9 +12,8 @@ use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Str;
 use Prettus\Validator\Contracts\ValidatorInterface;
 use Prettus\Validator\Exceptions\ValidatorException;
-use Yajra\DataTables\Facades\DataTables;
 
-class UserController extends Controller
+class UserController extends BackendBaseController
 {
     use ValidatesRequests;
 
@@ -33,8 +30,8 @@ class UserController extends Controller
     /**
      * DashboardController constructor.
      *
-     * @param UserRepository $repository
-     * @param UserValidator $validator
+     * @param  UserRepository  $repository
+     * @param  UserValidator  $validator
      */
     public function __construct(UserRepository $repository, UserValidator $validator)
     {
@@ -45,41 +42,25 @@ class UserController extends Controller
         $this->repository = $repository;
         $this->validator = $validator;
 
-//        $this->authorizeResource(User::class, 'user');
+        $this->authorizeResource(User::class, 'user');
     }
 
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
+     * @throws \Exception
      */
     public function index()
     {
         $users = $this->repository->orderBy('created_at', 'desc')->all();
-//        return view('backend.user.index', compact(['users']));
-        return view('backend.user.index');
+
+        if (\request()->ajax()) {
+            return $this->datatableData($users);
+        }
+        return view('backend.user.index', compact(['users']));
     }
 
-    /**
-     * Process datatables ajax request.
-     *
-     * @return JsonResponse
-     * @throws Exception
-     */
-    public function anyData()
-    {
-        $data = User::latest()->get();
-        return Datatables::of($data)
-            ->addIndexColumn()
-            ->addColumn('action', function($row){
-                $btn = '<a href="javascript:void(0)" class="edit btn btn-primary btn-sm">View</a>';
-                return $btn;
-            })
-            ->rawColumns(['action'])
-            ->make(true);
-
-//        return Datatables::of(User::query())->make(true);
-    }
 
     /**
      * todo instance repo dan alınmalı..
@@ -96,7 +77,8 @@ class UserController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param Request $request
+     * @param  Request  $request
+     *
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -114,7 +96,7 @@ class UserController extends Controller
             $this->repository->create($inputs);
 
             return redirect()->to(route('user.index'));
-        } catch (ValidatorException $e) {
+        }catch (ValidatorException $e){
             return Response::json([
                     'error' => true,
                     'message' => $e->getMessageBag()
@@ -149,7 +131,7 @@ class UserController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param Request $request
+     * @param  Request  $request
      * @param $record
      *
      * @return JsonResponse
@@ -175,7 +157,7 @@ class UserController extends Controller
 
             return redirect()->to(route('user.index'));
 
-        } catch (ValidatorException $e) {
+        }catch (ValidatorException $e){
             return Response::json([
                     'error' => true,
                     'message' => $e->getMessageBag()

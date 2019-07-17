@@ -5,7 +5,6 @@
 @stop
 
 @section('content')
-
     <section class="content">
         <div class="row">
             <div class="col-12">
@@ -22,7 +21,7 @@
                                     <th>{{trans('user.form.email')}}</th>
                                     <th>{{trans('user.form.cell_phone')}}</th>
                                     <th>{{trans('common.form.updated_at')}}</th>
-                                    <th width="100px">{{trans('common.form.action')}}</th>
+                                    <th width="%10">{{trans('common.form.action')}}</th>
                                 </tr>
                             </thead>
                         </table>
@@ -39,14 +38,14 @@
 @push('css')
 @endpush
 
-@push('script')
+@push('scripts')
     <script>
         $(function() {
             $('#table').DataTable({
                 processing: true,
                 serverSide: true,
                 responsive: true,
-                ajax: '{!! route('users.anyData') !!}',
+                ajax: '{!! route('user.index') !!}',
                 columns: [
                     { data: 'name', name: 'name' },
                     { data: 'email', name: 'email' },

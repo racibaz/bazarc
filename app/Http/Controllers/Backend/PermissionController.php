@@ -5,15 +5,12 @@ namespace App\Http\Controllers\Backend;
 use App\Contracts\Repositories\PermissionRepository as Repository;
 use App\Models\Permission;
 use App\Validators\PermissionValidator;
-use Exception;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Response;
 use Prettus\Validator\Contracts\ValidatorInterface;
 use Prettus\Validator\Exceptions\ValidatorException;
-use Yajra\DataTables\Facades\DataTables;
 
 class PermissionController extends BackendBaseController
 {
@@ -32,8 +29,8 @@ class PermissionController extends BackendBaseController
     /**
      * DashboardController constructor.
      *
-     * @param \App\Contracts\Repositories\PermissionRepository $repository
-     * @param PermissionValidator $validator
+     * @param  \App\Contracts\Repositories\PermissionRepository  $repository
+     * @param  PermissionValidator  $validator
      */
     public function __construct(Repository $repository, PermissionValidator $validator)
     {
@@ -47,22 +44,17 @@ class PermissionController extends BackendBaseController
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
+     * @throws \Exception
      */
     public function index()
     {
-        $permissions = $this->repository->orderBy('created_at', 'desc')->all();
-        return view('backend.permission.index', compact(['permissions']));
-    }
+        $records = $this->repository->orderBy('created_at', 'desc')->all();
 
-    /**
-     * Process datatables ajax request.
-     *
-     * @return JsonResponse
-     * @throws Exception
-     */
-    public function anyData()
-    {
-        return Datatables::of(Permission::query())->make(true);
+        if (\request()->ajax()) {
+            return $this->datatableData($records);
+        }
+
+        return view('backend.permission.index', compact(['records']));
     }
 
     /**
@@ -80,7 +72,8 @@ class PermissionController extends BackendBaseController
     /**
      * Store a newly created resource in storage.
      *
-     * @param Request $request
+     * @param  Request  $request
+     *
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -93,7 +86,7 @@ class PermissionController extends BackendBaseController
             $this->repository->create($inputs);
 
             return redirect()->to(route('permission.index'));
-        } catch (ValidatorException $e) {
+        }catch (ValidatorException $e){
             return Response::json([
                     'error' => true,
                     'message' => $e->getMessageBag()
@@ -128,7 +121,7 @@ class PermissionController extends BackendBaseController
     /**
      * Update the specified resource in storage.
      *
-     * @param Request $request
+     * @param  Request  $request
      * @param $record
      *
      * @return JsonResponse
@@ -146,7 +139,7 @@ class PermissionController extends BackendBaseController
 
             return redirect()->to(route('permission.index'));
 
-        } catch (ValidatorException $e) {
+        }catch (ValidatorException $e){
             return Response::json([
                     'error' => true,
                     'message' => $e->getMessageBag()

@@ -1,12 +1,11 @@
-<?php
+<?php /** @noinspection ALL */
 
 namespace App\Http\Controllers\Backend;
 
 use App\Contracts\Repositories\ActivityLogRepository;
-use App\Http\Controllers\Controller;
 use App\Models\ActivityLog;
-use App\Models\User;
 use Illuminate\Http\Response;
+
 
 class ActivityLogController extends BackendBaseController
 {
@@ -25,6 +24,11 @@ class ActivityLogController extends BackendBaseController
     public function index()
     {
         $records = $this->repository->orderBy('created_at', 'desc')->all();
+
+        if (\request()->ajax()) {
+            return $this->datatableData($records);
+        }
+
         return view('backend.activity_log.index', compact(['records']));
     }
 

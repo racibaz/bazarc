@@ -52,18 +52,11 @@ class RoleController extends BackendBaseController
     public function index()
     {
         $roles = $this->repository->orderBy('created_at', 'desc')->all();
-        return view('backend.role.index', compact(['roles']));
-    }
 
-    /**
-     * Process datatables ajax request.
-     *
-     * @return JsonResponse
-     * @throws Exception
-     */
-    public function anyData()
-    {
-        return Datatables::of(Role::query())->make(true);
+        if (\request()->ajax()) {
+            return $this->datatableData($roles);
+        }
+        return view('backend.role.index', compact(['roles']));
     }
 
     /**
