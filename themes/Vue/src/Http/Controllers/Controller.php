@@ -1,6 +1,6 @@
 <?php
 
-namespace Themes\DefaultTheme\Http\Controllers;
+namespace Themes\Vue\Http\Controllers;
 
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Routing\Controller as BaseController;

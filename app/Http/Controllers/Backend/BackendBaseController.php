@@ -34,7 +34,8 @@ class BackendBaseController extends Controller
             $this->checkPermissionOnCurrentRoute();
 
             return $next($request);
-        });
+        }
+        );
     }
 
     /**
@@ -58,7 +59,7 @@ class BackendBaseController extends Controller
 
         $classModelName = strtolower(substr($controllerName, 0, -10));
 
-        if (!Auth::user()->can($methodName.'-'.$classModelName)) {
+        if (!Auth::user()->can($methodName . '-' . $classModelName)) {
 //        if (!Auth::user()->can($methodName . '-' . $classModelName)) {
             //Log::warning('Yetkisiz Alana Girmeye Çalışıldı. ' . 'Kişi : ' . Auth::user()->name . '  IP :' . Auth::user()->getUserIp());
             throw new AuthorizationException('Unauthorized action.');
@@ -73,7 +74,7 @@ class BackendBaseController extends Controller
      * @return JsonResponse
      * @throws Exception
      */
-    public function datatableData($records): object
+    public function datatableData($records)
     {
         $datatables = app('datatables');
         return $datatables->of($records)

@@ -30,8 +30,8 @@ class UserController extends BackendBaseController
     /**
      * DashboardController constructor.
      *
-     * @param  UserRepository  $repository
-     * @param  UserValidator  $validator
+     * @param UserRepository $repository
+     * @param UserValidator $validator
      */
     public function __construct(UserRepository $repository, UserValidator $validator)
     {
@@ -77,7 +77,7 @@ class UserController extends BackendBaseController
     /**
      * Store a newly created resource in storage.
      *
-     * @param  Request  $request
+     * @param Request $request
      *
      * @return \Illuminate\Http\Response
      */
@@ -96,7 +96,7 @@ class UserController extends BackendBaseController
             $this->repository->create($inputs);
 
             return redirect()->to(route('user.index'));
-        }catch (ValidatorException $e){
+        } catch (ValidatorException $e) {
             return Response::json([
                     'error' => true,
                     'message' => $e->getMessageBag()
@@ -131,7 +131,7 @@ class UserController extends BackendBaseController
     /**
      * Update the specified resource in storage.
      *
-     * @param  Request  $request
+     * @param Request $request
      * @param $record
      *
      * @return JsonResponse
@@ -157,7 +157,7 @@ class UserController extends BackendBaseController
 
             return redirect()->to(route('user.index'));
 
-        }catch (ValidatorException $e){
+        } catch (ValidatorException $e) {
             return Response::json([
                     'error' => true,
                     'message' => $e->getMessageBag()

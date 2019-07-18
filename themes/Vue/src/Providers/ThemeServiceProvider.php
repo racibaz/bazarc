@@ -1,6 +1,6 @@
 <?php
 
-namespace Themes\DefaultTheme\Providers;
+namespace Themes\Vue\Providers;
 
 use Caffeinated\Themes\Support\ServiceProvider;
 

@@ -37,7 +37,7 @@
                 <a href="#" class="dropdown-item">
                     <!-- Message Start -->
                     <div class="media">
-                        <img src="{{asset('themes/default-theme/img/logo.png')}}" alt="User Avatar" class="img-size-50 mr-3 img-circle">
+                        <img src="{{asset('themes/vue/img/logo.png')}}" alt="User Avatar" class="img-size-50 mr-3 img-circle">
                         <div class="media-body">
                             <h3 class="dropdown-item-title">
                                 Brad Diesel
@@ -53,7 +53,7 @@
                 <a href="#" class="dropdown-item">
                     <!-- Message Start -->
                     <div class="media">
-                        <img src="{{asset('themes/default-theme/img/profile.png')}}" alt="User Avatar" class="img-size-50 img-circle mr-3">
+                        <img src="{{asset('themes/vue/img/profile.png')}}" alt="User Avatar" class="img-size-50 img-circle mr-3">
                         <div class="media-body">
                             <h3 class="dropdown-item-title">
                                 John Pierce

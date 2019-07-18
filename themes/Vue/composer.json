@@ -1,10 +1,10 @@
 {
-    "name": "vendor/default-theme",
-    "description": "DefaultTheme theme.",
+    "name": "vendor/vue",
+    "description": "Vue theme.",
     "type": "caffeinated-theme",
     "autoload": {
         "psr-4": {
-            "Themes\\DefaultTheme\\": "src/"
+            "Themes\\Vue\\": "src/"
         }
     },
     "require": {

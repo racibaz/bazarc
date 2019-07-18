@@ -1,6 +1,6 @@
 <?php
 
-namespace Themes\DefaultTheme\Providers;
+namespace Themes\Vue\Providers;
 
 use Illuminate\Support\Facades\Route;
 use Caffeinated\Themes\Support\RouteServiceProvider as ServiceProvider;
@@ -14,7 +14,7 @@ class RouteServiceProvider extends ServiceProvider
      *
      * @var string
      */
-    protected $namespace = 'Themes\DefaultTheme\Http\Controllers';
+    protected $namespace = 'Themes\Vue\Http\Controllers';
 
     /**
      * Define your route model bindings, pattern filters, etc.

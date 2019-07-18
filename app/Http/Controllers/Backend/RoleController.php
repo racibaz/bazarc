@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Contracts\Repositories\RoleRepository as Repository;
-use App\Http\Controllers\Controller;
 use App\Models\Role;
 use App\Validators\RoleValidator;
 use Exception;
@@ -11,10 +10,8 @@ use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Response;
-use Illuminate\Support\Str;
 use Prettus\Validator\Contracts\ValidatorInterface;
 use Prettus\Validator\Exceptions\ValidatorException;
-use Yajra\DataTables\Facades\DataTables;
 
 class RoleController extends BackendBaseController
 {
@@ -48,6 +45,7 @@ class RoleController extends BackendBaseController
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
+     * @throws Exception
      */
     public function index()
     {
@@ -127,20 +125,17 @@ class RoleController extends BackendBaseController
      *
      * @return JsonResponse
      * @internal param int $id
-     *
      */
     public function update(Request $request, $record)
     {
         $inputs = $request->all();
 
         try {
-
             $this->validator->with($inputs)->setId($record->id)->passesOrFail(ValidatorInterface::RULE_UPDATE);
 
             $this->repository->update($inputs, $record->id);
 
             return redirect()->to(route('role.index'));
-
         } catch (ValidatorException $e) {
             return Response::json([
                     'error' => true,

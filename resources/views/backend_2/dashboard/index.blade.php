@@ -1,7 +1,7 @@
 @extends('backend.master')
 
 @section('breadcrumbs')
-    User Breadcrumb
+    Dashboard Breadcrumb
 @stop
 @section('content')
 
