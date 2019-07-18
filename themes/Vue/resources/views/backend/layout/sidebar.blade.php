@@ -36,7 +36,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <router-link to="/dashboard1" class="nav-link">
+                        <router-link to="/dashboard" class="nav-link">
                             <i class="fa fa-home" aria-hidden="true"></i>
                             <p>
                                 {{trans('dashboard.dashboard')}}
@@ -45,7 +45,7 @@
                         </router-link>
                     </li>
                     <li class="nav-item">
-                        <router-link to="/profile1" class="nav-link">
+                        <router-link to="/profile" class="nav-link">
                             <i class="fa fa-home" aria-hidden="true"></i>
                             <p>
                                 Profile
@@ -56,13 +56,12 @@
                 @endcan
                 @can('index-user')
                     <li class="nav-item">
-                        <a href="{!! route('user.index') !!}" class="nav-link">
-                            <i class="nav-icon fa fa-users"></i>
+                        <router-link to="/users" class="nav-link">
+                            <i class="fas fa-users" aria-hidden="true"></i>
                             <p>
                                 {{trans('user.users')}}
-                                <span class="right badge badge-danger">New</span>
                             </p>
-                        </a>
+                        </router-link>
                     </li>
                 @endcan
                 @can('index-setting')
