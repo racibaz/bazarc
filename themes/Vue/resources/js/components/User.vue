@@ -9,7 +9,8 @@
                     <div class="card-header">
                         <h3 class="card-title">Users</h3>
                         <div class="card-tools">
-                            <button class="btn btn-success" @click="newModal">Add New <i class="fas fa-user-plus fa-fw"></i></button>
+                            <button class="btn btn-success" @click="newModal">Add New <i
+                                    class="fas fa-user-plus fa-fw"></i></button>
                         </div>
                     </div>
                     <!-- /.card-header -->
@@ -19,14 +20,16 @@
                                 <th>ID</th>
                                 <th>Name</th>
                                 <th>Email</th>
+                                <th>Cell Phone</th>
                                 <th>Updated Date</th>
                                 <th>Actions</th>
                             </tr>
-                            <tr>
-                                <td>183</td>
-                                <td>John Doe</td>
-                                <td>11-7-2014</td>
-                                <td><span class="tag tag-success">Approved</span></td>
+                            <tr v-for="user in users" :key="user.id">
+                                <td>{{user.id}}</td>
+                                <td>{{user.name}}</td>
+                                <td>{{user.email}}</td>
+                                <td>{{user.cell_phone}}</td>
+                                <td>{{user.updated_at | humanReadbleDate}}</td>
                                 <td>
                                     <a href="#">
                                         <i class="fa fa-edit blue"></i>
@@ -48,7 +51,8 @@
 
 
         <!-- Modal -->
-        <div class="modal fade" id="addNew" tabindex="-1" role="dialog" aria-labelledby="addNewLabel" aria-hidden="true">
+        <div class="modal fade" id="addNew" tabindex="-1" role="dialog" aria-labelledby="addNewLabel"
+             aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -75,15 +79,17 @@
                             </div>
 
                             <div class="form-group">
-                        <textarea v-model="form.bio" name="bio" id="bio"
-                                  placeholder="Short bio for user (Optional)"
-                                  class="form-control" :class="{ 'is-invalid': form.errors.has('bio') }"></textarea>
+                                <textarea v-model="form.bio" name="bio" id="bio"
+                                          placeholder="Short bio for user (Optional)"
+                                          class="form-control" :class="{ 'is-invalid': form.errors.has('bio') }">
+
+                                </textarea>
                                 <has-error :form="form" field="bio"></has-error>
                             </div>
 
-
                             <div class="form-group">
-                                <select name="type" v-model="form.type" id="type" class="form-control" :class="{ 'is-invalid': form.errors.has('type') }">
+                                <select name="type" v-model="form.type" id="type" class="form-control"
+                                        :class="{ 'is-invalid': form.errors.has('type') }">
                                     <option value="">Select User Role</option>
                                     <option value="admin">Admin</option>
                                     <option value="user">Standard User</option>
@@ -110,7 +116,7 @@
                 </div>
             </div>
         </div>
-        </div>
+    </div>
 </template>
 
 <script>
@@ -118,25 +124,46 @@
         data() {
             return {
                 editmode: false,
-                users : {},
+                users: {},
                 form: new Form({
-                    id:'',
-                    name : '',
+                    id: '',
+                    name: '',
                     email: '',
-                    password: '',
-                    cell_phone: ''
+                    cell_phone: '',
+                    updated_at:'',
                 })
             }
         },
         methods: {
-            newModal(){
+            loadUsers() {
+                axios.get("api/v1/users")
+                    .then(({data}) => (
+                        this.users = data.data
+                    ));
+            },
+            newModal() {
                 this.editmode = false;
                 this.form.reset();
                 $('#addNew').modal('show');
             },
-            createUser(){
-                this.form.post('api/users');
+            createUser() {
+                this.$Progress.start();
+                this.form.post('api/v1/users')
+                    .then(({data}) => {
+                        $('#addNew').modal('hide')
+                        toast({
+                            type: 'success',
+                            title: 'User Created in successfully'
+                        })
+                        this.$Progress.finish();
+                    })
+                    .catch(() => {
+                        this.$Progress.fail();
+                    })
             },
+        },
+        created() {
+            this.loadUsers();
         }
     }
 </script>

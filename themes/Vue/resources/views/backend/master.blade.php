@@ -43,6 +43,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 <div class="container-fluid">
                     <!-- Small boxes (Stat box) -->
                     <router-view></router-view>
+                    <vue-progress-bar></vue-progress-bar>
                 </div><!-- /.container-fluid -->
             </section>
             <!-- /.content -->
