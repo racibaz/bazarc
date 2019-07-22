@@ -85,10 +85,54 @@ class UserController extends ApiController
             $record = $this->repository->create($inputs);
 
             return response()->json($record, 201);
-
         } catch (ValidatorException $e) {
-
             return $this->errorResponse($e->getMessageBag(), 409);
         }
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param Request $request
+     * @param $record
+     *
+     * @return JsonResponse
+     * @internal param int $id
+     *
+     */
+    public function update(Request $request, $record)
+    {
+        $inputs = $request->all();
+
+        try {
+            $inputs['slug'] = Str::slug($inputs['name'], '-');
+
+            if (!empty($inputs['password'])) {
+                $inputs['password'] = bcrypt($inputs['password']);
+            } else {
+                unset($inputs['password']);
+            }
+            $this->validator->with($inputs)->setId($record->id)->passesOrFail(ValidatorInterface::RULE_UPDATE);
+
+            $this->repository->update($inputs, $record->id);
+
+            return response()->json($record, 201);
+
+        } catch (ValidatorException $e) {
+            return $this->errorResponse($e->getMessageBag(), 409);
+        }
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param $record
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy($record)
+    {
+        $this->repository->delete($record->id);
+        return $this->showOne($record);
     }
 }

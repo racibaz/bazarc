@@ -31,11 +31,11 @@
                                 <td>{{user.cell_phone}}</td>
                                 <td>{{user.updated_at | humanReadbleDate}}</td>
                                 <td>
-                                    <a href="#">
+                                    <a href="#" @click="editModal(user)">
                                         <i class="fa fa-edit blue"></i>
                                     </a>
                                     /
-                                    <a href="#">
+                                    <a href="#" @click="deleteUser(user.id)">
                                         <i class="fa fa-trash red"></i>
                                     </a>
 
@@ -79,24 +79,31 @@
                             </div>
 
                             <div class="form-group">
-                                <textarea v-model="form.bio" name="bio" id="bio"
-                                          placeholder="Short bio for user (Optional)"
-                                          class="form-control" :class="{ 'is-invalid': form.errors.has('bio') }">
-
-                                </textarea>
-                                <has-error :form="form" field="bio"></has-error>
+                                <input v-model="form.cell_phone" type="text" name="cell_phone"
+                                       placeholder="Cell Phone"
+                                       class="form-control" :class="{ 'is-invalid': form.errors.has('cell_phone') }">
+                                <has-error :form="form" field="cell_phone"></has-error>
                             </div>
 
-                            <div class="form-group">
-                                <select name="type" v-model="form.type" id="type" class="form-control"
-                                        :class="{ 'is-invalid': form.errors.has('type') }">
-                                    <option value="">Select User Role</option>
-                                    <option value="admin">Admin</option>
-                                    <option value="user">Standard User</option>
-                                    <option value="author">Author</option>
-                                </select>
-                                <has-error :form="form" field="type"></has-error>
-                            </div>
+                            <!--                            <div class="form-group">-->
+                            <!--                                <textarea v-model="form.bio" name="bio" id="bio"-->
+                            <!--                                          placeholder="Short bio for user (Optional)"-->
+                            <!--                                          class="form-control" :class="{ 'is-invalid': form.errors.has('bio') }">-->
+
+                            <!--                                </textarea>-->
+                            <!--                                <has-error :form="form" field="bio"></has-error>-->
+                            <!--                            </div>-->
+
+                            <!--                            <div class="form-group">-->
+                            <!--                                <select name="type" v-model="form.type" id="type" class="form-control"-->
+                            <!--                                        :class="{ 'is-invalid': form.errors.has('type') }">-->
+                            <!--                                    <option value="">Select User Role</option>-->
+                            <!--                                    <option value="admin">Admin</option>-->
+                            <!--                                    <option value="user">Standard User</option>-->
+                            <!--                                    <option value="author">Author</option>-->
+                            <!--                                </select>-->
+                            <!--                                <has-error :form="form" field="type"></has-error>-->
+                            <!--                            </div>-->
 
                             <div class="form-group">
                                 <input v-model="form.password" type="password" name="password" id="password"
@@ -129,8 +136,9 @@
                     id: '',
                     name: '',
                     email: '',
+                    password: '',
                     cell_phone: '',
-                    updated_at:'',
+                    updated_at: '',
                 })
             }
         },
@@ -141,7 +149,33 @@
                         this.users = data.data
                     ));
             },
-            newModal() {
+            updateUser(){
+                this.$Progress.start();
+                // console.log('Editing data');
+                this.form.put('api/v1/users/'+this.form.id)
+                    .then(() => {
+                        // success
+                        $('#addNew').modal('hide');
+                        swal(
+                            'Updated!',
+                            'Information has been updated.',
+                            'success'
+                        )
+                        this.$Progress.finish();
+                        Fire.$emit('AfterCreate');
+                    })
+                    .catch(() => {
+                        this.$Progress.fail();
+                    });
+
+            },
+            editModal(user){
+                this.editmode = true;
+                this.form.reset();
+                $('#addNew').modal('show');
+                this.form.fill(user);
+            },
+            newModal(){
                 this.editmode = false;
                 this.form.reset();
                 $('#addNew').modal('show');
@@ -150,6 +184,9 @@
                 this.$Progress.start();
                 this.form.post('api/v1/users')
                     .then(({data}) => {
+
+                        Fire.$emit('AfterCreate');
+
                         $('#addNew').modal('hide')
                         toast({
                             type: 'success',
@@ -159,11 +196,41 @@
                     })
                     .catch(() => {
                         this.$Progress.fail();
+                        swal("Failed!", "There are someting wronge.", "warning");
                     })
+            },
+            deleteUser(id) {
+                swal.fire({
+                    title: 'Are you sure?',
+                    text: "You won't be able to revert this!",
+                    type: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Yes, delete it!'
+                }).then((result) => {
+
+                    // Send request to the server
+                    if (result.value) {
+                        this.form.delete('api/v1/users/'+id).then(()=>{
+                            swal(
+                                'Deleted!',
+                                'Your file has been deleted.',
+                                'succ ess'
+                            )
+                            Fire.$emit('AfterCreate');
+                        }).catch(()=> {
+                            swal("Failed!", "There was something wronge.", "warning");
+                        });
+                    }
+                })
             },
         },
         created() {
             this.loadUsers();
+            Fire.$on('AfterCreate', () => {
+                this.loadUsers();
+            });
         }
     }
 </script>
