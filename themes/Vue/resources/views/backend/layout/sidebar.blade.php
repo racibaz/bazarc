@@ -56,6 +56,23 @@
                 @endcan
                 @can('index-user')
                     <li class="nav-item">
+                        <router-link to="/developers" class="nav-link">
+                            <i class="fas fa-users" aria-hidden="true"></i>
+                            <p>
+                                {{--                                {{trans('developer.plural')}}--}}
+                                developers
+                            </p>
+                        </router-link>
+                    </li>
+                    <li class="nav-item">
+                        <router-link to="/deneme" class="nav-link">
+                            <i class="fas fa-users" aria-hidden="true"></i>
+                            <p>
+                                {{trans('user.users')}}
+                            </p>
+                        </router-link>
+                    </li>
+                    <li class="nav-item">
                         <router-link to="/users" class="nav-link">
                             <i class="fas fa-users" aria-hidden="true"></i>
                             <p>
@@ -63,6 +80,9 @@
                             </p>
                         </router-link>
                     </li>
+                @endcan
+                @can('manage-developer')
+
                 @endcan
                 @can('index-setting')
                     <li class="nav-item">

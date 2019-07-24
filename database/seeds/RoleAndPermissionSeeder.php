@@ -74,6 +74,8 @@ class RoleAndPermissionSeeder extends Seeder
 
         Permission::create(['name' => 'manage-log']);
 
+        Permission::create(['name' => 'manage-developer']);
+
         // create roles and assign created permissions
 
         // this can be done as separate statements

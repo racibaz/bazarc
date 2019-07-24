@@ -46,8 +46,10 @@ Vue.component(AlertError.name, AlertError)
 
 let routes = [
     { path: '/dashboard', component: require('./components/Dashboard.vue').default },
+    { path: '/developers', component: require('./components/Developer.vue').default },
     { path: '/users', component: require('./components/User.vue').default },
     { path: '/profile', component: require('./components/ExampleComponent.vue').default },
+    { path: '/deneme', component: require('./components/Profile.vue')},
 ]
 
 const router = new VueRouter({
@@ -76,6 +78,7 @@ Vue.component(
     'passport-clients',
     require('./components/passport/Clients.vue').default
 );
+
 
 Vue.component(
     'passport-authorized-clients',
