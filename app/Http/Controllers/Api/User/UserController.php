@@ -54,6 +54,17 @@ class UserController extends ApiController
     }
 
     /**
+     * @return JsonResponse
+     */
+    public function profile()
+    {
+        return  User::find(1);
+
+//        $record = auth('api')->user();
+//        return $this->showOne($record);
+    }
+
+    /**
      * @param User $record
      *
      * @return JsonResponse

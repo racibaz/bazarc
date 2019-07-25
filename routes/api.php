@@ -8,6 +8,8 @@ Route::prefix('v1')->group(function () {
      * User
      * */
     Route::apiResource('users', 'Api\User\UserController');
+    Route::get('profile', 'Api\User\UserController@profile')->name('users.profile');
+
     Route::apiResource('activity_logs', 'Api\ActivityLogController')->only(['index', 'show']);
     Route::apiResource('roles', 'Api\RoleController');
     Route::apiResource('permissions', 'Api\PermissionController');

@@ -21,9 +21,10 @@ class UserTransformer extends TransformerAbstract
         $attributes = [
             'identifier' => 'id',
             'name' => 'name',
-            'email' => 'email',
-            'cell_phone' => 'cell_phone',
             'slug' => 'slug',
+            'email' => 'email',
+            'photo' => 'photo',
+            'cell_phone' => 'cell_phone',
             'status' => 'status'
         ];
 
@@ -41,6 +42,7 @@ class UserTransformer extends TransformerAbstract
             'id' => 'identifier',
             'name' => 'name',
             'email' => 'email',
+            'photo' => 'photo',
             'cell_phone' => 'cell_phone',
             'verified' => 'isVerified',
             'created_at' => 'creationDate',
@@ -64,6 +66,7 @@ class UserTransformer extends TransformerAbstract
             'name' => $model->name,
             'slug' => $model->slug,
             'email' => $model->email,
+            'photo' => $model->photo,
             'cell_phone' => $model->cell_phone,
             'created_at' => (string)$model->created_at,
             'updated_at' => (string)$model->updated_at,

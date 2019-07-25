@@ -1,4 +1,3 @@
-
 /**
  * First we will load all of this project's JavaScript dependencies which
  * includes Vue and other libraries. It is a great starting point when
@@ -9,23 +8,23 @@ require('./bootstrap');
 
 window.Vue = require('vue');
 import moment from 'moment';
-import { Form, HasError, AlertError } from 'vform'
+import {AlertError, Form, HasError} from 'vform'
+import VueRouter from 'vue-router'
+import VueProgressBar from 'vue-progressbar'
+import swal from 'sweetalert2'
 
 window.Form = Form;
 Vue.component(HasError.name, HasError)
 Vue.component(AlertError.name, AlertError)
 
-import VueRouter from 'vue-router'
 Vue.use(VueRouter)
 
-import VueProgressBar from 'vue-progressbar'
 Vue.use(VueProgressBar, {
     color: 'rgb(143, 255, 199)',
     failedColor: 'red',
     height: '3px'
 })
 
-import swal from 'sweetalert2'
 window.swal = swal;
 
 const toast = swal.mixin({
@@ -42,14 +41,12 @@ window.Form = Form;
 Vue.component(HasError.name, HasError)
 Vue.component(AlertError.name, AlertError)
 
-
-
 let routes = [
-    { path: '/dashboard', component: require('./components/Dashboard.vue').default },
-    { path: '/developers', component: require('./components/Developer.vue').default },
-    { path: '/users', component: require('./components/User.vue').default },
-    { path: '/profile', component: require('./components/ExampleComponent.vue').default },
-    { path: '/deneme', component: require('./components/Profile.vue')},
+    {path: '/dashboard', component: require('./components/Dashboard.vue').default},
+    {path: '/developers', component: require('./components/Developer.vue').default},
+    {path: '/users', component: require('./components/User.vue').default},
+    {path: '/profile', component: require('./components/Profile.vue').default},
+    {path: '/deneme', component: require('./components/ExampleComponent.vue').default},
 ]
 
 const router = new VueRouter({
@@ -58,7 +55,7 @@ const router = new VueRouter({
 })
 
 
-Vue.filter('humanReadbleDate',function(created){
+Vue.filter('humanReadbleDate', function (created) {
     return moment(created).format('MMMM Do YYYY');
 });
 

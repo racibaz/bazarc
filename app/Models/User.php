@@ -72,6 +72,7 @@ class User extends Authenticatable implements Transformable
         'two_factor_type',
         'authy_id',
         'slug',
+        'photo',
         'cell_phone',
         'facebook',
         'twitter',

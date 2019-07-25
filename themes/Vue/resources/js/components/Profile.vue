@@ -22,7 +22,7 @@
                     <h5 class="widget-user-desc">{{this.form.type}}</h5>
                 </div>
                 <div class="widget-user-image">
-                    <img class="img-circle" :src="getProfilePhoto()" alt="User Avatar">
+<!--                    <img class="img-circle" :src="getProfilePhoto()" alt="User Avatar">-->
                 </div>
                 <div class="card-footer">
                     <div class="row">
@@ -79,7 +79,7 @@
                                     <label for="inputName" class="col-sm-2 control-label">Name</label>
 
                                     <div class="col-sm-12">
-                                    <input type="" v-model="form.name" class="form-control" id="inputName" placeholder="Name" :class="{ 'is-invalid': form.errors.has('name') }">
+                                    <input type="text" v-model="form.name" class="form-control" id="inputName" placeholder="Name" :class="{ 'is-invalid': form.errors.has('name') }">
                                      <has-error :form="form" field="name"></has-error>
                                     </div>
                                 </div>
@@ -146,16 +146,17 @@
 
 <script>
     export default {
-        data(){
+        data() {
             return {
-                 form: new Form({
-                    id:'',
-                    name : '',
+                form: new Form({
+                    id: '',
+                    name: '',
                     email: '',
                     password: '',
-                    type: '',
-                    bio: '',
-                    photo: ''
+                    photo: '',
+                    cell_phone: '',
+                    bio_note: '',
+                    updated_at: '',
                 })
             }
         },
@@ -177,7 +178,7 @@
                 if(this.form.password == ''){
                     this.form.password = undefined;
                 }
-                this.form.put('api/profile')
+                this.form.put('api/v1/profile')
                 .then(()=>{
                      Fire.$emit('AfterCreate');
                     this.$Progress.finish();
@@ -208,8 +209,9 @@
         },
 
         created() {
-            axios.get("api/profile")
+            axios.get("api/v1/profile")
             .then(({ data }) => (this.form.fill(data)));
+
         }
     }
 </script>
