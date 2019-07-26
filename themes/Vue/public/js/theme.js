@@ -63326,7 +63326,12 @@ var render = function() {
             ]
           ),
           _vm._v(" "),
-          _c("div", { staticClass: "widget-user-image" }),
+          _c("div", { staticClass: "widget-user-image" }, [
+            _c("img", {
+              staticClass: "img-circle",
+              attrs: { src: _vm.getProfilePhoto(), alt: "User Avatar" }
+            })
+          ]),
           _vm._v(" "),
           _vm._m(0)
         ])
@@ -63469,29 +63474,35 @@ var render = function() {
                               {
                                 name: "model",
                                 rawName: "v-model",
-                                value: _vm.form.bio,
-                                expression: "form.bio"
+                                value: _vm.form.bio_note,
+                                expression: "form.bio_note"
                               }
                             ],
                             staticClass: "form-control",
-                            class: { "is-invalid": _vm.form.errors.has("bio") },
+                            class: {
+                              "is-invalid": _vm.form.errors.has("bio_note")
+                            },
                             attrs: {
                               id: "inputExperience",
                               placeholder: "Experience"
                             },
-                            domProps: { value: _vm.form.bio },
+                            domProps: { value: _vm.form.bio_note },
                             on: {
                               input: function($event) {
                                 if ($event.target.composing) {
                                   return
                                 }
-                                _vm.$set(_vm.form, "bio", $event.target.value)
+                                _vm.$set(
+                                  _vm.form,
+                                  "bio_note",
+                                  $event.target.value
+                                )
                               }
                             }
                           }),
                           _vm._v(" "),
                           _c("has-error", {
-                            attrs: { form: _vm.form, field: "bio" }
+                            attrs: { form: _vm.form, field: "bio_note" }
                           })
                         ],
                         1
@@ -63511,7 +63522,7 @@ var render = function() {
                       _c("div", { staticClass: "col-sm-12" }, [
                         _c("input", {
                           staticClass: "form-input",
-                          attrs: { type: "file", name: "photo" },
+                          attrs: { type: "file", id: "photo", name: "photo" },
                           on: { change: _vm.updateProfile }
                         })
                       ])

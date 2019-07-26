@@ -22,7 +22,7 @@
                     <h5 class="widget-user-desc">{{this.form.type}}</h5>
                 </div>
                 <div class="widget-user-image">
-<!--                    <img class="img-circle" :src="getProfilePhoto()" alt="User Avatar">-->
+                    <img class="img-circle" :src="getProfilePhoto()" alt="User Avatar">
                 </div>
                 <div class="card-footer">
                     <div class="row">
@@ -96,14 +96,14 @@
                                     <label for="inputExperience" class="col-sm-2 control-label">Experience</label>
 
                                     <div class="col-sm-12">
-                                    <textarea  v-model="form.bio" class="form-control" id="inputExperience" placeholder="Experience" :class="{ 'is-invalid': form.errors.has('bio') }"></textarea>
-                                     <has-error :form="form" field="bio"></has-error>
+                                    <textarea  v-model="form.bio_note" class="form-control" id="inputExperience" placeholder="Experience" :class="{ 'is-invalid': form.errors.has('bio_note') }"></textarea>
+                                     <has-error :form="form" field="bio_note"></has-error>
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label for="photo" class="col-sm-2 control-label">Profile Photo</label>
                                     <div class="col-sm-12">
-                                        <input type="file" @change="updateProfile" name="photo" class="form-input">
+                                        <input type="file" id="photo" @change="updateProfile" name="photo" class="form-input">
                                     </div>
 
                                 </div>
@@ -161,14 +161,11 @@
             }
         },
         mounted() {
-
             console.log('Component mounted.')
         },
 
         methods:{
-
             getProfilePhoto(){
-
                 let photo = (this.form.photo.length > 200) ? this.form.photo : "img/profile/"+ this.form.photo ;
                 return photo;
             },
@@ -211,7 +208,6 @@
         created() {
             axios.get("api/v1/profile")
             .then(({ data }) => (this.form.fill(data)));
-
         }
     }
 </script>

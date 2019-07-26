@@ -22,6 +22,7 @@ class CreateUsersTable extends Migration
             $table->enum('two_factor_type', ['off', 'sms', 'app'])->default('off');
             $table->string('authy_id')->unique()->nullable();
             $table->string('slug')->nullable();
+            $table->string('photo')->nullable();
             $table->string('cell_phone')->nullable();
             $table->string('facebook')->nullable();
             $table->string('twitter')->nullable();

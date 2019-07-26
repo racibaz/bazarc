@@ -20,6 +20,7 @@ class UserValidator extends LaravelValidator
             'password'                      => 'required|min:4',
             'email_verified_at'             => 'nullable|date',
 //            'slug'                          => 'required|unique:users|string',
+            //todo it should be image validation and formats
             'photo'                         => 'nullable',
             'cell_phone'                    => 'nullable|string',
             'web_site'                      => 'nullable|url',
@@ -36,6 +37,7 @@ class UserValidator extends LaravelValidator
             'email_verified_at'             => 'nullable|date',
             'password'                      => 'sometimes|min:4',
 //            'slug'                          => 'required|unique:users|string',
+            //todo it should be image validation and formats
             'photo'                         => 'nullable',
             'cell_phone'                    => 'nullable|string',
             'web_site'                      => 'nullable|url',

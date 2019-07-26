@@ -41,8 +41,7 @@ class BazArcInstall extends Command
         Artisan::call('optimize:clear');
         Artisan::call('migrate', ['--force' => true]);
         Artisan::call('db:seed', ['--force' => true]);
-        Artisan::call('passport:install');
-
+//
         return true;
     }
 }
