@@ -49,12 +49,17 @@ class UserController extends ApiController
      */
     public function index()
     {
-        $users = $this->repository->all();
+//        $users = $this->repository->all();
+//        return $this->showAll($users);
 
-        return $this->showAll($users);
+        return  User::latest()->paginate(10);
+
+//          return $this->repository->all();
+//          return User::all();
     }
 
     /**
+     * todo it should be dynamic.
      * @return JsonResponse
      */
     public function profile()

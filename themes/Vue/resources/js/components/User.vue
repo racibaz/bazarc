@@ -24,7 +24,7 @@
                                 <th>Updated Date</th>
                                 <th>Actions</th>
                             </tr>
-                            <tr v-for="user in users" :key="user.id">
+                            <tr v-for="user in users.data" :key="user.id">
                                 <td>{{user.id}}</td>
                                 <td>{{user.name}}</td>
                                 <td>{{user.email}}</td>
@@ -44,6 +44,9 @@
                         </table>
                     </div>
                     <!-- /.card-body -->
+                    <div class="card-footer">
+                        <pagination :data="users" :limit="3" @pagination-change-page="getResults"></pagination>
+                    </div>
                 </div>
                 <!-- /.card -->
             </div>
@@ -83,6 +86,20 @@
                                        placeholder="Cell Phone"
                                        class="form-control" :class="{ 'is-invalid': form.errors.has('cell_phone') }">
                                 <has-error :form="form" field="cell_phone"></has-error>
+                            </div>
+
+                            <div class="form-group">
+                                <input v-model="form.facebook" type="text" name="facebook"
+                                       placeholder="Facebook Account"
+                                       class="form-control" :class="{ 'is-invalid': form.errors.has('facebook') }">
+                                <has-error :form="form" field="facebook"></has-error>
+                            </div>
+
+                            <div class="form-group">
+                                <input v-model="form.web_site" type="email" name="web_site"
+                                       placeholder="Web Site"
+                                       class="form-control" :class="{ 'is-invalid': form.errors.has('web_site') }">
+                                <has-error :form="form" field="web_site"></has-error>
                             </div>
 
                             <!--                            <div class="form-group">-->
@@ -138,15 +155,23 @@
                     email: '',
                     password: '',
                     cell_phone: '',
+                    facebook: '',
+                    web_site: '',
                     updated_at: '',
                 })
             }
         },
         methods: {
+            getResults(page = 1) {
+                axios.get('api/v1/users/?page=' + page)
+                    .then(response => {
+                        this.users = response.data;
+                    });
+            },
             loadUsers() {
                 axios.get("api/v1/users")
                     .then(({data}) => (
-                        this.users = data.data
+                        this.users = data
                     ));
             },
             updateUser(){

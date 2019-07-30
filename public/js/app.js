@@ -54546,7 +54546,9 @@ __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
 window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
 
-Vue.use(vue_router__WEBPACK_IMPORTED_MODULE_0__["default"]);
+Vue.use(vue_router__WEBPACK_IMPORTED_MODULE_0__["default"]); // var $  = require('jquery');
+// var dt = require('datatables.net')();
+
 var routes = [{
   path: '/dashboard',
   component: __webpack_require__(/*! ./components/Dashboard.vue */ "./resources/js/components/Dashboard.vue")["default"]

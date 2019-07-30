@@ -9,7 +9,7 @@ require('./bootstrap');
 window.Vue = require('vue');
 import moment from 'moment';
 import {AlertError, Form, HasError} from 'vform'
-import VueRouter from 'vue-router'
+
 import VueProgressBar from 'vue-progressbar'
 import swal from 'sweetalert2'
 
@@ -17,6 +17,9 @@ window.Form = Form;
 Vue.component(HasError.name, HasError)
 Vue.component(AlertError.name, AlertError)
 
+Vue.component('pagination', require('laravel-vue-pagination'));
+
+import VueRouter from 'vue-router'
 Vue.use(VueRouter)
 
 Vue.use(VueProgressBar, {
