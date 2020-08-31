@@ -3,13 +3,13 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Contracts\Repositories\PermissionRepository as Repository;
+use App\Http\Controllers\Controller;
 use App\Models\Permission;
 use App\Validators\PermissionValidator;
 use Exception;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Response;
 use Prettus\Validator\Contracts\ValidatorInterface;
 use Prettus\Validator\Exceptions\ValidatorException;
@@ -51,6 +51,7 @@ class PermissionController extends BackendBaseController
     public function index()
     {
         $permissions = $this->repository->orderBy('created_at', 'desc')->all();
+
         return view('backend.permission.index', compact(['permissions']));
     }
 
@@ -74,6 +75,7 @@ class PermissionController extends BackendBaseController
     public function create()
     {
         $record = new Permission();
+
         return view('backend.permission._form', compact(['record']));
     }
 
@@ -96,7 +98,7 @@ class PermissionController extends BackendBaseController
         } catch (ValidatorException $e) {
             return Response::json([
                     'error' => true,
-                    'message' => $e->getMessageBag()
+                    'message' => $e->getMessageBag(),
                 ]
             );
         }
@@ -133,7 +135,6 @@ class PermissionController extends BackendBaseController
      *
      * @return JsonResponse
      * @internal param int $id
-     *
      */
     public function update(Request $request, $record)
     {
@@ -145,11 +146,10 @@ class PermissionController extends BackendBaseController
             $this->repository->update($inputs, $record->id);
 
             return redirect()->to(route('permission.index'));
-
         } catch (ValidatorException $e) {
             return Response::json([
                     'error' => true,
-                    'message' => $e->getMessageBag()
+                    'message' => $e->getMessageBag(),
                 ]
             );
         }
@@ -165,6 +165,7 @@ class PermissionController extends BackendBaseController
     public function destroy($record)
     {
         $this->repository->delete($record->id);
+
         return redirect()->to(route('permission.index'));
     }
 }

@@ -3,7 +3,7 @@
  * Created by PhpStorm.
  * User: muhammed.cansiz
  * Date: 14-May-19
- * Time: 3:58 PM
+ * Time: 3:58 PM.
  */
 
 // Dashboard
@@ -13,14 +13,14 @@ Breadcrumbs::for('home', function ($trail) {
     $trail->push('Home', route('home'));
 });
 
-#region Dashboard
+//region Dashboard
 Breadcrumbs::for('dashboard', function ($trail) {
     $trail->parent('home');
     $trail->push('Dashboard', route('dashboard'));
 });
-#endregion
+//endregion
 
-#region Profile Breadcrumb
+//region Profile Breadcrumb
 Breadcrumbs::for('profile.show', function ($trail) {
     $trail->parent('dashboard');
     $trail->push('Profile Show', route('profile.show', auth()->user()->getAuthIdentifier()));
@@ -30,9 +30,9 @@ Breadcrumbs::for('profile.edit', function ($trail) {
     $trail->parent('dashboard');
     $trail->push('Profile Edit', route('profile.edit', auth()->user()->getAuthIdentifier()));
 });
-#endregion
+//endregion
 
-#region   models of resource routes macro breadcrumbs
+//region   models of resource routes macro breadcrumbs
 Breadcrumbs::macro('resource', function ($name, $title) {
     // Home > Blog
     Breadcrumbs::for("$name.index", function ($trail) use ($name, $title) {
@@ -64,4 +64,4 @@ Breadcrumbs::resource('setting', 'Settings');
 Breadcrumbs::resource('activity_log', 'Activity Log');
 Breadcrumbs::resource('role', 'Roles');
 Breadcrumbs::resource('permission', 'Permission');
-#endregion
+//endregion

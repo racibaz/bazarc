@@ -14,7 +14,7 @@ use Prettus\Validator\Exceptions\ValidatorException;
 class RoleController extends ApiController
 {
     /**
-     * @var $repository
+     * @var
      */
     private $repository;
 
@@ -41,7 +41,7 @@ class RoleController extends ApiController
     }
 
     /**
-     * role list
+     * role list.
      * @return mixed
      */
     public function index()
@@ -78,9 +78,7 @@ class RoleController extends ApiController
             $record = $this->repository->create($inputs);
 
             return response()->json($record, 201);
-
         } catch (ValidatorException $e) {
-
             return $this->errorResponse($e->getMessageBag(), 409);
         }
     }
@@ -101,10 +99,8 @@ class RoleController extends ApiController
 
             $this->repository->update($request->all(), $record->id);
 
-            return $this->showMessage("Updated the record info");
-
+            return $this->showMessage('Updated the record info');
         } catch (ValidatorException $e) {
-
             return $this->errorResponse($e->getMessageBag(), 409);
         }
     }
@@ -119,6 +115,6 @@ class RoleController extends ApiController
     {
         $this->repository->delete($record->id);
 
-        return $this->showMessage("Updated the record info");
+        return $this->showMessage('Updated the record info');
     }
 }

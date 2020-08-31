@@ -16,7 +16,7 @@ use Prettus\Validator\Exceptions\ValidatorException;
 class UserController extends ApiController
 {
     /**
-     * @var $repository
+     * @var
      */
     private $repository;
 
@@ -43,7 +43,7 @@ class UserController extends ApiController
     }
 
     /**
-     * user list
+     * user list.
      * @return mixed
      */
     public function index()
@@ -85,9 +85,7 @@ class UserController extends ApiController
             $record = $this->repository->create($inputs);
 
             return response()->json($record, 201);
-
         } catch (ValidatorException $e) {
-
             return $this->errorResponse($e->getMessageBag(), 409);
         }
     }

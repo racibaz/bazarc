@@ -20,7 +20,7 @@ class CheckPermission
             return $next($request);
         }
 
-        $userId = Auth::check() ? \auth()->user()->getAuthIdentifier() : "";
+        $userId = Auth::check() ? \auth()->user()->getAuthIdentifier() : '';
         //Log::warning('Unauthorized request. uri :' . Route::getCurrentRoute()->uri() . ' : user_id : ' . $userId . '  IP :' . $request->ip());
         return redirect('/login');
     }

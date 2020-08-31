@@ -10,8 +10,6 @@ use Prettus\Repository\Traits\TransformableTrait;
 
 /**
  * Class ActivityLog.
- *
- * @package namespace App\Models;
  */
 class ActivityLog extends Model implements Transformable
 {
@@ -32,7 +30,6 @@ class ActivityLog extends Model implements Transformable
         'subject_type',
         'causer_id',
         'causer_type',
-        'properties'
+        'properties',
     ];
-
 }

@@ -31,15 +31,13 @@ class RoleControllerTest extends TestCase
                         'id',
                         'name',
                         'guard_name',
-                        'links' =>
-                            [
-                                '*' =>
-                                    [
+                        'links' => [
+                                '*' => [
                                         'rel',
-                                        'href'
-                                    ]
-                            ]
-                    ]
+                                        'href',
+                                    ],
+                            ],
+                    ],
                 ],
                 'meta' => [
                     'pagination' => [
@@ -47,9 +45,9 @@ class RoleControllerTest extends TestCase
                         'count',
                         'per_page',
                         'current_page',
-                        'total_pages'
-                    ]
-                ]
+                        'total_pages',
+                    ],
+                ],
             ]
             );
     }
@@ -75,17 +73,17 @@ class RoleControllerTest extends TestCase
             'id',
             'name',
             'guard_name',
-            'created_at'
+            'created_at',
         ]
         )->assertJson([
             'name' => $name,
-            'guard_name' => $guardName
+            'guard_name' => $guardName,
         ]
         )->assertStatus(201);
 
         $this->assertDatabaseHas('roles', [
             'name' => $name,
-            'guard_name' => $guardName
+            'guard_name' => $guardName,
         ]
         );
     }
@@ -108,16 +106,15 @@ class RoleControllerTest extends TestCase
         $response = $this->actingAs($user, 'api')
             ->json('POST', 'api/v1/roles', [
                 'name' => 'role2',
-                'guard_name' => 'web'
+                'guard_name' => 'web',
             ]
             );
 
         $response = $this->actingAs($user, 'api')
-            ->json('DELETE', "api/v1/roles/", [
-                'id' => 2
+            ->json('DELETE', 'api/v1/roles/', [
+                'id' => 2,
             ]
             );
-
 
 //        $this->assertDatabaseMissing('roles', [
 //            'name' => $name,

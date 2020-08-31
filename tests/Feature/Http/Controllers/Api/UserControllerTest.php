@@ -66,7 +66,7 @@ class UserControllerTest extends TestCase
             ->json('POST', 'api/v1/users', [
                 'name' => $name = $faker->company,
                 'email' => $email = $faker->email,
-                'password' => $password = 'secret12345*'
+                'password' => $password = 'secret12345*',
             ]
             );
 
@@ -75,19 +75,19 @@ class UserControllerTest extends TestCase
             'name',
             'slug',
             'email',
-            'created_at'
+            'created_at',
         ]
         )->assertJson([
             'name' => $name,
             'slug' => Str::slug($name),
-            'email' => $email
+            'email' => $email,
         ]
         )->assertStatus(201);
 
         $this->assertDatabaseHas('users', [
             'name' => $name,
             'slug' => Str::slug($name),
-            'email' => $email
+            'email' => $email,
         ]
         );
     }
@@ -97,14 +97,11 @@ class UserControllerTest extends TestCase
      */
     public function can_return_a_collection_of_paginated_users()
     {
-
         $user1 = factory(User::class)->create();
         $user2 = factory(User::class)->create();
         $user3 = factory(User::class)->create();
 
-
         $response = $this->actingAs($user1, 'api')->json('GET', '/api/v1/users');
-
 
         $response->assertStatus(200)
             ->assertJsonStructure([
@@ -116,15 +113,13 @@ class UserControllerTest extends TestCase
                         'email',
                         'created_at',
                         'updated_at',
-                        'links' =>
-                            [
-                                '*' =>
-                                    [
+                        'links' => [
+                                '*' => [
                                         'rel',
-                                        'href'
-                                    ]
-                            ]
-                    ]
+                                        'href',
+                                    ],
+                            ],
+                    ],
                 ],
                 'meta' => [
                     'pagination' => [
@@ -133,9 +128,9 @@ class UserControllerTest extends TestCase
                         'per_page',
                         'current_page',
                         'total_pages',
-                        'links' => ['next']
-                    ]
-                ]
+                        'links' => ['next'],
+                    ],
+                ],
             ]
             );
     }

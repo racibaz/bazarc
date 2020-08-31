@@ -9,8 +9,6 @@ use Prettus\Repository\Traits\TransformableTrait;
 
 /**
  * Class Permission.
- *
- * @package namespace App\Models;
  */
 class Permission extends \Spatie\Permission\Models\Permission implements Transformable
 {
@@ -19,5 +17,4 @@ class Permission extends \Spatie\Permission\Models\Permission implements Transfo
     public $transformer = PermissionTransformer::class;
     protected $fillable = [];
     protected $presenter = PermissionPresenter::class;
-
 }

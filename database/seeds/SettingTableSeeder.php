@@ -59,7 +59,6 @@ class SettingTableSeeder extends Seeder
             'attribute_value'             => 'logo.jpg',
         ]);
 
-
         Setting::create([
             'attribute_key'               => 'copyright',
             'attribute_value'             => 'copyright yazısı',
@@ -81,13 +80,13 @@ class SettingTableSeeder extends Seeder
 
         Setting::create([
             'attribute_key'               => 'user_default_status',
-            'attribute_value'             => \App\Models\User::ACTIVE
+            'attribute_value'             => \App\Models\User::ACTIVE,
         ]);
 
         //todo Maybe move to upper form role seeder and we give static name for role //writer
         Setting::create([
             'attribute_key'               => 'user_default_role',
-            'attribute_value'             => 'writer'
+            'attribute_value'             => 'writer',
         ]);
 
         Setting::create([
@@ -115,7 +114,6 @@ class SettingTableSeeder extends Seeder
             'attribute_value'             => 'footer codes',
         ]);
 
-
         Setting::create([
             'attribute_key'               => 'allow_photo_formats',
             'attribute_value'             => 'jpg,tiff,gif,png',
@@ -125,7 +123,6 @@ class SettingTableSeeder extends Seeder
             'attribute_key'               => 'allow_video_formats',
             'attribute_value'             => 'video/avi,video/mpeg,video/quicktime,avi,mov,mp4,3gp,3gp2,wmv,flv',
         ]);
-
 
         //profile permissions
         Permission::create(['name' => 'index-setting']);

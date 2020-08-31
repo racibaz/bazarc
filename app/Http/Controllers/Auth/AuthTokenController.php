@@ -22,7 +22,7 @@ class AuthTokenController extends Controller
      */
     public function getToken(Request $request)
     {
-        if (!$request->session()->has('authy')) {
+        if (! $request->session()->has('authy')) {
             return redirect()->to('/');
         }
 
@@ -37,7 +37,7 @@ class AuthTokenController extends Controller
     public function postToken(Request $request)
     {
         $this->validate($request, [
-            'token' => 'required'
+            'token' => 'required',
         ]
         );
 
@@ -55,6 +55,7 @@ class AuthTokenController extends Controller
             $request->session()->get('authy.remember')
         )) {
             $request->session()->forget('authy');
+
             return redirect()->intended();
         }
 
@@ -69,7 +70,7 @@ class AuthTokenController extends Controller
     {
         $user = User::findOrFail($request->session()->get('authy.user_id'));
 
-        if (!$user->hasSmsTwoFactorAuthenticationEnabled()) {
+        if (! $user->hasSmsTwoFactorAuthenticationEnabled()) {
             return redirect()->back();
         }
 

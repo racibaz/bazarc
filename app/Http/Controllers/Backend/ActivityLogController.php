@@ -25,6 +25,7 @@ class ActivityLogController extends BackendBaseController
     public function index()
     {
         $records = $this->repository->orderBy('created_at', 'desc')->all();
+
         return view('backend.activity_log.index', compact(['records']));
     }
 

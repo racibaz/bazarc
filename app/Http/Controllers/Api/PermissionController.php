@@ -13,7 +13,7 @@ use Prettus\Validator\Exceptions\ValidatorException;
 class PermissionController extends ApiController
 {
     /**
-     * @var $repository
+     * @var
      */
     private $repository;
 
@@ -27,7 +27,6 @@ class PermissionController extends ApiController
      *
      * @param Repository $repository
      * @param PermissionValidator $validator
-     *
      */
     public function __construct(Repository $repository, PermissionValidator $validator)
     {
@@ -39,7 +38,7 @@ class PermissionController extends ApiController
     }
 
     /**
-     * permission list
+     * permission list.
      * @return mixed
      */
     public function index()
@@ -66,9 +65,7 @@ class PermissionController extends ApiController
             $record = $this->repository->create($inputs);
 
             return response()->json($record, 201);
-
         } catch (ValidatorException $e) {
-
             return $this->errorResponse($e->getMessageBag(), 409);
         }
     }
@@ -89,10 +86,8 @@ class PermissionController extends ApiController
 
             $this->repository->update($request->all(), $record->id);
 
-            return $this->showMessage("Updated the record info");
-
+            return $this->showMessage('Updated the record info');
         } catch (ValidatorException $e) {
-
             return $this->errorResponse($e->getMessageBag(), 409);
         }
     }
@@ -107,6 +102,6 @@ class PermissionController extends ApiController
     {
         $this->repository->delete($record->id);
 
-        return $this->showMessage("Updated the record info");
+        return $this->showMessage('Updated the record info');
     }
 }

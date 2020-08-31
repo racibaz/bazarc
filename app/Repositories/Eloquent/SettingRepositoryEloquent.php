@@ -10,8 +10,6 @@ use Prettus\Repository\Eloquent\BaseRepository;
 
 /**
  * Class SettingRepositoryEloquent.
- *
- * @package namespace App\Repositories\Eloquent;
  */
 class SettingRepositoryEloquent extends BaseRepository implements SettingRepository
 {
@@ -21,7 +19,7 @@ class SettingRepositoryEloquent extends BaseRepository implements SettingReposit
     protected $skipPresenter = true;
 
     /**
-     * Specify Model class name
+     * Specify Model class name.
      *
      * @return string
      */
@@ -31,7 +29,7 @@ class SettingRepositoryEloquent extends BaseRepository implements SettingReposit
     }
 
     /**
-     * Specify Validator class name
+     * Specify Validator class name.
      *
      * @return mixed
      */
@@ -40,13 +38,11 @@ class SettingRepositoryEloquent extends BaseRepository implements SettingReposit
         return SettingValidator::class;
     }
 
-
     /**
-     * Boot up the repository, pushing criteria
+     * Boot up the repository, pushing criteria.
      */
     public function boot()
     {
         $this->pushCriteria(app(RequestCriteria::class));
     }
-
 }

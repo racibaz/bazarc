@@ -6,11 +6,10 @@ use App\Contracts\Repositories\ActivityLogRepository as Repository;
 use App\Models\ActivityLog;
 use Illuminate\Http\JsonResponse;
 
-
 class ActivityLogController extends ApiController
 {
     /**
-     * @var $repository
+     * @var
      */
     private $repository;
 
@@ -27,7 +26,7 @@ class ActivityLogController extends ApiController
     }
 
     /**
-     * activityLog list
+     * activityLog list.
      * @return mixed
      */
     public function index()
@@ -45,6 +44,4 @@ class ActivityLogController extends ApiController
     {
         return $this->showOne($record);
     }
-
-
 }

@@ -11,13 +11,11 @@ class SettingPolicy
 
     /**
      * Create a new policy instance.
-     *
      */
     public function __construct()
     {
         //
     }
-
 
     /**
      * Determine whether the user can view the use.
@@ -25,7 +23,7 @@ class SettingPolicy
      * @param User $user
      * @param $record
      *
-     * @return boolean
+     * @return bool
      */
     public function index()
     {
@@ -38,7 +36,7 @@ class SettingPolicy
      * @param User $user
      * @param $record
      *
-     * @return boolean
+     * @return bool
      */
     public function view(User $user, $record)
     {
@@ -68,7 +66,7 @@ class SettingPolicy
      * @param User $user
      * @param $record
      *
-     * @return boolean
+     * @return bool
      * @internal param \App\Models\User $use
      */
     public function update(User $user, $record)

@@ -84,7 +84,6 @@ class Handler extends ExceptionHandler
         }
 
         if ($exception instanceof ModelNotFoundException) {
-
             $modelName = strtolower(class_basename($exception->getModel()));
             $message = "Does not exists any {$modelName} with the specified identificator";
 
@@ -100,7 +99,6 @@ class Handler extends ExceptionHandler
         }
 
         if ($exception instanceof AuthorizationException) {
-
             if ($request->ajax()) {
                 return $this->errorResponse($exception->getMessage(), 403);
             }
@@ -109,7 +107,6 @@ class Handler extends ExceptionHandler
         }
 
         if ($exception instanceof MethodNotAllowedHttpException) {
-
             $message = 'The specified method for the request is invalid';
 
             if ($request->ajax()) {

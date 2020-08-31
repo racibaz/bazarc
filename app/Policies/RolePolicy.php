@@ -23,7 +23,7 @@ class RolePolicy
     /**
      * Determine whether the role can view the use.
      *
-     * @return boolean
+     * @return bool
      */
     public function index()
     {
@@ -38,7 +38,7 @@ class RolePolicy
      * @param \App\Models\User $user
      * @param $record
      *
-     * @return boolean
+     * @return bool
      */
     public function view(User $user, $record)
     {
@@ -67,7 +67,7 @@ class RolePolicy
      * @param \App\Models\User $user
      * @param $record
      *
-     * @return boolean
+     * @return bool
      * @internal param \App\Models\Role $use
      */
     public function update(User $user, $record)

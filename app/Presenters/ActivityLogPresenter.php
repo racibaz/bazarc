@@ -7,13 +7,11 @@ use Prettus\Repository\Presenter\FractalPresenter;
 
 /**
  * Class ActivityPresenter.
- *
- * @package namespace App\Presenters;
  */
 class ActivityLogPresenter extends FractalPresenter
 {
     /**
-     * Transformer
+     * Transformer.
      *
      * @return ActivityLogTransformer
      */

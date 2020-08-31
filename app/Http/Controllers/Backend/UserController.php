@@ -55,6 +55,7 @@ class UserController extends BackendBaseController
     public function index()
     {
         $users = $this->repository->orderBy('created_at', 'desc')->all();
+
         return view('backend.user.index', compact(['users']));
     }
 
@@ -78,6 +79,7 @@ class UserController extends BackendBaseController
     public function create()
     {
         $record = new User();
+
         return view('backend.user._form', compact(['record']));
     }
 
@@ -105,7 +107,7 @@ class UserController extends BackendBaseController
         } catch (ValidatorException $e) {
             return Response::json([
                 'error' => true,
-                'message' => $e->getMessageBag()
+                'message' => $e->getMessageBag(),
             ]
             );
         }
@@ -142,7 +144,6 @@ class UserController extends BackendBaseController
      *
      * @return JsonResponse
      * @internal param int $id
-     *
      */
     public function update(Request $request, $record)
     {
@@ -151,7 +152,7 @@ class UserController extends BackendBaseController
         try {
             $inputs['slug'] = Str::slug($inputs['name'], '-');
 
-            if (!empty($inputs['password'])) {
+            if (! empty($inputs['password'])) {
                 $inputs['password'] = bcrypt($inputs['password']);
             } else {
                 unset($inputs['password']);
@@ -162,11 +163,10 @@ class UserController extends BackendBaseController
             $this->repository->update($inputs, $record->id);
 
             return redirect()->to(route('user.index'));
-
         } catch (ValidatorException $e) {
             return Response::json([
                 'error' => true,
-                'message' => $e->getMessageBag()
+                'message' => $e->getMessageBag(),
             ]
             );
         }
@@ -182,6 +182,7 @@ class UserController extends BackendBaseController
     public function destroy($record)
     {
         $this->repository->delete($record->id);
+
         return redirect()->to(route('user.index'));
     }
 }

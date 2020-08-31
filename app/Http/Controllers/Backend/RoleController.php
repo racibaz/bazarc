@@ -52,6 +52,7 @@ class RoleController extends BackendBaseController
     public function index()
     {
         $roles = $this->repository->orderBy('created_at', 'desc')->all();
+
         return view('backend.role.index', compact(['roles']));
     }
 
@@ -75,6 +76,7 @@ class RoleController extends BackendBaseController
     public function create()
     {
         $record = new Role();
+
         return view('backend.role._form', compact(['record']));
     }
 
@@ -97,7 +99,7 @@ class RoleController extends BackendBaseController
         } catch (ValidatorException $e) {
             return Response::json([
                     'error' => true,
-                    'message' => $e->getMessageBag()
+                    'message' => $e->getMessageBag(),
                 ]
             );
         }
@@ -134,24 +136,21 @@ class RoleController extends BackendBaseController
      *
      * @return JsonResponse
      * @internal param int $id
-     *
      */
     public function update(Request $request, $record)
     {
         $inputs = $request->all();
 
         try {
-
             $this->validator->with($inputs)->setId($record->id)->passesOrFail(ValidatorInterface::RULE_UPDATE);
 
             $this->repository->update($inputs, $record->id);
 
             return redirect()->to(route('role.index'));
-
         } catch (ValidatorException $e) {
             return Response::json([
                     'error' => true,
-                    'message' => $e->getMessageBag()
+                    'message' => $e->getMessageBag(),
                 ]
             );
         }
@@ -167,6 +166,7 @@ class RoleController extends BackendBaseController
     public function destroy($record)
     {
         $this->repository->delete($record->id);
+
         return redirect()->to(route('role.index'));
     }
 }

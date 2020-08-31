@@ -15,6 +15,6 @@ class DiallingCode extends Model
      */
     protected $fillable = [
         'name',
-        'code'
+        'code',
     ];
 }

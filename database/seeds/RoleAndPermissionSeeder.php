@@ -50,10 +50,8 @@ class RoleAndPermissionSeeder extends Seeder
         Permission::create(['name' => 'delete-profile']);
         Permission::create(['name' => 'delete-any-profile']);
 
-
         Permission::create(['name' => 'index-activity-log']);
         Permission::create(['name' => 'show-activity-log']);
-
 
         //role
         Permission::create(['name' => 'index-role']);
@@ -70,7 +68,6 @@ class RoleAndPermissionSeeder extends Seeder
         Permission::create(['name' => 'show-permission']);
         Permission::create(['name' => 'delete-permission']);
         Permission::create(['name' => 'update-permission']);
-
 
         Permission::create(['name' => 'manage-log']);
 
