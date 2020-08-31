@@ -32,7 +32,7 @@ class EventServiceProvider extends ServiceProvider
 //        ],
 
         'Illuminate\Auth\Events\Login' => [
-            'App\Listeners\Users\LogSuccessfulLogin',
+            \App\Listeners\Users\LogSuccessfulLogin::class,
         ],
 
 //        'Illuminate\Auth\Events\Failed' => [
