@@ -7,8 +7,6 @@ use Prettus\Validator\LaravelValidator;
 
 /**
  * Class RoleValidator.
- *
- * @package namespace App\Validators;
  */
 class RoleValidator extends LaravelValidator
 {
@@ -20,6 +18,6 @@ class RoleValidator extends LaravelValidator
         ValidatorInterface::RULE_UPDATE => [
             'name' => 'required|min:3|string|unique:roles',
             'guard_name' => 'required',
-        ]
+        ],
     ];
 }

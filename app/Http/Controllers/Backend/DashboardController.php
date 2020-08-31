@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Backend;
 
-
 use App\Contracts\Repositories\UserRepository;
 use App\Models\User;
 use Exception;
@@ -10,7 +9,6 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Yajra\DataTables\Facades\DataTables;
-
 
 class DashboardController extends BackendBaseController
 {
@@ -41,6 +39,7 @@ class DashboardController extends BackendBaseController
     {
         $users = $this->repository->all();
         $userCount = count($users);
+
         return view('backend.dashboard.index', compact('users', 'userCount'));
     }
 
@@ -84,7 +83,7 @@ class DashboardController extends BackendBaseController
      */
     public function show($id)
     {
-        dd("show");
+        dd('show');
     }
 
     /**

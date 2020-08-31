@@ -10,7 +10,7 @@ class PhoneNumber extends Model
 
     protected $fillable = [
         'phone_number',
-        'dialling_code_id'
+        'dialling_code_id',
     ];
 
     public function diallingCode()

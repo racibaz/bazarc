@@ -11,7 +11,7 @@ class ImpersonateUserTest extends TestCase
     use RefreshDatabase;
 
     /** @test * */
-    public function non_admin_user_cannot_access_impersonate_page ()
+    public function non_admin_user_cannot_access_impersonate_page()
     {
         $this->withExceptionHandling();
 
@@ -27,7 +27,7 @@ class ImpersonateUserTest extends TestCase
     }
 
     /** @test * */
-    public function non_admin_user_cannot_impersonate_a_user ()
+    public function non_admin_user_cannot_impersonate_a_user()
     {
         $this->withExceptionHandling();
 
@@ -43,7 +43,7 @@ class ImpersonateUserTest extends TestCase
     }
 
     /** @test * */
-    public function admin_can_impersonate_a_user ()
+    public function admin_can_impersonate_a_user()
     {
         $admin = factory(User::class)->create();
         $admin->assignRole('super-admin');
@@ -58,7 +58,7 @@ class ImpersonateUserTest extends TestCase
     }
 
     /** @test * */
-    public function user_can_stop_impersonating ()
+    public function user_can_stop_impersonating()
     {
         $admin = factory(User::class)->create();
         $admin->assignRole('super-admin');

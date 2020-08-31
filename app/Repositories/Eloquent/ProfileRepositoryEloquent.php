@@ -10,8 +10,6 @@ use Prettus\Repository\Eloquent\BaseRepository;
 
 /**
  * Class ProfileRepositoryRepositoryEloquent.
- *
- * @package namespace App\Repositories\Eloquent;
  */
 class ProfileRepositoryEloquent extends BaseRepository implements ProfileRepository
 {
@@ -21,7 +19,7 @@ class ProfileRepositoryEloquent extends BaseRepository implements ProfileReposit
     protected $skipPresenter = true;
 
     /**
-     * Specify Model class name
+     * Specify Model class name.
      *
      * @return string
      */
@@ -39,7 +37,7 @@ class ProfileRepositoryEloquent extends BaseRepository implements ProfileReposit
     }
 
     /**
-     * Specify Validator class name
+     * Specify Validator class name.
      *
      * @return mixed
      */
@@ -48,13 +46,11 @@ class ProfileRepositoryEloquent extends BaseRepository implements ProfileReposit
         return ProfileValidator::class;
     }
 
-
     /**
-     * Boot up the repository, pushing criteria
+     * Boot up the repository, pushing criteria.
      */
     public function boot()
     {
         $this->pushCriteria(app(RequestCriteria::class));
     }
-
 }

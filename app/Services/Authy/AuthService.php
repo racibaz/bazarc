@@ -3,19 +3,19 @@
  * Created by PhpStorm.
  * User: muhammed.cansiz
  * Date: 27-May-19
- * Time: 9:48 AM
+ * Time: 9:48 AM.
  */
 
 namespace App\Services\Authy;
 
 use App\Models\User;
-use Authy\AuthyApi;
 use App\Services\Authy\Exceptions\InvalidTokenException;
 use App\Services\Authy\Exceptions\RegistrationFailedException;
 use App\Services\Authy\Exceptions\SmsRequestFailedException;
+use Authy\AuthyApi;
 use Authy\AuthyFormatException;
 
-class AuthyService
+class AuthService
 {
     private $client;
 
@@ -32,8 +32,8 @@ class AuthyService
             $user->phoneNumber->diallingCode->dialling_code
         );
 
-        if (!$user->ok()) {
-             new RegistrationFailedException;
+        if (! $user->ok()) {
+            new RegistrationFailedException;
         }
 
         return $user->id();
@@ -47,10 +47,10 @@ class AuthyService
                 $token
             );
         } catch (AuthyFormatException $e) {
-             new InvalidTokenException;
+            new InvalidTokenException;
         }
 
-        if (!$verification->ok()) {
+        if (! $verification->ok()) {
             new InvalidTokenException;
         }
 
@@ -63,7 +63,7 @@ class AuthyService
             'force' => true,
         ]);
 
-        if (!$request->ok()) {
+        if (! $request->ok()) {
             new SmsRequestFailedException;
         }
     }

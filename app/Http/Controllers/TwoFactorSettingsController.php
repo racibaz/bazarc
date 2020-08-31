@@ -4,8 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Facades\Authy;
 use App\Models\DiallingCode;
-use Illuminate\Http\Request;
 use App\Services\Authy\Exceptions\RegistrationFailedException;
+use Illuminate\Http\Request;
 
 class TwoFactorSettingsController extends Controller
 {
@@ -19,7 +19,7 @@ class TwoFactorSettingsController extends Controller
     public function update(Request $request)
     {
         $this->validate($request, [
-            'two_factor_type' => 'required|in:' . implode(',', array_keys(config('twofactor.types'))),
+            'two_factor_type' => 'required|in:'.implode(',', array_keys(config('twofactor.types'))),
             'phone_number' => 'required_unless:two_factor_type,off',
             'phone_number_dialling_code' => 'required_unless:two_factor_type,off|exists:dialling_codes,id',
         ]);
@@ -28,7 +28,7 @@ class TwoFactorSettingsController extends Controller
 
         $user->updatePhoneNumber($request->phone_number, $request->phone_number_dialling_code);
 
-        if (!$user->registeredForTwoFactorAuthentication()) {
+        if (! $user->registeredForTwoFactorAuthentication()) {
             try {
                 $authyId = Authy::registerUser($user);
                 $user->authy_id = $authyId;

@@ -12,9 +12,7 @@ use Illuminate\Support\Facades\Route;
 
 class BackendBaseController extends Controller
 {
-
     use DispatchesJobs, ValidatesRequests;
-
     use AuthorizesRequests {
         resourceAbilityMap as protected resourceAbilityMapTrait;
     }
@@ -23,12 +21,10 @@ class BackendBaseController extends Controller
      * Controller constructor.
      *
      * Set permisson_check method
-     *
      */
     public function __construct()
     {
         $this->middleware(function ($request, $next) {
-
             $this->checkPermissionOnCurrentRoute();
 
             return $next($request);
@@ -37,7 +33,7 @@ class BackendBaseController extends Controller
     }
 
     /**
-     * Check the user permissions in current route
+     * Check the user permissions in current route.
      * @return bool
      * @throws AuthorizationException
      */
@@ -57,7 +53,7 @@ class BackendBaseController extends Controller
 
         $classModelName = strtolower(substr($controllerName, 0, -10));
 
-        if (!Auth::user()->can($methodName . '-' . $classModelName)) {
+        if (! Auth::user()->can($methodName.'-'.$classModelName)) {
 //        if (!Auth::user()->can($methodName . '-' . $classModelName)) {
             //Log::warning('Yetkisiz Alana Girmeye Çalışıldı. ' . 'Kişi : ' . Auth::user()->name . '  IP :' . Auth::user()->getUserIp());
             throw new AuthorizationException('Unauthorized action.');

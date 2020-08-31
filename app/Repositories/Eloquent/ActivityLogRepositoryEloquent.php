@@ -10,8 +10,6 @@ use Prettus\Repository\Eloquent\BaseRepository;
 
 /**
  * Class ActivityLogRepositoryEloquent.
- *
- * @package namespace App\Repositories\Eloquent;
  */
 class ActivityLogRepositoryEloquent extends BaseRepository implements ActivityLogRepository
 {
@@ -21,7 +19,7 @@ class ActivityLogRepositoryEloquent extends BaseRepository implements ActivityLo
     protected $skipPresenter = true;
 
     /**
-     * Specify Model class name
+     * Specify Model class name.
      *
      * @return string
      */
@@ -39,11 +37,10 @@ class ActivityLogRepositoryEloquent extends BaseRepository implements ActivityLo
     }
 
     /**
-     * Boot up the repository, pushing criteria
+     * Boot up the repository, pushing criteria.
      */
     public function boot()
     {
         $this->pushCriteria(app(RequestCriteria::class));
     }
-
 }

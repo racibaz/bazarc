@@ -8,13 +8,11 @@ use Prettus\Repository\Presenter\FractalPresenter;
 
 /**
  * Class UserPresenter.
- *
- * @package namespace App\Presenters;
  */
 class UserPresenter extends FractalPresenter
 {
     /**
-     * Transformer
+     * Transformer.
      *
      * @return TransformerAbstract
      */

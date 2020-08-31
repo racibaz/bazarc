@@ -36,6 +36,7 @@ class PermissionTransformer extends TransformerAbstract
             'created_at' => 'creationDate',
             'updated_at' => 'lastChange',
         ];
+
         return isset($attributes[$index]) ? $attributes[$index] : null;
     }
 
@@ -49,7 +50,7 @@ class PermissionTransformer extends TransformerAbstract
     public function transform(Permission $model)
     {
         return [
-            'id' => (int)$model->id,
+            'id' => (int) $model->id,
             'name' => $model->name,
             'guard_name' => $model->guard_name,
             'created_at' => (string) $model->created_at,
@@ -59,7 +60,7 @@ class PermissionTransformer extends TransformerAbstract
                     'rel' => 'self',
                     'href' => route('roles.show', $model->id),
                 ],
-            ]
+            ],
         ];
     }
 }

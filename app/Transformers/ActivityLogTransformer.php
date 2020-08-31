@@ -22,7 +22,7 @@ class ActivityLogTransformer extends TransformerAbstract
             'causer_id' => 'causer_id',
             'causer_type' => 'causer_type',
             'properties' => 'properties',
-            'status' => 'status'
+            'status' => 'status',
         ];
 
         return isset($attributes[$index]) ? $attributes[$index] : null;
@@ -44,8 +44,9 @@ class ActivityLogTransformer extends TransformerAbstract
             'causer_id' => 'causer_id',
             'causer_type' => 'causer_type',
             'properties' => 'properties',
-            'status' => 'status'
+            'status' => 'status',
         ];
+
         return isset($attributes[$index]) ? $attributes[$index] : null;
     }
 
@@ -59,25 +60,23 @@ class ActivityLogTransformer extends TransformerAbstract
     public function transform(ActivityLog $model)
     {
         return [
-            'id' => (int)$model->id,
+            'id' => (int) $model->id,
             'log_name' => $model->log_name,
             'description' => $model->description,
             'subject_id' => $model->subject_id,
             'subject_type' => $model->subject_type,
             'causer_id' => $model->causer_id,
             'causer_type' => $model->causer_type,
-            'properties' => (string)$model->properties,
-            'created_at' => (string)$model->created_at,
-            'updated_at' => (string)$model->updated_at,
+            'properties' => (string) $model->properties,
+            'created_at' => (string) $model->created_at,
+            'updated_at' => (string) $model->updated_at,
 
             'links' => [
                 [
                     'rel' => 'self',
                     'href' => route('users.show', $model->id),
                 ],
-            ]
+            ],
         ];
     }
-
-
 }

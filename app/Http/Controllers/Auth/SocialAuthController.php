@@ -16,16 +16,15 @@ class SocialAuthController extends Controller
 
     public function callback($service)
     {
-
         $serviceUser = Socialite::driver($service)->user();
 
         $user = $this->getExistingUser($serviceUser, $service);
 
-        if (!$user) {
+        if (! $user) {
             $user = User::create([
                 'name' => $serviceUser->getName(),
                 'email' => $serviceUser->getEmail(),
-                'status' => User::ACTIVE
+                'status' => User::ACTIVE,
             ]
             );
         }
@@ -45,7 +44,7 @@ class SocialAuthController extends Controller
 
     protected function needsToCreateSocial(User $user, $service)
     {
-        return !$user->hasSocialLinked($service);
+        return ! $user->hasSocialLinked($service);
     }
 
     protected function getExistingUser($serviceUser, $service)

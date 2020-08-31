@@ -26,7 +26,7 @@ class UsersTableSeeder extends Seeder
             'web_site' => 'http://www.bazsoft.biz',
             'gender' => 1,
             'bio_note' => 'Bio text',
-            'status' => 1
+            'status' => 1,
         ]);
 
         $user->save();

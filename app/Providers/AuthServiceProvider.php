@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use App\Models\ActivityLog;
 use App\Models\Permission;
+use App\Models\Profile;
 use App\Models\Role;
 use App\Models\Setting;
 use App\Models\User;
@@ -13,10 +14,9 @@ use App\Policies\ProfilePolicy;
 use App\Policies\RolePolicy;
 use App\Policies\SettingPolicy;
 use App\Policies\UserPolicy;
-use App\Models\Profile;
 use Carbon\Carbon;
-use Illuminate\Support\Facades\Gate;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
+use Illuminate\Support\Facades\Gate;
 use Laravel\Passport\Passport;
 
 class AuthServiceProvider extends ServiceProvider

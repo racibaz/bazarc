@@ -73,7 +73,7 @@ class RegisterController extends Controller
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
-            'status' => (int)$userDefaultStatus->attribute_value
+            'status' => (int) $userDefaultStatus->attribute_value,
         ]
         );
 
@@ -100,14 +100,17 @@ class RegisterController extends Controller
                 break;
             case Setting::$registrationTypes['private']['number']:
                 Auth::logout();
+
                 return redirect()->back()->withErrors(trans('setting.user_registration_type.private'));
                 break;
             case Setting::$registrationTypes['verified']['number']:
                 Auth::logout();
+
                 return redirect()->back()->withErrors(trans('setting.user_registration_type.verified'));
                 break;
             case Setting::$registrationTypes['none']['number']:
                 Auth::logout();
+
                 return redirect()->back()->withErrors(trans('setting.user_registration_type.none'));
                 break;
         }

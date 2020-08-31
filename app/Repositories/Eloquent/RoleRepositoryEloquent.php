@@ -11,8 +11,6 @@ use Prettus\Repository\Eloquent\BaseRepository;
 
 /**
  * Class RoleRepositoryEloquent.
- *
- * @package namespace App\Repositories\Eloquent;
  */
 class RoleRepositoryEloquent extends BaseRepository implements RoleRepository
 {
@@ -22,7 +20,7 @@ class RoleRepositoryEloquent extends BaseRepository implements RoleRepository
     protected $skipPresenter = true;
 
     /**
-     * Specify Model class name
+     * Specify Model class name.
      *
      * @return string
      */
@@ -40,7 +38,7 @@ class RoleRepositoryEloquent extends BaseRepository implements RoleRepository
     }
 
     /**
-     * Specify Validator class name
+     * Specify Validator class name.
      *
      * @return mixed
      */
@@ -50,11 +48,10 @@ class RoleRepositoryEloquent extends BaseRepository implements RoleRepository
     }
 
     /**
-     * Boot up the repository, pushing criteria
+     * Boot up the repository, pushing criteria.
      */
     public function boot()
     {
         $this->pushCriteria(app(RequestCriteria::class));
     }
-
 }

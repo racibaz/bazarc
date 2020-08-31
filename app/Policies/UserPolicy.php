@@ -11,7 +11,6 @@ class UserPolicy
 
     /**
      * Create a new policy instance.
-     *
      */
     public function __construct()
     {
@@ -24,7 +23,7 @@ class UserPolicy
      * @param User $user
      * @param $record
      *
-     * @return boolean
+     * @return bool
      */
     public function index()
     {
@@ -39,7 +38,7 @@ class UserPolicy
      * @param User $user
      * @param $record
      *
-     * @return boolean
+     * @return bool
      */
     public function view(User $user, $record)
     {
@@ -69,7 +68,7 @@ class UserPolicy
      * @param User $user
      * @param $record
      *
-     * @return boolean
+     * @return bool
      * @internal param \App\Models\User $use
      */
     public function update(User $user, $record)

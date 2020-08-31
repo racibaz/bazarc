@@ -14,7 +14,7 @@ class SocialAuthControllerTest extends TestCase
     /**
      * @test
      */
-    public function can_authenticate_using_twitter ()
+    public function can_authenticate_using_twitter()
     {
         $abstractUser = Mockery::mock('Laravel\Socialite\Two\User');
 
@@ -36,11 +36,10 @@ class SocialAuthControllerTest extends TestCase
             ->assertStatus(302);
     }
 
-
     /**
      * @test
      */
-    public function can_authenticate_using_google ()
+    public function can_authenticate_using_google()
     {
         $abstractUser = Mockery::mock('Laravel\Socialite\Two\User');
 
@@ -65,7 +64,7 @@ class SocialAuthControllerTest extends TestCase
     /**
      * @test
      */
-    public function can_authenticate_using_facebook ()
+    public function can_authenticate_using_facebook()
     {
         $abstractUser = Mockery::mock('Laravel\Socialite\Two\User');
 
@@ -90,7 +89,7 @@ class SocialAuthControllerTest extends TestCase
     /**
      * @test
      */
-    public function can_authenticate_using_github ()
+    public function can_authenticate_using_github()
     {
         $abstractUser = Mockery::mock('Laravel\Socialite\Two\User');
 

@@ -8,8 +8,8 @@ use App\Models\Profile;
 use App\Models\Role;
 use App\Models\Setting;
 use App\Models\User;
-use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
+use Illuminate\Support\Facades\Route;
 
 class RouteServiceProvider extends ServiceProvider
 {

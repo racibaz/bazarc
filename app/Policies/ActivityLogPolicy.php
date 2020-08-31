@@ -22,7 +22,7 @@ class ActivityLogPolicy
     /**
      * Determine whether the user can view the use.
      *
-     * @return boolean
+     * @return bool
      */
     public function index()
     {
@@ -37,7 +37,7 @@ class ActivityLogPolicy
      * @param User $user
      * @param $record
      *
-     * @return boolean
+     * @return bool
      */
     public function view(User $user, $record)
     {

@@ -25,7 +25,7 @@ class ProfilePolicy
      * @param User $user
      * @param $record
      *
-     * @return boolean
+     * @return bool
      */
     public function view(User $user, $record)
     {
@@ -36,14 +36,13 @@ class ProfilePolicy
         }
     }
 
-
     /**
      * Determine whether the user can update the use.
      *
      * @param User $user
      * @param $record
      *
-     * @return boolean
+     * @return bool
      * @internal param \App\Models\User $use
      */
     public function update(User $user, $record)

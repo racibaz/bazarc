@@ -14,6 +14,6 @@ $factory->define(ActivityLog::class, function (Faker $faker) {
         'subject_type' => User::class,
         'causer_id' => null,
         'causer_type' => null,
-        'properties' => null
+        'properties' => null,
     ];
 });

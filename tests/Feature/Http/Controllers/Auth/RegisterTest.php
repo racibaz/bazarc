@@ -17,7 +17,7 @@ class RegisterTest extends TestCase
      *
      * @return void
      */
-    public function test_user_register_while_get_the_role ()
+    public function test_user_register_while_get_the_role()
     {
         Session::start();
 
@@ -29,7 +29,7 @@ class RegisterTest extends TestCase
             'slug' => Str::slug('test'),
             'status' => 1,
             'password_confirmation' => 12345,
-            '_token' => csrf_token()
+            '_token' => csrf_token(),
         ];
 
         $response = $this->post('/register/', $user);
