@@ -50,16 +50,13 @@ class ActivityLogControllerTest extends TestCase
      */
     public function can_return_a_collection_of_paginated_activity_logs()
     {
-
         $user = factory(User::class)->create();
 
         $activity_log1 = factory(ActivityLog::class)->create();
         $activity_log2 = factory(ActivityLog::class)->create();
         $activity_log3 = factory(ActivityLog::class)->create();
 
-
         $response = $this->actingAs($user, 'api')->json('GET', '/api/v1/activity_logs');
-
 
         $response->assertStatus(200)
             ->assertJsonStructure([
@@ -72,14 +69,13 @@ class ActivityLogControllerTest extends TestCase
                         'causer_id',
                         'causer_type',
                         'properties',
-                        'links' =>
-                            [
+                        'links' => [
                                 '*' => [
                                     'rel',
-                                    'href'
-                                ]
-                            ]
-                    ]
+                                    'href',
+                                ],
+                            ],
+                    ],
                 ],
                 'meta' => [
                     'pagination' => [
@@ -88,9 +84,9 @@ class ActivityLogControllerTest extends TestCase
                         'per_page',
                         'current_page',
                         'total_pages',
-                        'links' => ['next']
-                    ]
-                ]
+                        'links' => ['next'],
+                    ],
+                ],
             ]
             );
     }

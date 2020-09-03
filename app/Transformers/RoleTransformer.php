@@ -8,8 +8,6 @@ use League\Fractal\TransformerAbstract;
 
 /**
  * Class RoleTransformer.
- *
- * @package namespace App\Transformers;
  */
 class RoleTransformer extends TransformerAbstract
 {
@@ -42,6 +40,7 @@ class RoleTransformer extends TransformerAbstract
             'created_at' => 'creationDate',
             'updated_at' => 'lastChange',
         ];
+
         return isset($attributes[$index]) ? $attributes[$index] : null;
     }
 
@@ -55,7 +54,7 @@ class RoleTransformer extends TransformerAbstract
     public function transform(Role $model)
     {
         return [
-            'id' => (int)$model->id,
+            'id' => (int) $model->id,
             'name' => $model->name,
             'guard_name' => $model->guard_name,
             'created_at' => (string) $model->created_at,
@@ -65,7 +64,7 @@ class RoleTransformer extends TransformerAbstract
                     'rel' => 'self',
                     'href' => route('roles.show', $model->id),
                 ],
-            ]
+            ],
         ];
     }
 }

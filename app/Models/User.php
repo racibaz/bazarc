@@ -15,23 +15,22 @@ use Spatie\Permission\Traits\HasRoles;
 class User extends Authenticatable implements Transformable
 {
     use TransformableTrait;
-
     use HasRoles;
-
     use HasApiTokens;
-
     use Notifiable;
-
     use LogsActivity;
 
     /**
-     * User types
+     * User types.
      *
-     * @var integer
+     * @var int
      */
-    public const ACTIVE = 1, PASSIVE = 2, PREPARING_EMAIL_ACTIVATION = 3, GARBAGE = 4;
+    public const ACTIVE = 1;
+    public const PASSIVE = 2;
+    public const PREPARING_EMAIL_ACTIVATION = 3;
+    public const GARBAGE = 4;
     /**
-     * User types
+     * User types.
      *
      * @var array
      */
@@ -55,7 +54,7 @@ class User extends Authenticatable implements Transformable
             'name' => 'Garbage',
             'number' => 4,
             'is_accept' => false,
-        ]
+        ],
     ];
     protected static $logAttributes = ['name'];
     public $transformer = UserTransformer::class;
@@ -83,7 +82,7 @@ class User extends Authenticatable implements Transformable
         'bio_note',
         'IP',
         'last_login',
-        'previous_visit'
+        'previous_visit',
     ];
     /**
      * The attributes that should be hidden for arrays.
@@ -93,7 +92,7 @@ class User extends Authenticatable implements Transformable
     protected $hidden = [
         'password',
         'remember_token',
-        'status'
+        'status',
     ];
 
     /**
@@ -106,7 +105,7 @@ class User extends Authenticatable implements Transformable
     ];
 
     /**
-     * Get the active user
+     * Get the active user.
      *
      * @param $query
      *
@@ -124,7 +123,7 @@ class User extends Authenticatable implements Transformable
 
     public function hasSocialLinked($service)
     {
-        return (bool)$this->social->where('service', $service)->count();
+        return (bool) $this->social->where('service', $service)->count();
     }
 
     public function hasTwoFactorAuthenticationEnabled()
@@ -174,7 +173,7 @@ class User extends Authenticatable implements Transformable
     {
         $this->phoneNumber()->delete();
 
-        if (!$phoneNumber) {
+        if (! $phoneNumber) {
             return;
         }
 
@@ -190,4 +189,3 @@ class User extends Authenticatable implements Transformable
         return $this->hasOne(PhoneNumber::class);
     }
 }
-

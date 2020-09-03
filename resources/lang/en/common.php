@@ -17,5 +17,5 @@ return [
 
         //Common form fields
         'name' => 'Name',
-    ]
+    ],
 ];

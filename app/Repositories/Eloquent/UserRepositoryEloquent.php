@@ -9,11 +9,8 @@ use App\Validators\UserValidator;
 use Prettus\Repository\Criteria\RequestCriteria;
 use Prettus\Repository\Eloquent\BaseRepository;
 
-
 /**
  * Class PostRepositoryEloquent.
- *
- * @package namespace App\Repositories\Eloquent;
  */
 class UserRepositoryEloquent extends BaseRepository implements UserRepository
 {
@@ -23,7 +20,7 @@ class UserRepositoryEloquent extends BaseRepository implements UserRepository
     protected $skipPresenter = true;
 
     /**
-     * Specify Model class name
+     * Specify Model class name.
      *
      * @return string
      */
@@ -41,7 +38,7 @@ class UserRepositoryEloquent extends BaseRepository implements UserRepository
     }
 
     /**
-     * Specify Validator class name
+     * Specify Validator class name.
      *
      * @return mixed
      */
@@ -51,11 +48,10 @@ class UserRepositoryEloquent extends BaseRepository implements UserRepository
     }
 
     /**
-     * Boot up the repository, pushing criteria
+     * Boot up the repository, pushing criteria.
      */
     public function boot()
     {
         $this->pushCriteria(app(RequestCriteria::class));
     }
-
 }

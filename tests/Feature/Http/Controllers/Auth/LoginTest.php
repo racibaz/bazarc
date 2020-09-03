@@ -13,7 +13,7 @@ class LoginTest extends TestCase
      *
      * @return void
      */
-    public function it_should_see_login_page ()
+    public function it_should_see_login_page()
     {
         $this->get(route('login'))
             ->assertStatus(200);
@@ -26,10 +26,9 @@ class LoginTest extends TestCase
      *
      * @return void
      */
-    public function a_user_login_to_ ()
+    public function a_user_login_to_()
     {
         $this->get(route('login'))
             ->assertStatus(200);
     }
-
 }

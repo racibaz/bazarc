@@ -17,13 +17,12 @@ class PermissionPolicy
      */
     public function __construct()
     {
-
     }
 
     /**
      * Determine whether the permission can view the use.
      *
-     * @return boolean
+     * @return bool
      */
     public function index()
     {
@@ -38,7 +37,7 @@ class PermissionPolicy
      * @param \App\Models\User $user
      * @param $record
      *
-     * @return boolean
+     * @return bool
      */
     public function view(User $user, $record)
     {
@@ -67,7 +66,7 @@ class PermissionPolicy
      * @param \App\Models\User $user
      * @param $record
      *
-     * @return boolean
+     * @return bool
      * @internal param \App\Models\Permission $use
      */
     public function update(User $user, $record)

@@ -10,9 +10,7 @@ use Spatie\Permission\Traits\HasRoles;
 class Profile extends Model
 {
     use TransformableTrait;
-
     use HasRoles;
-
     use Notifiable;
 
     protected $table = 'users';
@@ -38,6 +36,6 @@ class Profile extends Model
         'bio_note',
         'IP',
         'last_login',
-        'previous_visit'
+        'previous_visit',
     ];
 }

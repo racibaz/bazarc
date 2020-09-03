@@ -3,20 +3,18 @@
 namespace App\Validators;
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use \Prettus\Validator\Contracts\ValidatorInterface;
-use \Prettus\Validator\LaravelValidator;
+use Prettus\Validator\Contracts\ValidatorInterface;
+use Prettus\Validator\LaravelValidator;
 
 /**
  * Class ProfileValidator.
- *
- * @package namespace App\Validators;
  */
 class ProfileValidator extends LaravelValidator
 {
     use RefreshDatabase;
 
     /**
-     * Validation Rules
+     * Validation Rules.
      *
      * @var array
      */
@@ -32,7 +30,7 @@ class ProfileValidator extends LaravelValidator
             'bio_note'                      => 'nullable|string',
             'IP'                            => 'nullable|ip',
             'last_login'                    => 'nullable|date',
-            'previous_visit'                => 'nullable|date'
+            'previous_visit'                => 'nullable|date',
         ],
     ];
 }

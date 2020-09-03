@@ -7,8 +7,6 @@ use League\Fractal\TransformerAbstract;
 
 /**
  * Class UserTransformer.
- *
- * @package namespace App\Transformers;
  */
 class UserTransformer extends TransformerAbstract
 {
@@ -22,7 +20,7 @@ class UserTransformer extends TransformerAbstract
             'identifier' => 'id',
             'name' => 'name',
             'slug' => 'slug',
-            'status' => 'status'
+            'status' => 'status',
         ];
 
         return isset($attributes[$index]) ? $attributes[$index] : null;
@@ -44,6 +42,7 @@ class UserTransformer extends TransformerAbstract
             'updated_at' => 'lastChange',
             'deleted_at' => 'deletedDate',
         ];
+
         return isset($attributes[$index]) ? $attributes[$index] : null;
     }
 
@@ -57,19 +56,19 @@ class UserTransformer extends TransformerAbstract
     public function transform(User $model)
     {
         return [
-            'id' => (int)$model->id,
+            'id' => (int) $model->id,
             'name' => $model->name,
             'slug' => $model->slug,
             'email' => $model->email,
-            'created_at' => (string)$model->created_at,
-            'updated_at' => (string)$model->updated_at,
+            'created_at' => (string) $model->created_at,
+            'updated_at' => (string) $model->updated_at,
 
             'links' => [
                 [
                     'rel' => 'self',
                     'href' => route('users.show', $model->id),
                 ],
-            ]
+            ],
         ];
     }
 }

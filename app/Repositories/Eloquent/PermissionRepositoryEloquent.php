@@ -2,17 +2,15 @@
 
 namespace App\Repositories\Eloquent;
 
-use App\Presenters\PermissionPresenter;
-use Prettus\Repository\Eloquent\BaseRepository;
-use Prettus\Repository\Criteria\RequestCriteria;
 use App\Contracts\Repositories\PermissionRepository;
 use App\Models\Permission;
+use App\Presenters\PermissionPresenter;
 use App\Validators\PermissionValidator;
+use Prettus\Repository\Criteria\RequestCriteria;
+use Prettus\Repository\Eloquent\BaseRepository;
 
 /**
  * Class PermissionRepositoryEloquent.
- *
- * @package namespace App\Repositories\Eloquent;
  */
 class PermissionRepositoryEloquent extends BaseRepository implements PermissionRepository
 {
@@ -22,7 +20,7 @@ class PermissionRepositoryEloquent extends BaseRepository implements PermissionR
     protected $skipPresenter = true;
 
     /**
-     * Specify Model class name
+     * Specify Model class name.
      *
      * @return string
      */
@@ -40,7 +38,7 @@ class PermissionRepositoryEloquent extends BaseRepository implements PermissionR
     }
 
     /**
-     * Specify Validator class name
+     * Specify Validator class name.
      *
      * @return mixed
      */
@@ -50,11 +48,10 @@ class PermissionRepositoryEloquent extends BaseRepository implements PermissionR
     }
 
     /**
-     * Boot up the repository, pushing criteria
+     * Boot up the repository, pushing criteria.
      */
     public function boot()
     {
         $this->pushCriteria(app(RequestCriteria::class));
     }
-    
 }

@@ -105,7 +105,7 @@ class SettingController extends BackendBaseController
             'roles',
             'userDefaultRole',
             'statuses',
-            'userDefaultStatus'
+            'userDefaultStatus',
         ]
         )
         );
@@ -131,53 +131,50 @@ class SettingController extends BackendBaseController
     {
         $inputs = $request->all();
 
-        if (!empty($inputs['title']) || $inputs['title'] == null) {
+        if (! empty($inputs['title']) || $inputs['title'] == null) {
             $record = $this->repository->findByField('attribute_key', 'title')->first();
             $this->repository->update(['attribute_value' => $inputs['title']], $record->id);
         }
 
-        if (!empty($inputs['slogan']) || $inputs['slogan'] == null) {
+        if (! empty($inputs['slogan']) || $inputs['slogan'] == null) {
             $record = $this->repository->findByField('attribute_key', 'slogan')->first();
             $this->repository->update(['attribute_value' => $inputs['slogan']], $record->id);
         }
 
-        if (!empty($inputs['description']) || $inputs['description'] == null) {
+        if (! empty($inputs['description']) || $inputs['description'] == null) {
             $record = $this->repository->findByField('attribute_key', 'description')->first();
             $this->repository->update(['attribute_value' => $inputs['description']], $record->id);
         }
 
-        if (!empty($inputs['keywords']) || $inputs['keywords'] == null) {
+        if (! empty($inputs['keywords']) || $inputs['keywords'] == null) {
             $record = $this->repository->findByField('attribute_key', 'keywords')->first();
             $this->repository->update(['attribute_value' => $inputs['keywords']], $record->id);
         }
 
-        if (!empty($inputs['url']) || $inputs['url'] == null) {
+        if (! empty($inputs['url']) || $inputs['url'] == null) {
             $record = $this->repository->findByField('attribute_key', 'url')->first();
             $this->repository->update(['attribute_value' => $inputs['url']], $record->id);
         }
 
-        if (!empty($inputs['timezone']) || $inputs['timezone'] == null) {
+        if (! empty($inputs['timezone']) || $inputs['timezone'] == null) {
             $record = $this->repository->findByField('attribute_key', 'timezone')->first();
             $this->repository->update(['attribute_value' => $inputs['timezone']], $record->id);
         }
 
-        if (!empty($inputs['registration_type']) || $inputs['registration_type'] == null) {
+        if (! empty($inputs['registration_type']) || $inputs['registration_type'] == null) {
             $record = $this->repository->findByField('attribute_key', 'registration_type')->first();
             $this->repository->update(['attribute_value' => $inputs['registration_type']], $record->id);
         }
 
-        if (!empty($inputs['user_default_role']) || $inputs['user_default_role'] == null) {
-
+        if (! empty($inputs['user_default_role']) || $inputs['user_default_role'] == null) {
             $record = $this->repository->findByField('attribute_key', 'user_default_role')->first();
             $this->repository->update(['attribute_value' => $inputs['user_default_role']], $record->id);
         }
 
-        if (!empty($inputs['user_default_status']) || $inputs['user_default_status'] == null) {
-
+        if (! empty($inputs['user_default_status']) || $inputs['user_default_status'] == null) {
             $record = $this->repository->findByField('attribute_key', 'user_default_status')->first();
             $this->repository->update(['attribute_value' => $inputs['user_default_status']], $record->id);
         }
-
 
         return redirect()->to(route('setting.index'));
     }

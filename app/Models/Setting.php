@@ -8,8 +8,6 @@ use Prettus\Repository\Traits\TransformableTrait;
 
 /**
  * Class Setting.
- *
- * @package namespace App\Models;
  */
 class Setting extends Model implements Transformable
 {
@@ -18,20 +16,20 @@ class Setting extends Model implements Transformable
     public static $registrationTypes = [
         'public' => [
             'name' => 'Public',
-            'number' => 1
+            'number' => 1,
         ],
         'private' => [
             'name' => 'Private',
-            'number' => 2
+            'number' => 2,
         ],
         'verified' => [
             'name' => 'Verified',
-            'number' => 3
+            'number' => 3,
         ],
         'none' => [
             'name' => 'None',
-            'number' => 4
-        ]
+            'number' => 4,
+        ],
     ];
 
     /**
@@ -40,5 +38,4 @@ class Setting extends Model implements Transformable
      * @var array
      */
     protected $fillable = ['attribute_key', 'attribute_value', 'description', 'is_active'];
-
 }

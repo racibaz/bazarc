@@ -39,7 +39,7 @@ class ImpersonateController extends BackendBaseController
     public function impersonate(Request $request)
     {
         $request->validate([
-            'email' => 'required|email|exists:users,email'
+            'email' => 'required|email|exists:users,email',
         ]
         );
 

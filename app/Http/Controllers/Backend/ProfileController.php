@@ -13,7 +13,6 @@ use Illuminate\Support\Str;
 use Prettus\Validator\Contracts\ValidatorInterface;
 use Prettus\Validator\Exceptions\ValidatorException;
 
-
 class ProfileController extends BackendBaseController
 {
     use ValidatesRequests;
@@ -76,7 +75,6 @@ class ProfileController extends BackendBaseController
      *
      * @return JsonResponse
      * @internal param int $id
-     *
      */
     public function update(Request $request, $record)
     {
@@ -85,7 +83,7 @@ class ProfileController extends BackendBaseController
         try {
             $inputs['slug'] = Str::slug($inputs['name'], '-');
 
-            if (!empty($inputs['password'])) {
+            if (! empty($inputs['password'])) {
                 $inputs['password'] = bcrypt($inputs['password']);
             } else {
                 unset($inputs['password']);
@@ -96,12 +94,10 @@ class ProfileController extends BackendBaseController
             $this->repository->update($inputs, $record->id);
 
             return redirect()->to(route('profile.show', $record));
-
         } catch (ValidatorException $e) {
-
             return Response::json([
                 'error' => true,
-                'message' => $e->getMessageBag()
+                'message' => $e->getMessageBag(),
             ]
             );
         }

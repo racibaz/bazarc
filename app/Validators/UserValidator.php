@@ -3,7 +3,7 @@
  * Created by PhpStorm.
  * User: muhammed.cansiz
  * Date: 15-May-19
- * Time: 12:03 PM
+ * Time: 12:03 PM.
  */
 
 namespace App\Validators;
@@ -26,7 +26,7 @@ class UserValidator extends LaravelValidator
             'bio_note'                      => 'nullable|string',
             'IP'                            => 'nullable|ip',
             'last_login'                    => 'nullable|date',
-            'previous_visit'                => 'nullable|date'
+            'previous_visit'                => 'nullable|date',
         ],
         //todo password eklenmeli.
         ValidatorInterface::RULE_UPDATE => [
@@ -40,7 +40,7 @@ class UserValidator extends LaravelValidator
             'bio_note'                      => 'nullable|string',
             'IP'                            => 'nullable|ip',
             'last_login'                    => 'nullable|date',
-            'previous_visit'                => 'nullable|date'
-        ]
+            'previous_visit'                => 'nullable|date',
+        ],
     ];
 }

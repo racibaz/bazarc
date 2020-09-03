@@ -2,8 +2,8 @@
 
 namespace App\Providers;
 
-use Authy\AuthyApi;
 use App\Services\Authy\AuthyService;
+use Authy\AuthyApi;
 use Illuminate\Support\ServiceProvider;
 
 class AuthyServiceProvider extends ServiceProvider
@@ -27,6 +27,7 @@ class AuthyServiceProvider extends ServiceProvider
     {
         $this->app->singleton('authy', function () {
             $client = new AuthyApi(env('AUTHY_SECRET'));
+
             return new AuthyService($client);
         });
     }
