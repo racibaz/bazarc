@@ -409,7 +409,7 @@
     "node-releases": "^1.1.23",
     "normalize-path": "^3.0.0",
     "normalize-range": "^0.1.2",
-    "normalize-url": "^3.3.0",
+    "normalize-url": "^4.5.1",
     "npm-run-path": "^2.0.2",
     "nth-check": "^1.0.2",
     "num2fraction": "^1.2.2",
