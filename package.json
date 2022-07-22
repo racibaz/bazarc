@@ -225,7 +225,7 @@
     "faye-websocket": "^0.10.0",
     "figgy-pudding": "^3.5.1",
     "file-loader": "^2.0.0",
-    "file-type": "^10.11.0",
+    "file-type": "^16.5.4",
     "fill-range": "^4.0.0",
     "finalhandler": "^1.1.2",
     "find-cache-dir": "^2.1.0",
