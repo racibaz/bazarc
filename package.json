@@ -345,7 +345,7 @@
     "json5": "^2.1.0",
     "jsonfile": "^4.0.0",
     "killable": "^1.0.1",
-    "kind-of": "^6.0.2",
+    "kind-of": "^6.0.3",
     "last-call-webpack-plugin": "^3.0.0",
     "lcid": "^2.0.0",
     "loader-runner": "^2.4.0",
