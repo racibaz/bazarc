@@ -342,7 +342,7 @@
     "json-parse-better-errors": "^1.0.2",
     "json-schema-traverse": "^0.4.1",
     "json3": "^3.3.3",
-    "json5": "^2.1.0",
+    "json5": "^2.2.2",
     "jsonfile": "^4.0.0",
     "killable": "^1.0.1",
     "kind-of": "^6.0.2",
